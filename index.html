@@ -4,36 +4,176 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Librox — a calm book reader for iPhone and iPad</title>
-<style>
-  :root { color-scheme: light dark; }
-  body { margin: 0; font-family: "New York", Georgia, serif; background: #faf5e9; color: #2b2620;
-         display: flex; min-height: 100vh; flex-direction: column; }
-  @media (prefers-color-scheme: dark) { body { background: #121110; color: #e8e2d6; } }
-  main { max-width: 40rem; margin: 0 auto; padding: 4rem 1.5rem 2rem; flex: 1; }
-  h1 { font-size: 2.4rem; letter-spacing: 0.14em; font-weight: 600; margin-bottom: 0.2rem; }
-  .tag { font-style: italic; opacity: 0.75; margin-top: 0; }
-  p { line-height: 1.65; }
-  ul { line-height: 1.9; padding-left: 1.2rem; }
-  a { color: #9c4a1f; }
-  footer { text-align: center; font-size: 0.85rem; opacity: 0.7; padding: 2rem; }
-</style>
+<meta name="description" content="Librox is a calm, native EPUB and TXT reader for iPhone and iPad. Hand-tuned themes, read-aloud narration, a guided pacer, free classics, and private iCloud sync. No accounts, no ads, no tracking.">
+<link rel="stylesheet" href="librox.css">
+<script>
+/* Apply a remembered theme before first paint, so there is no flash. */
+(function () {
+  try {
+    var t = localStorage.getItem("librox-theme");
+    if (t === "eink" || t === "paper" || t === "dark") {
+      document.documentElement.setAttribute("data-theme", t);
+    }
+  } catch (e) {}
+})();
+</script>
 </head>
 <body>
+<div class="shell">
+
+<header class="site reveal">
+  <a class="wordmark" href="index.html">Librox</a>
+  <nav class="site-links">
+    <a href="#discover">Find books</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Support</a>
+  </nav>
+</header>
+
 <main>
-  <h1>LIBROX</h1>
-  <p class="tag">A calm, paper-quiet book reader for iPhone and iPad.</p>
-  <p>Librox reads your EPUB and TXT books with hand-tuned themes, careful typography,
-     read-aloud narration, a guided reading pacer, and private iCloud sync.
-     No accounts, no ads, no tracking.</p>
-  <ul>
-    <li>Three reading themes: E-Ink, Paper, and true-black Dark</li>
-    <li>Listen: on-device read-aloud that follows along on the page</li>
-    <li>A guided pacer for building reading speed (150–900 wpm)</li>
-    <li>Free classics from Project Gutenberg, Standard Ebooks, and any OPDS catalog</li>
-    <li>Bookmarks, notes, shelves, and reading streaks — synced through your own iCloud</li>
-  </ul>
-  <p><a href="privacy.html">Privacy policy</a> · <a href="support.html">Support</a></p>
+  <!-- ============================ Hero ============================ -->
+  <section class="hero">
+    <div>
+      <div class="eyebrow reveal d1">For iPhone &amp; iPad</div>
+      <h1 class="reveal d1">A calm,<br>paper-quiet<br>book reader.</h1>
+      <p class="lede reveal d2">
+        Librox reads your EPUB and TXT books on a page that feels like paper —
+        careful typography, read-aloud narration that follows along, a guided
+        pacer, and private iCloud sync. No accounts, no ads, no tracking.
+      </p>
+      <div class="cta-row reveal d3">
+        <a class="btn-accent" href="#discover">Find free books</a>
+        <span class="cta-note">Coming soon to the App&nbsp;Store</span>
+      </div>
+    </div>
+
+    <div class="phone-wrap reveal d2">
+      <div class="phone" aria-hidden="true">
+        <div class="page-head"><span class="eyebrow">Frankenstein · Letter I</span></div>
+        <div class="page-body">
+          <p><span class="drop">Y</span>ou will rejoice to hear that no disaster
+             has accompanied the commencement of an enterprise which you have
+             regarded with such evil forebodings.</p>
+          <p><span class="spoken">I arrived here yesterday, and my first task is to
+             assure my dear sister of my welfare</span> and increasing confidence
+             in the success of my undertaking.</p>
+          <p>I am already far north of London, and as I walk in the streets of
+             Petersburgh, I feel a cold northern breeze play upon my cheeks,
+             which braces my nerves and fills me with delight.</p>
+        </div>
+        <div class="page-foot">
+          <span>PAGE 3 OF 214</span>
+          <span>2%</span>
+        </div>
+        <div class="progress"><i></i></div>
+      </div>
+      <div>
+        <div class="chip-row" role="group" aria-label="Reading theme">
+          <button class="chip theme-chip" data-theme="eink" aria-pressed="false">E-Ink</button>
+          <button class="chip theme-chip" data-theme="paper" aria-pressed="false">Paper</button>
+          <button class="chip theme-chip" data-theme="dark" aria-pressed="false">Dark</button>
+        </div>
+        <p class="chip-caption">Three hand-tuned themes — try them on this page.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== Features ========================== -->
+  <section class="features" aria-label="Features">
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="eyebrow">Read</div>
+        <h3>Typography that disappears</h3>
+        <p>New York, Georgia, Palatino, and bundled OpenDyslexic, set on a page
+           that keeps your place when text reflows. Page turns the way you like
+           them — Cut, Glint, or Curl — by tap, swipe, keyboard, or Bluetooth
+           page-turner.</p>
+      </div>
+      <div class="feature">
+        <div class="eyebrow">Listen</div>
+        <h3>A voice that follows the page</h3>
+        <p>On-device read-aloud highlights the sentence being spoken and turns
+           the pages for you, with Lock Screen controls, adjustable speed, and
+           a sleep timer. Book text never leaves your device.</p>
+      </div>
+      <div class="feature">
+        <div class="eyebrow">Pace</div>
+        <h3>A silent metronome</h3>
+        <p>The guided pacer sweeps through the text at 150–900 words per
+           minute, and reading focus dims everything but the current sentence —
+           your eye always knows where to land.</p>
+      </div>
+      <div class="feature">
+        <div class="eyebrow">Habit</div>
+        <h3>Streaks you can actually keep</h3>
+        <p>A daily reading goal, a gentle streak, and Want&nbsp;to&nbsp;Read /
+           Reading / Finished shelves — backed by Open Library search for books
+           you don't own yet.</p>
+      </div>
+      <div class="feature">
+        <div class="eyebrow">Library</div>
+        <h3>Yours, everywhere</h3>
+        <p>Import from Files, AirDrop, the Share sheet, or the one-tap Safari
+           extension. Discover free, DRM-free books from Project Gutenberg,
+           Standard Ebooks, Unglue.it, and any OPDS catalog you add.</p>
+      </div>
+      <div class="feature">
+        <div class="eyebrow">Private</div>
+        <h3>No accounts. No ads. No tracking.</h3>
+        <p>Books, positions, bookmarks, and notes sync through your own iCloud,
+           invisible to us. Librox collects no data — there is nothing to
+           collect it with.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== Discover ========================== -->
+  <section class="discover" id="discover">
+    <hr class="hairline">
+    <div class="discover-head">
+      <div class="eyebrow" style="margin-top: 46px;">Discover</div>
+      <h2>Borrow from the commons.</h2>
+      <p>Search the same free, DRM-free catalogs built into the app. Found
+         something? One tap sends it straight to Librox on your iPhone or iPad.</p>
+    </div>
+
+    <form id="book-search" role="search" aria-label="Search free books">
+      <div class="search-bar">
+        <input id="book-query" type="search" placeholder="Search a title or author…"
+               autocomplete="off" spellcheck="false" aria-label="Search a title or author">
+        <button class="go" type="submit">Search</button>
+      </div>
+      <div class="chip-row" role="radiogroup" aria-label="Catalog">
+        <button type="button" class="chip source-chip" data-source="all" role="radio" aria-checked="true">All sources</button>
+        <button type="button" class="chip source-chip" data-source="gutenberg" role="radio" aria-checked="false">Project Gutenberg</button>
+        <button type="button" class="chip source-chip" data-source="standardebooks" role="radio" aria-checked="false">Standard Ebooks</button>
+      </div>
+    </form>
+
+    <div id="search-status" class="search-status" role="status" aria-live="polite"></div>
+    <ul id="search-results" class="results"></ul>
+
+    <p class="discover-foot">
+      Searches go directly from your browser to Project Gutenberg and
+      Standard Ebooks — nothing passes through servers we run, because we
+      don't run any. “Add to Librox” opens the app; if nothing happens,
+      install Librox first or use the EPUB link.
+    </p>
+  </section>
 </main>
-<footer>© 2026 Section 9 Labs</footer>
+
+<footer class="site">
+  <div class="inner">
+    <div>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="support.html">Support</a>
+      <a href="mailto:matias@section9labs.com">Contact</a>
+    </div>
+    <div class="copy">© 2026 Section 9 Labs</div>
+  </div>
+</footer>
+
+</div>
+<script src="librox.js"></script>
 </body>
 </html>
