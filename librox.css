@@ -1,0 +1,381 @@
+/* Librox site — the app's design system, translated to CSS.
+   Source of truth: Libros/Sources/LibrosStyle.swift + ReaderTheme.
+   One ink, six alphas. One accent ("bookcloth"). Hairlines, never cards. */
+
+/* ---------- Themes (mirror the app's three reader themes) ---------- */
+:root {
+  color-scheme: light dark;
+  /* Paper — the default, matches ReaderTheme paper */
+  --bg: #FAF5E9;
+  --ink: #2B2620;
+  --accent: #8A4B2F;        /* bookcloth, light variant */
+  --on-accent: #FBF3E6;
+  --accent-soft-a: 12%;
+  --grain-opacity: 0.5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #0E0C0B;
+    --ink: #E8E2D6;
+    --accent: #E0A183;      /* bookcloth, dark variant */
+    --on-accent: #2A1408;
+    --accent-soft-a: 16%;
+    --grain-opacity: 0.22;
+  }
+}
+/* Scoped to :root — the theme chips carry data-theme attributes too,
+   and a bare [data-theme] selector would re-theme each chip after itself. */
+:root[data-theme="paper"] {
+  --bg: #FAF5E9; --ink: #2B2620;
+  --accent: #8A4B2F; --on-accent: #FBF3E6;
+  --accent-soft-a: 12%; --grain-opacity: 0.5;
+}
+:root[data-theme="eink"] {
+  --bg: #FBFAF6; --ink: #171512;
+  --accent: #8A4B2F; --on-accent: #FBF3E6;
+  --accent-soft-a: 10%; --grain-opacity: 0.35;
+}
+:root[data-theme="dark"] {
+  --bg: #0E0C0B; --ink: #E8E2D6;
+  --accent: #E0A183; --on-accent: #2A1408;
+  --accent-soft-a: 16%; --grain-opacity: 0.22;
+}
+
+/* ---------- Ink ramp — named steps, use these, not raw numbers ---------- */
+:root {
+  --ink-label:     color-mix(in srgb, var(--ink) 70%, transparent);
+  --ink-furniture: color-mix(in srgb, var(--ink) 52%, transparent);
+  --ink-border:    color-mix(in srgb, var(--ink) 18%, transparent);
+  --ink-chipline:  color-mix(in srgb, var(--ink) 14%, transparent);
+  --ink-hairline:  color-mix(in srgb, var(--ink) 10%, transparent);
+  --ink-fill:      color-mix(in srgb, var(--ink) 6%, transparent);
+  --accent-soft:   color-mix(in srgb, var(--accent) var(--accent-soft-a), transparent);
+
+  /* Two families, same rule as the app: serif for language from the book,
+     the system face for the app talking about the book. ui-serif renders as
+     New York on Apple devices — the audience of an iPhone/iPad app page. */
+  --serif: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, ui-sans-serif, "Segoe UI", sans-serif;
+
+  --radius-cover: 3px;
+  --radius-button: 12px;
+  --radius-sheet: 22px;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .35s ease, color .35s ease;
+}
+/* Paper grain — barely-there, like the page texture in the app's themes. */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  opacity: calc(var(--grain-opacity) * 0.08);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+main, header.site, footer.site { position: relative; z-index: 2; }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.shell { max-width: 64rem; margin: 0 auto; padding: 0 20px; }
+.prose { max-width: 42rem; }
+
+/* ---------- Type roles ---------- */
+.serif { font-family: var(--serif); }
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-label);
+}
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.014em; margin: 0; }
+p { margin: 0.75em 0; }
+
+.hairline { border: 0; border-top: 1px solid var(--ink-hairline); margin: 0; }
+
+/* ---------- Header ---------- */
+header.site {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 28px 0 0;
+}
+.wordmark {
+  font-family: var(--serif);
+  font-size: 1.05rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+}
+nav.site-links { display: flex; gap: 22px; }
+nav.site-links a {
+  font-size: 0.82rem; color: var(--ink-label); text-decoration: none;
+}
+nav.site-links a:hover { color: var(--accent); }
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px;
+  align-items: center;
+  padding: 72px 0 84px;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 5.6vw, 3.9rem);
+  line-height: 1.08;
+  margin: 14px 0 0;
+}
+.hero .lede {
+  font-size: 1.06rem;
+  color: var(--ink-label);
+  max-width: 33rem;
+  margin-top: 20px;
+}
+.cta-row { display: flex; align-items: center; gap: 18px; margin-top: 34px; flex-wrap: wrap; }
+.btn-accent {
+  display: inline-block;
+  font-family: var(--sans); font-size: 0.92rem; font-weight: 600;
+  color: var(--on-accent); background: var(--accent);
+  border: 0; border-radius: 14px;
+  padding: 14px 22px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .18s ease, filter .18s ease;
+}
+.btn-accent:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.cta-note { font-size: 0.8rem; color: var(--ink-furniture); }
+
+/* ---------- Phone mock: the reader page, drawn in CSS ---------- */
+.phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.phone {
+  width: min(290px, 78vw);
+  aspect-ratio: 9 / 19;
+  border: 1px solid var(--ink-border);
+  border-radius: 42px;
+  background: var(--bg);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--ink) 8%, transparent),
+    0 24px 60px -24px color-mix(in srgb, var(--ink) 28%, transparent);
+  padding: 16px 20px 18px;
+  display: flex; flex-direction: column;
+  transform: rotate(1.2deg);
+  transition: background-color .35s ease;
+}
+.phone .page-head {
+  display: flex; justify-content: center;
+  padding: 14px 0 16px;
+}
+.phone .page-head .eyebrow { font-size: 0.5rem; }
+.phone .page-body {
+  flex: 1;
+  font-family: var(--serif);
+  font-size: 0.74rem;
+  line-height: 1.75;
+  overflow: hidden;
+}
+.phone .page-body p { margin: 0 0 0.9em; }
+.phone .page-body .drop {
+  font-size: 1.5em; font-weight: 600;
+}
+.phone .spoken {
+  background: var(--accent-soft);
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 2px;
+}
+.phone .page-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 12px;
+}
+.phone .page-foot span { font-size: 0.52rem; color: var(--ink-furniture); letter-spacing: 0.08em; }
+.phone .progress { height: 1px; background: var(--ink-hairline); position: relative; margin-top: 10px; }
+.phone .progress i { position: absolute; inset: 0 78% 0 0; background: var(--accent); }
+
+/* ---------- Theme chips (the app's LibrosChip, one size everywhere) ---------- */
+.chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
+  background: none;
+  border: 1px solid var(--ink-chipline);
+  border-radius: 999px;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.chip:hover { border-color: var(--ink-furniture); }
+.chip[aria-pressed="true"], .chip[aria-checked="true"] {
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.chip-caption { font-size: 0.74rem; color: var(--ink-furniture); text-align: center; }
+
+/* ---------- Feature rows — hairlines, never cards ---------- */
+.features { padding: 10px 0 40px; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 56px;
+}
+.feature {
+  border-top: 1px solid var(--ink-hairline);
+  padding: 26px 0 30px;
+}
+.feature h3 { font-size: 1.35rem; margin: 10px 0 8px; }
+.feature p { color: var(--ink-label); font-size: 0.93rem; margin: 0; }
+
+/* ---------- Discover / search ---------- */
+.discover { padding: 56px 0 30px; }
+.discover-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); margin: 12px 0 10px; }
+.discover-head p { color: var(--ink-label); max-width: 36rem; }
+
+.search-bar {
+  display: flex; align-items: center; gap: 14px;
+  border-bottom: 1px solid var(--ink-border);
+  margin: 34px 0 20px;
+  max-width: 42rem;
+}
+.search-bar input {
+  flex: 1;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--ink);
+  background: none; border: 0;
+  padding: 10px 0 14px;
+}
+.search-bar input::placeholder { color: var(--ink-furniture); opacity: 1; }
+.search-bar input:focus { outline: none; }
+.search-bar .go {
+  font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); background: none; border: 0; cursor: pointer;
+  padding: 10px 2px 14px;
+}
+
+.search-status { font-size: 0.82rem; color: var(--ink-furniture); min-height: 1.4em; margin: 14px 0 4px; }
+
+.results { list-style: none; margin: 10px 0 0; padding: 0; max-width: 46rem; }
+.result {
+  display: grid;
+  grid-template-columns: 66px minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  border-top: 1px solid var(--ink-hairline);
+  padding: 18px 0;
+}
+.result:last-child { border-bottom: 1px solid var(--ink-hairline); }
+
+/* Tinted cover — deterministic from the title, same six tints as the app */
+.cover {
+  width: 66px; height: 99px;
+  border-radius: var(--radius-cover);
+  overflow: hidden;
+  position: relative;
+  background: var(--cover-tint, #2F4A4A);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--ink) 25%, transparent);
+  flex-shrink: 0;
+}
+.cover .initial {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 500;
+  color: rgba(251, 243, 230, 0.92);
+}
+.cover img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.result .meta { min-width: 0; }
+.result .meta .eyebrow { font-size: 0.58rem; }
+.result .title {
+  font-family: var(--serif); font-size: 1.02rem; font-weight: 500;
+  letter-spacing: -0.014em; line-height: 1.3;
+  margin: 5px 0 2px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.result .author { font-size: 0.82rem; color: var(--ink-label); }
+
+.result .actions { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.btn-add {
+  font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+  color: var(--on-accent); background: var(--accent);
+  border-radius: 999px; border: 0;
+  padding: 10px 16px;
+  text-align: center; text-decoration: none;
+  white-space: nowrap;
+}
+.btn-add:hover { filter: brightness(1.06); }
+.btn-epub {
+  font-family: var(--sans); font-size: 0.72rem; font-weight: 500;
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
+  border: 1px solid var(--ink-chipline);
+  border-radius: 999px;
+  padding: 7px 16px;
+  text-align: center; text-decoration: none;
+  white-space: nowrap;
+}
+.btn-epub:hover { border-color: var(--ink-furniture); }
+
+.discover-foot { font-size: 0.8rem; color: var(--ink-furniture); max-width: 42rem; margin-top: 26px; }
+
+/* ---------- Inner pages (privacy, support) ---------- */
+.page { padding: 56px 0 70px; }
+.page h1 { font-size: clamp(2rem, 4.4vw, 2.8rem); margin: 12px 0 6px; }
+.page h2 { font-size: 1.3rem; margin: 2.2em 0 0.4em; }
+.page .updated { font-size: 0.82rem; color: var(--ink-furniture); font-style: italic; }
+.page p, .page li { color: color-mix(in srgb, var(--ink) 86%, transparent); font-size: 0.97rem; }
+.page ul { padding-left: 1.2rem; line-height: 1.9; }
+
+/* ---------- Footer ---------- */
+footer.site { padding: 26px 0 40px; margin-top: 40px; }
+footer.site .inner {
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: 12px;
+  border-top: 1px solid var(--ink-hairline);
+  padding-top: 22px;
+}
+footer.site a { color: var(--ink-label); text-decoration: none; font-size: 0.82rem; margin-right: 18px; }
+footer.site a:hover { color: var(--accent); }
+footer.site .copy { font-size: 0.78rem; color: var(--ink-furniture); }
+
+/* ---------- Load reveal ---------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.reveal { animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.reveal.d1 { animation-delay: 0.08s; }
+.reveal.d2 { animation-delay: 0.16s; }
+.reveal.d3 { animation-delay: 0.26s; }
+.reveal.d4 { animation-delay: 0.38s; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none; }
+  html { scroll-behavior: auto; }
+  .phone { transform: none; }
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 44px 0 56px; }
+  .phone-wrap { order: 2; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .result { grid-template-columns: 52px minmax(0, 1fr); }
+  .cover { width: 52px; height: 78px; }
+  .result .actions { grid-column: 2; flex-direction: row; }
+  header.site { flex-direction: column; gap: 10px; align-items: flex-start; }
+}
