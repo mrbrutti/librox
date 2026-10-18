@@ -7,7 +7,7 @@ const motionToggle = document.querySelector("[data-motion-toggle]");
 if (canvas && hero && replay && motionToggle) {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color("#d8d0bf");
+  scene.background = new THREE.Color("#10251f");
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 60);
   camera.position.set(0.5, 0.2, 10.8);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" });
@@ -22,7 +22,7 @@ if (canvas && hero && replay && motionToggle) {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-  scene.add(new THREE.HemisphereLight(0xfff8e9, 0x545b50, 1.8));
+  scene.add(new THREE.HemisphereLight(0xfff8e9, 0x263e37, 1.8));
   const key = new THREE.DirectionalLight(0xfff2dc, 3.1);
   key.position.set(-4, 7, 8);
   key.castShadow = true;
@@ -225,10 +225,25 @@ if (canvas && hero && replay && motionToggle) {
   book.add(turnPage);
   const basePositions = turnGeometry.attributes.position.array.slice();
 
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), matte("#d8d0bf", 1));
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), matte("#10251f", 1));
   floor.position.z = -0.64;
   floor.receiveShadow = true;
   scene.add(floor);
+  const haloCanvas = document.createElement("canvas");
+  haloCanvas.width = haloCanvas.height = 256;
+  const haloContext = haloCanvas.getContext("2d");
+  const haloFade = haloContext.createRadialGradient(128, 128, 8, 128, 128, 128);
+  haloFade.addColorStop(0, "rgba(116,141,107,.48)");
+  haloFade.addColorStop(0.52, "rgba(58,96,75,.26)");
+  haloFade.addColorStop(1, "rgba(16,37,31,0)");
+  haloContext.fillStyle = haloFade;
+  haloContext.fillRect(0, 0, 256, 256);
+  const halo = new THREE.Mesh(
+    new THREE.PlaneGeometry(13, 10),
+    new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(haloCanvas), transparent: true, depthWrite: false }),
+  );
+  halo.position.set(0.8, 0, -0.63);
+  scene.add(halo);
   const shadowCanvas = document.createElement("canvas");
   shadowCanvas.width = shadowCanvas.height = 256;
   const shadowContext = shadowCanvas.getContext("2d");
@@ -255,6 +270,7 @@ if (canvas && hero && replay && motionToggle) {
   let renderedProgress = -1;
   let renderedPointerX = 0;
   let renderedPointerY = 0;
+  let drag = null;
   motionToggle.textContent = playing ? "Pause motion" : "Play motion";
 
   function setBook(progress) {
@@ -274,9 +290,9 @@ if (canvas && hero && replay && motionToggle) {
     turnGeometry.computeVertexNormals();
     book.rotation.y = -0.17 + open * 0.12 + pointerX * 0.065;
     book.rotation.x = -0.13 + pointerY * 0.04;
-    book.position.x = innerWidth <= 700 ? -0.15 + open * 0.3 : 0.65 + open * 0.45;
+    book.position.x = innerWidth <= 700 ? -0.15 + open * 0.3 : 0.25 + open * 0.6;
     book.position.y = innerWidth <= 700 ? 0.35 : -0.1;
-    camera.position.z = innerWidth <= 700 ? 9.8 + open * 3.6 : 10.8 + open * 3.7;
+    camera.position.z = innerWidth <= 700 ? 9.8 + open * 3.6 : 9.2 + open * 4.8;
     camera.lookAt(open > 0.65 ? 0.03 : 0.7, 0, 0);
     hero.dataset.bookState = open > 0.75 ? "open" : "closed";
   }
@@ -313,21 +329,48 @@ if (canvas && hero && replay && motionToggle) {
     }
     requestAnimationFrame(tick);
   }
-  replay.addEventListener("click", () => {
+  function replayOpening() {
     start = performance.now();
     currentProgress = 0;
     playing = !reducedMotion.matches;
     motionToggle.textContent = playing ? "Pause motion" : "Play motion";
     if (reducedMotion.matches) { currentProgress = 1; setBook(1); render(); }
-  });
+  }
+  replay.addEventListener("click", replayOpening);
   motionToggle.addEventListener("click", () => {
     if (currentProgress === 1 && !playing) currentProgress = 0;
     playing = !playing;
     if (playing) start = performance.now() - currentProgress * 7700;
     motionToggle.textContent = playing ? "Pause motion" : "Play motion";
   });
+  canvas.addEventListener("pointerdown", (event) => {
+    if (reducedMotion.matches || (event.pointerType === "mouse" && event.button !== 0)) return;
+    drag = { id: event.pointerId, x: event.clientX, progress: currentProgress, moved: false };
+    playing = false;
+    motionToggle.textContent = "Play motion";
+    canvas.setPointerCapture(event.pointerId);
+  });
+  canvas.addEventListener("pointermove", (event) => {
+    if (!drag || drag.id !== event.pointerId) return;
+    const delta = event.clientX - drag.x;
+    if (Math.abs(delta) > 8) drag.moved = true;
+    if (!drag.moved) return;
+    currentProgress = clamp(drag.progress - delta / Math.max(320, canvas.clientWidth) * 1.4);
+    setBook(currentProgress);
+    render();
+  });
+  function endDrag(event) {
+    if (!drag || drag.id !== event.pointerId) return;
+    const wasTap = !drag.moved && event.type === "pointerup";
+    drag = null;
+    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    if (wasTap) replayOpening();
+    else motionToggle.textContent = currentProgress >= 1 ? "Replay motion" : "Play motion";
+  }
+  canvas.addEventListener("pointerup", endDrag);
+  canvas.addEventListener("pointercancel", endDrag);
   hero.addEventListener("pointermove", (event) => {
-    if (reducedMotion.matches || event.pointerType === "touch") return;
+    if (reducedMotion.matches || drag || event.pointerType === "touch") return;
     pointerX = (event.clientX / innerWidth - 0.5) * 2;
     pointerY = (event.clientY / innerHeight - 0.5) * 2;
   }, { passive: true });

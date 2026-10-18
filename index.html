@@ -4,14 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="apple-itunes-app" content="app-id=6796746657" />
-    <meta name="theme-color" content="#e9e2d3" />
+    <meta name="theme-color" content="#0d201c" />
     <meta name="description" content="Open a book and stay in its world. See the Librox reading experience and preview what is coming next on iPhone Duo." />
     <meta property="og:title" content="Librox — open a world of books" />
     <meta property="og:description" content="Explore the Librox 2.0 reading experience on iPhone Duo." />
     <meta property="og:image" content="https://librox.app/assets/duo-library.webp" />
     <title>Librox — open a world of books</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="librox.css?v=3" />
+    <link rel="stylesheet" href="librox.css?v=6" />
     <script>
       (function () {
         try {
@@ -49,9 +49,12 @@
             <button type="button" data-book-replay>Replay opening</button>
             <span aria-hidden="true"></span>
             <button type="button" data-motion-toggle>Pause motion</button>
+            <span aria-hidden="true"></span>
+            <span class="film-drag-hint">Drag the book to turn a page</span>
           </div>
         </div>
         <p class="film-disclosure">Cinematic book illustration inspired by Librox. See actual app footage below.</p>
+        <a class="film-scroll-cue" href="#app-in-motion">SCROLL TO STEP INSIDE <span aria-hidden="true">↓</span></a>
       </section>
       <section id="app-in-motion" class="capture-section" aria-labelledby="capture-title">
         <div class="wide capture-grid">
@@ -248,8 +251,8 @@
         <div class="footer-legal"><span>© 2026 Section 9 Labs</span><small>iPhone, iPad, Mac, App Store, and the Apple Logo are trademarks of Apple Inc., registered in the U.S. and other countries.</small></div>
       </div>
     </footer>
-    <script src="librox.js?v=2"></script>
+    <script src="librox.js?v=3"></script>
     <script type="module" src="duo-stage.bundle.js"></script>
-    <script type="module" src="book-scene.bundle.js?v=4"></script>
+    <script type="module" src="book-scene.bundle.js?v=8"></script>
   </body>
 </html>

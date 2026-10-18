@@ -52,6 +52,7 @@
     });
     new IntersectionObserver(function (entries) {
       videoVisible = entries[0].isIntersecting;
+      featureVideo.closest(".capture-section").classList.toggle("is-active", videoVisible);
       syncFeatureVideo();
     }, { threshold: 0.2 }).observe(featureVideo);
     motionPreference.addEventListener("change", syncFeatureVideo);

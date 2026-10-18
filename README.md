@@ -2,6 +2,8 @@
 
 Static GitHub Pages site for librox.app. The opening scene is a WebGL rendering of a clothbound book built from the app's CoverOcean artwork. It is explicitly labeled a cinematic illustration. The next section uses an uncut recording of the current Librox development build; the iPhone Duo stage places Librox 2.0 design captures within Apple's official static iPhone Duo bezel. The bezel is used as provided by Apple; only the screen content changes.
 
+The [site motion direction](docs/site-motion-direction.md) records the product-led reference, scene sequence, interaction rules, and three-day review path.
+
 ## Local preview
 
 ```sh
