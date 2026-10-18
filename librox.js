@@ -36,9 +36,6 @@
   function applyTheme(name) {
     if (THEMES.indexOf(name) === -1) return;
     document.documentElement.setAttribute("data-theme", name);
-    try {
-      localStorage.setItem("librox-theme", name);
-    } catch (e) {}
     document.querySelectorAll(".theme-chip").forEach(function (chip) {
       chip.setAttribute(
         "aria-pressed",
@@ -51,7 +48,7 @@
       applyTheme(chip.dataset.theme);
     });
   });
-  // Reflect a stored choice (set pre-paint by the inline head script) in the chips.
+  // Keep the theme preview local to this visit so the landing page opens in paper.
   var current = document.documentElement.getAttribute("data-theme");
   if (current) {
     document.querySelectorAll(".theme-chip").forEach(function (chip) {
@@ -64,35 +61,6 @@
   if (!current) {
     var paperChip = document.querySelector('.theme-chip[data-theme="paper"]');
     if (paperChip) paperChip.setAttribute("aria-pressed", "true");
-  }
-
-  /* Keep the physical Duo beside the chapter currently crossing the viewport. */
-  var story = document.querySelector(".story");
-  if (story) {
-    var chapters = Array.prototype.slice.call(
-      story.querySelectorAll("[data-chapter]"),
-    );
-    var scrollFrame = 0;
-    function updateChapter() {
-      scrollFrame = 0;
-      var marker = innerHeight * (innerWidth <= 900 ? 0.67 : 0.52);
-      var selected = chapters.find(function (chapter) {
-        var bounds = chapter.getBoundingClientRect();
-        return bounds.top <= marker && bounds.bottom > marker;
-      });
-      if (!selected) return;
-      chapters.forEach(function (chapter) {
-        chapter.classList.toggle("is-current", chapter === selected);
-      });
-      if (window.libroxStage) window.libroxStage.setMode(selected.dataset.chapter);
-    }
-    function scheduleChapter() {
-      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateChapter);
-    }
-    addEventListener("scroll", scheduleChapter, { passive: true });
-    addEventListener("resize", scheduleChapter);
-    addEventListener("librox-stage-ready", scheduleChapter);
-    scheduleChapter();
   }
 
   /* Editorial sections arrive as the reader reaches them. */

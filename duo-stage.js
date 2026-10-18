@@ -24,14 +24,20 @@ if (host && story && product && screens.length === 3) {
       `Librox 2.0 ${mode} design preview displayed within Apple's official open iPhone Duo bezel`,
     );
     screens.forEach((screen) => {
-      if (screen.dataset.screen === currentMode) screen.classList.add("is-previous");
+      screen.classList.toggle("is-previous", screen.dataset.screen === currentMode);
       screen.classList.toggle("is-active", screen.dataset.screen === mode);
+    });
+    story.querySelectorAll("[data-chapter]").forEach((chapter) => {
+      const active = chapter.dataset.chapter === mode;
+      chapter.classList.toggle("is-current", active);
+      chapter.inert = !active;
+      chapter.setAttribute("aria-hidden", active ? "false" : "true");
     });
     currentMode = mode;
     if (reduceMotion.matches) {
       screens.forEach((screen) => screen.classList.remove("is-previous"));
     }
-    document.querySelectorAll("[data-scene-mode]").forEach((button) => {
+    host.querySelectorAll("[data-scene-mode]").forEach((button) => {
       button.setAttribute(
         "aria-pressed",
         button.dataset.sceneMode === mode ? "true" : "false",
@@ -57,15 +63,7 @@ if (host && story && product && screens.length === 3) {
 
   document.querySelectorAll("[data-scene-mode]").forEach((control) => {
     control.addEventListener("click", () => {
-      const mode = control.dataset.sceneMode;
-      setMode(mode);
-      const chapter = story.querySelector(`[data-chapter="${mode}"]`);
-      if (chapter) {
-        scrollTo({
-          top: scrollY + chapter.getBoundingClientRect().top,
-          behavior: reduceMotion.matches ? "auto" : "smooth",
-        });
-      }
+      setMode(control.dataset.sceneMode);
     });
   });
   screens.forEach((screen) => {
@@ -78,8 +76,8 @@ if (host && story && product && screens.length === 3) {
     control.addEventListener("click", playTour);
   });
 
-  showMode("library");
-  host.classList.add("stage-ready");
+  showMode(location.hash === "#the-page" ? "reading" : location.hash === "#listening" ? "listening" : "library");
+  requestAnimationFrame(() => requestAnimationFrame(() => host.classList.add("stage-ready")));
   window.libroxStage = { setMode };
   window.dispatchEvent(new Event("librox-stage-ready"));
 }
