@@ -31,6 +31,61 @@
     storeAvailability.hidden = false;
   }
 
+  var openingVideo = document.querySelector("[data-opening-video]");
+  var openingToggle = document.querySelector("[data-opening-toggle]");
+  var openingReplay = document.querySelector("[data-opening-replay]");
+  if (openingVideo && openingToggle && openingReplay) {
+    var openingMotionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+    var openingVisible = false;
+    var openingPausedByUser = false;
+    var openingPlayRequested = false;
+    function updateOpeningToggle() {
+      var label = openingVideo.paused ? "Play" : "Pause";
+      openingToggle.textContent = label;
+      openingToggle.setAttribute("aria-label", label + " opening video");
+    }
+    function syncOpeningVideo() {
+      if (openingVisible && !openingVideo.ended &&
+          (openingPlayRequested || (!openingPausedByUser && !openingMotionPreference.matches))) {
+        openingVideo.play().catch(function () {});
+      } else {
+        openingVideo.pause();
+      }
+      updateOpeningToggle();
+    }
+    openingToggle.addEventListener("click", function () {
+      if (openingVideo.paused) {
+        if (openingVideo.ended) openingVideo.currentTime = 0;
+        openingPlayRequested = true;
+        openingPausedByUser = false;
+      } else {
+        openingPlayRequested = false;
+        openingPausedByUser = true;
+      }
+      syncOpeningVideo();
+    });
+    openingReplay.addEventListener("click", function () {
+      openingVideo.currentTime = 0;
+      openingPlayRequested = true;
+      openingPausedByUser = false;
+      syncOpeningVideo();
+    });
+    openingVideo.addEventListener("play", updateOpeningToggle);
+    openingVideo.addEventListener("pause", updateOpeningToggle);
+    openingVideo.addEventListener("ended", updateOpeningToggle);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        openingVisible = entries[0].isIntersecting;
+        syncOpeningVideo();
+      }, { threshold: 0.15 }).observe(openingVideo);
+    } else {
+      openingVisible = true;
+      syncOpeningVideo();
+    }
+    openingMotionPreference.addEventListener("change", syncOpeningVideo);
+    updateOpeningToggle();
+  }
+
   var featureVideo = document.querySelector("[data-feature-video]");
   var videoToggle = document.querySelector("[data-video-toggle]");
   if (featureVideo && videoToggle) {

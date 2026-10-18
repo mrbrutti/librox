@@ -4,23 +4,23 @@ Reference: [GPT-6 Can Now Build 3D Interactive Websites](https://www.youtube.com
 
 ## Film sequence
 
-1. **The cover.** A large clothbound book floats in a dark studio. It opens and turns one paper leaf. Dragging the canvas scrubs the motion; tapping replays it. The hero is explicitly a cinematic illustration.
-2. **The real app.** A continuous simulator recording shows a cover tap, the reader opening, and two page turns. This is labeled as development-build footage and expands into a spotlight as it enters the viewport.
+1. **The opening.** The hero shows the actual native SceneKit/Metal book-opening study, recorded in a Librox development build. The opening plays once inside Apple's official static iPhone 17 Pro bezel, holds on the reader, and offers replay and pause controls. It is labeled as a shortened development sequence.
+2. **The reading space.** A continuous simulator recording shows a cover tap, the reader opening, and two page turns inside the same official static bezel. It is labeled as development-build footage.
 3. **The Duo preview.** Scroll chapters change the Librox 2.0 library, page, and listening screens within Apple's official static iPhone Duo bezel. These are labeled design previews.
 4. **The page and discovery.** Reading themes and catalog search remain live interactions; subsequent motion should illustrate actual app capabilities rather than invented screens.
 
 ## Visual and motion rules
 
 - Preserve Librox's ocean cover artwork, warm paper, dark green cloth, and coral accent.
-- Make the book's cover, hinge, leaf, and cast shadow move as one physical object. Do not model or animate Apple hardware.
+- Show the app's authored native book motion. Do not model or animate Apple hardware; the official device bezels stay static.
 - Keep real app recordings separate and visibly labeled. Generated imagery may establish an environment or light treatment; it must not be presented as app footage.
-- Pause WebGL rendering and app video offscreen. Reduced-motion visitors get a stable still state on load; explicit play or drag still works. Every autoplay scene has a manual replay or pause control.
+- Pause app video offscreen. Reduced-motion visitors get a stable still state on load; explicit play and replay still work. Every autoplay scene has a manual pause control.
 - Prefer one purposeful interaction per chapter over decorative motion everywhere.
 
 ## Three-day delivery path
 
-- **October 18:** Match the reference's product scale and art direction; make the book directly draggable; enlarge and reveal the real app footage; verify desktop and phone layouts.
+- **October 18:** Use the native book-opening footage in the hero, apply official iPhone bezels to phone captures, and verify desktop and phone layouts.
 - **October 19–20:** Capture and edit additional authentic feature footage where the current build supports it. Develop the page-to-app transition and tune the Duo chapter pacing with real assets.
 - **October 21:** Verify motion, accessibility, loading, and responsive layouts; audit every product claim and asset label; present the draft site for review. The live domain remains on `main` until the draft is approved and merged.
 
-Higgsfield is an optional visual-production route. As of October 18, a studio image draft was prepared, but no generation was submitted or charged; the account was not authenticated. The current implementation uses the existing Librox artwork, Three.js scene, and app footage.
+Higgsfield is an optional visual-production route. As of October 18, a studio image draft was prepared, but no generation was submitted or charged; the account was not authenticated. The current implementation uses native Librox app footage and official static Apple bezels.

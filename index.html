@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://librox.app/assets/duo-library.webp" />
     <title>Librox — open a world of books</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="librox.css?v=6" />
+    <link rel="stylesheet" href="librox.css?v=7" />
     <script>
       (function () {
         try {
@@ -33,27 +33,32 @@
       </div>
     </header>
     <main id="main">
-      <section id="experience" class="film-hero" aria-labelledby="film-title" data-book-state="closed">
-        <canvas class="book-canvas" data-book-canvas aria-hidden="true"></canvas>
+      <section id="experience" class="film-hero" aria-labelledby="film-title">
+        <div class="film-device phone-device" role="group" aria-label="Native Librox book opening recorded on iPhone in a development build">
+          <div class="phone-display">
+            <video data-opening-video muted playsinline preload="metadata" poster="assets/librox-native-opening-poster.webp" aria-label="A Moby-Dick cover opens into the Librox reader in a native development build">
+              <source src="assets/librox-native-opening.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <img class="phone-bezel" src="assets/iphone-17-pro-deep-blue-portrait.png" width="1350" height="2760" alt="" />
+        </div>
         <div class="film-grain" aria-hidden="true"></div>
         <div class="film-vignette" aria-hidden="true"></div>
         <div class="film-content wide">
-          <p class="film-kicker">LIBROX <span></span> A READING SPACE</p>
+          <p class="film-kicker">LIBROX <span></span> NATIVE OPENING STUDY</p>
           <h1 id="film-title">It starts<br />with <em>a book.</em></h1>
           <p>Touch the cover. Let the world fall away. Read, listen, and find your way back to the story whenever you like.</p>
           <div class="film-actions">
             <a class="button button-cream" href="#app-in-motion">Step inside <span aria-hidden="true">↓</span></a>
             <a class="film-store-link" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="film-controls" aria-label="Book animation controls">
-            <button type="button" data-book-replay>Replay opening</button>
+          <div class="film-controls" aria-label="Opening video controls">
+            <button type="button" data-opening-replay>Replay opening</button>
             <span aria-hidden="true"></span>
-            <button type="button" data-motion-toggle>Pause motion</button>
-            <span aria-hidden="true"></span>
-            <span class="film-drag-hint">Drag the book to turn a page</span>
+            <button type="button" data-opening-toggle aria-label="Pause opening video">Pause</button>
           </div>
         </div>
-        <p class="film-disclosure">Cinematic book illustration inspired by Librox. See actual app footage below.</p>
+        <p class="film-disclosure">Native app opening study · development build · sequence shortened</p>
         <a class="film-scroll-cue" href="#app-in-motion">SCROLL TO STEP INSIDE <span aria-hidden="true">↓</span></a>
       </section>
       <section id="app-in-motion" class="capture-section" aria-labelledby="capture-title">
@@ -66,9 +71,14 @@
           </div>
           <div class="capture-screen">
             <div class="capture-halo" aria-hidden="true"></div>
-            <video data-feature-video autoplay muted loop playsinline preload="metadata" poster="assets/librox-reader-poster.webp?v=2" aria-label="Librox development build recording showing a cover tap, the reader opening, and two page turns">
-              <source src="assets/librox-reader-capture.mp4?v=3" type="video/mp4" />
-            </video>
+            <div class="phone-device capture-device">
+              <div class="phone-display">
+                <video data-feature-video muted loop playsinline preload="metadata" poster="assets/librox-reader-poster.webp?v=2" aria-label="Librox development build recording showing a cover tap, the reader opening, and two page turns">
+                  <source src="assets/librox-reader-capture.mp4?v=3" type="video/mp4" />
+                </video>
+              </div>
+              <img class="phone-bezel" src="assets/iphone-17-pro-deep-blue-portrait.png" width="1350" height="2760" alt="" loading="lazy" />
+            </div>
             <div class="capture-meta"><span>REAL APP CAPTURE / IN DEVELOPMENT</span><button type="button" data-video-toggle aria-label="Pause app video">Pause</button></div>
           </div>
         </div>
@@ -149,7 +159,7 @@
           </div>
           <p class="theme-hint">Try a reading mood on this page.</p>
         </div>
-        <div class="personal-art"><img src="assets/iphone-reader.webp" alt="Librox paper reader screen showing Moby-Dick" width="650" height="1413" loading="lazy" /><span>THE PAGE, AS IT SHOULD FEEL</span></div>
+        <div class="personal-art"><div class="phone-device personal-device"><div class="phone-display"><img src="assets/iphone-reader.webp" alt="Librox paper reader screen showing Moby-Dick" width="650" height="1413" loading="lazy" /></div><img class="phone-bezel" src="assets/iphone-17-pro-deep-blue-portrait.png" width="1350" height="2760" alt="" loading="lazy" /></div><span>THE PAGE, AS IT SHOULD FEEL</span></div>
       </section>
       <section class="values wide" aria-label="What makes Librox yours">
         <div class="value"><span>01 / YOUR SHELF</span><h3>Bring your books.</h3><p>Import EPUB and TXT books from Files, AirDrop, or the Share sheet.</p></div>
@@ -251,8 +261,7 @@
         <div class="footer-legal"><span>© 2026 Section 9 Labs</span><small>iPhone, iPad, Mac, App Store, and the Apple Logo are trademarks of Apple Inc., registered in the U.S. and other countries.</small></div>
       </div>
     </footer>
-    <script src="librox.js?v=4"></script>
+    <script src="librox.js?v=5"></script>
     <script type="module" src="duo-stage.bundle.js"></script>
-    <script type="module" src="book-scene.bundle.js?v=9"></script>
   </body>
 </html>

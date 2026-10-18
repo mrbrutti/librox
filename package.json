@@ -3,12 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "esbuild duo-stage.js --bundle --minify --format=esm --target=es2022 --outfile=duo-stage.bundle.js && esbuild book-scene.js --bundle --minify --format=esm --target=es2022 --outfile=book-scene.bundle.js"
+    "build": "esbuild duo-stage.js --bundle --minify --format=esm --target=es2022 --outfile=duo-stage.bundle.js"
   },
   "devDependencies": {
     "esbuild": "0.25.12"
-  },
-  "dependencies": {
-    "three": "^0.186.1"
   }
 }
