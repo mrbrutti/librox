@@ -347,6 +347,11 @@
   .experience-phone { height: 39svh; }
 }
 
+@media (min-width:430px) and (max-width:700px) and (min-height:1050px) {
+  .experience-phone { top: 82px; height: min(51svh,500px); }
+  .experience-panel { bottom: 155px; }
+}
+
 @media (max-height:700px) and (min-width:701px) {
   .experience-sticky { min-height: 0; }
   .experience-phone { height: 76svh; }
