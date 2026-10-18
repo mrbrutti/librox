@@ -68,8 +68,8 @@ h1 em,h2 em { font-weight:400; }
 .capture-copy .text-link { color:#f4eee1; }
 .capture-screen { height:660px; position:relative; display:grid; place-items:center; isolation:isolate; }
 .capture-halo { position:absolute; inset:0; border-radius:50%; background:radial-gradient(ellipse,#56715b99,#203b2d 54%,transparent 73%); filter:blur(12px); }
-.capture-screen video { position:relative; width:auto; height:min(96%,630px); max-width:95%; object-fit:contain; border-radius:22px; box-shadow:0 32px 80px #08160f99,0 0 0 6px #ffffff14; background:#f3eee3; }
-.capture-meta { position:absolute; bottom:0; left:10%; right:10%; display:flex; align-items:center; justify-content:space-between; gap:15px; color:#d2dccf; font-size:10px; font-weight:700; letter-spacing:.12em; }
+.capture-screen video { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:auto; height:min(88%,580px); max-width:95%; object-fit:contain; border-radius:4px; box-shadow:0 32px 80px #08160f99; background:#f3eee3; }
+.capture-meta { position:absolute; bottom:3px; left:10%; right:10%; display:flex; align-items:center; justify-content:space-between; gap:15px; color:#d2dccf; font-size:10px; font-weight:700; letter-spacing:.12em; }
 .capture-meta button { color:inherit; border:0; border-bottom:1px solid currentColor; padding:0 0 4px; background:none; font-size:11px; letter-spacing:0; }
 .story { --story-bg:#e7e0d2; --story-ink:#232921; --story-muted:#687168; background:var(--story-bg); color:var(--story-ink); transition:background 850ms cubic-bezier(.77,0,.175,1),color 850ms; }
 .story[data-mode="reading"] { --story-bg:#ece8de; }
@@ -443,7 +443,7 @@ footer.site .copy {
   .capture-copy h2 { font-size:clamp(62px,13vw,94px); }
   .capture-copy > p:not(.eyebrow) { font-size:20px; margin:23px 0; }
   .capture-screen { height:530px; }
-  .capture-screen video { height:480px; }
+  .capture-screen video { height:460px; }
   .capture-meta { left:4%; right:4%; }
   .story-grid { display:flex; flex-direction:column; }
   .story-stage { order:-1; position:sticky; top:0; z-index:5; align-self:stretch; width:100%; height:44svh; min-height:315px; flex-shrink:0; }

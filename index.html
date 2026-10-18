@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://librox.app/assets/duo-library.webp" />
     <title>Librox — open a world of books</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="librox.css" />
+    <link rel="stylesheet" href="librox.css?v=3" />
     <script>
       (function () {
         try {
@@ -58,15 +58,15 @@
           <div class="capture-copy">
             <p class="eyebrow"><span class="eyebrow-rule"></span> INSIDE LIBROX</p>
             <h2 id="capture-title">Inside the<br /><em>reading space.</em></h2>
-            <p>The moment a book becomes the place you are. This is a capture from the app available today; the following Duo scenes preview the 2.0 design.</p>
+            <p>A real capture from a Librox development build: touch the cover, open the reader, turn two pages. The Duo scenes below preview the wider 2.0 design.</p>
             <a class="text-link" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox on the App Store <span aria-hidden="true">↗</span></a>
           </div>
           <div class="capture-screen">
             <div class="capture-halo" aria-hidden="true"></div>
-            <video data-feature-video autoplay muted loop playsinline preload="metadata" poster="assets/librox-reader-poster.webp" aria-label="Actual Librox app recording showing the reader and its page controls">
-              <source src="assets/librox-reader-capture.mp4" type="video/mp4" />
+            <video data-feature-video autoplay muted loop playsinline preload="metadata" poster="assets/librox-reader-poster.webp?v=2" aria-label="Librox development build recording showing a cover tap, the reader opening, and two page turns">
+              <source src="assets/librox-reader-capture.mp4?v=3" type="video/mp4" />
             </video>
-            <div class="capture-meta"><span>ACTUAL APP CAPTURE</span><button type="button" data-video-toggle aria-label="Pause app video">Pause</button></div>
+            <div class="capture-meta"><span>REAL APP CAPTURE / IN DEVELOPMENT</span><button type="button" data-video-toggle aria-label="Pause app video">Pause</button></div>
           </div>
         </div>
       </section>
@@ -248,8 +248,8 @@
         <div class="footer-legal"><span>© 2026 Section 9 Labs</span><small>iPhone, iPad, Mac, App Store, and the Apple Logo are trademarks of Apple Inc., registered in the U.S. and other countries.</small></div>
       </div>
     </footer>
-    <script src="librox.js"></script>
+    <script src="librox.js?v=2"></script>
     <script type="module" src="duo-stage.bundle.js"></script>
-    <script type="module" src="book-scene.bundle.js"></script>
+    <script type="module" src="book-scene.bundle.js?v=2"></script>
   </body>
 </html>

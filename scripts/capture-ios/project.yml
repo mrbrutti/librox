@@ -1,0 +1,24 @@
+name: LibroxCaptureRunner
+options:
+  bundleIdPrefix: com.section9labs.capture
+targets:
+  CaptureHost:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources: [Sources]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: 5.0
+  CaptureUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources: [Tests]
+    dependencies:
+      - target: CaptureHost
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: 5.0
