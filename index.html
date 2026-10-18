@@ -14,7 +14,7 @@
     <link rel="preload" as="image" href="assets/librox-duo-native-poster.webp" />
     <link rel="preload" as="image" href="assets/iphone-duo-inner-open-star-white.png" />
     <link rel="stylesheet" href="librox.css?v=7" />
-    <link rel="stylesheet" href="experience.css?v=10" />
+    <link rel="stylesheet" href="experience.css?v=11" />
   </head>
   <body class="home">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -61,11 +61,18 @@
               </div>
               <img class="experience-iphone-bezel" src="assets/iphone-17-pro-deep-blue-portrait.png" width="1350" height="2760" alt="" />
             </div>
+            <div class="experience-device experience-iphone experience-listening" data-experience-device="listening" role="group" aria-label="Librox 2.0 listening design study inside Apple's official static iPhone 17 Pro bezel" aria-hidden="true">
+              <div class="experience-iphone-display">
+                <img src="assets/iphone-listening-concept.webp" width="720" height="1566" alt="" />
+              </div>
+              <img class="experience-iphone-bezel" src="assets/iphone-17-pro-deep-blue-portrait.png" width="1350" height="2760" alt="" />
+            </div>
           </div>
           <div class="experience-toolbar wide">
             <div class="experience-device-tabs" role="group" aria-label="Choose app preview">
               <button type="button" data-experience-select="duo" aria-pressed="true">iPhone Duo</button>
               <button type="button" data-experience-select="iphone" aria-pressed="false">iPhone Pro</button>
+              <button type="button" data-experience-select="listening" aria-pressed="false">Listening</button>
             </div>
             <p data-experience-caption>Native Duo opening study · development build · sequence shortened</p>
             <div class="experience-controls" aria-label="App video controls">
@@ -106,7 +113,7 @@
                 <p class="eyebrow"><span class="eyebrow-rule"></span> 03 / THE LISTENING ROOM</p>
                 <h2 id="listening-title">Stay with<br /><em>the story.</em></h2>
                 <p class="chapter-lede">When the page has to wait, listening keeps the thread. Follow the sentence, set the pace, and let the book travel with you.</p>
-                <p class="chapter-detail">The iPhone Duo listening view shown here is part of the Librox 2.0 design preview.</p>
+                <p class="chapter-detail">A cover-colored listening room with sentence controls, speed, voice, and a way back to the page. This Duo capture comes from the current development build.</p>
               </div>
               <span class="chapter-number" aria-hidden="true">03 <span>/</span> 03</span>
             </article>
@@ -117,7 +124,7 @@
               <div class="duo-display" aria-hidden="true">
                 <img class="is-active" src="assets/duo-library.webp" width="1800" height="1266" data-screen="library" alt="" fetchpriority="high" />
                 <img src="assets/duo-reading.webp" width="1800" height="1266" data-screen="reading" alt="" />
-                <img src="assets/duo-listening.webp" width="1800" height="1266" data-screen="listening" alt="" />
+                <img src="assets/duo-listening.webp?v=2" width="1800" height="1266" data-screen="listening" alt="" />
               </div>
               <img class="duo-bezel" src="assets/iphone-duo-inner-open-star-white.png" width="3093" height="2247" alt="" />
             </div>
@@ -248,7 +255,7 @@
       </div>
     </footer>
     <script src="librox.js?v=7"></script>
-    <script src="experience.js?v=7"></script>
+    <script src="experience.js?v=8"></script>
     <script type="module" src="duo-stage.bundle.js?v=5"></script>
   </body>
 </html>

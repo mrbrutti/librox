@@ -8,6 +8,7 @@
   var devices = {
     duo: experience.querySelector('[data-experience-device="duo"]'),
     iphone: experience.querySelector('[data-experience-device="iphone"]'),
+    listening: experience.querySelector('[data-experience-device="listening"]'),
   };
   var videos = {
     duo: experience.querySelector('[data-experience-video="duo"]'),
@@ -24,6 +25,7 @@
 
   function updateToggle() {
     var video = videos[activeDevice];
+    if (!video) return;
     var paused = video.paused || video.ended;
     toggle.textContent = paused ? "Play" : "Pause";
     toggle.setAttribute("aria-label", (paused ? "Play" : "Pause") + " app video");
@@ -34,6 +36,7 @@
     Object.keys(videos).forEach(function (name) {
       if (name !== activeDevice) videos[name].pause();
     });
+    if (!activeVideo) return;
     var canPlay = visible && document.visibilityState !== "hidden" && !activeVideo.ended &&
       (manualChoice[activeDevice] === true ||
         (manualChoice[activeDevice] === null && !motionPreference.matches));
@@ -48,7 +51,7 @@
   function showDevice(name) {
     if (!devices[name]) return;
     if (name !== activeDevice) {
-      videos[activeDevice].pause();
+      if (videos[activeDevice]) videos[activeDevice].pause();
       activeDevice = name;
     }
     experience.dataset.scene = name;
@@ -62,12 +65,15 @@
     });
     caption.textContent = name === "duo"
       ? "Native Duo opening study · development build · sequence shortened"
-      : "Real iPhone app capture · development build · continuous recording";
+      : name === "iphone"
+        ? "Real iPhone app capture · development build · continuous recording"
+        : "Cover-colored listening room · Librox 2.0 design study";
     syncPlayback();
   }
 
   function replayVideo() {
     var video = videos[activeDevice];
+    if (!video) return;
     video.currentTime = 0;
     manualChoice[activeDevice] = true;
     syncPlayback();
@@ -76,13 +82,14 @@
   tabs.forEach(function (tab) {
     tab.addEventListener("click", function () {
       var name = tab.dataset.experienceSelect;
-      if (name === activeDevice) replayVideo();
+      if (name === activeDevice && videos[name]) replayVideo();
       else showDevice(name);
     });
   });
   replay.addEventListener("click", replayVideo);
   toggle.addEventListener("click", function () {
     var video = videos[activeDevice];
+    if (!video) return;
     if (video.ended) {
       replayVideo();
     } else {

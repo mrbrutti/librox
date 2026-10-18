@@ -24,6 +24,10 @@
               linear-gradient(113deg, #081d17 8%, #0d261d 66%, #183d2d);
   pointer-events: none;
 }
+.experience[data-scene="listening"] .experience-shell:before {
+  background: radial-gradient(ellipse 40% 64% at 74% 46%, #1f714c 0%, #0c432c 42%, transparent 100%),
+              linear-gradient(113deg, #081d17 8%, #0a2b20 66%, #103d2b);
+}
 .experience-shell:after {
   content: "";
   position: absolute;
@@ -60,6 +64,7 @@
 .experience-duo { width: min(60vw, 880px); aspect-ratio: 3093 / 2247; right: max(3vw, calc((100vw - 1450px) / 2)); top: 49%; transform: translateY(-50%); }
 .experience-duo-display { position: absolute; left: 3.88%; top: 5.34%; width: 92.24%; height: 89.32%; overflow: hidden; border-radius: 5.8% / 8%; background: #e9e3d8; }
 .experience-iphone { height: min(77svh, 740px); aspect-ratio: 1350 / 2760; right: max(13vw, calc((100vw - 1220px) / 2)); top: 49%; transform: translateY(-50%); }
+.experience-listening { filter: drop-shadow(0 22px 50px #0008); }
 .experience-iphone-display { position: absolute; left: 5.333333%; right: 5.333333%; top: 2.5%; bottom: 2.5%; overflow: hidden; border-radius: 11% / 5%; background: #e9e3d8; }
 .experience-device video, .experience-device img:not([class$="bezel"]) { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; object-fit: fill; }
 .experience-device video { opacity: 0; }
@@ -72,12 +77,14 @@
 .experience-device-tabs button[aria-pressed="true"]:after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: #e98d72; }
 .experience-toolbar p { margin-inline: auto; max-width: 300px; font-size: 10px; line-height: 1.35; }
 .experience-controls { display: flex; gap: 18px; flex: none; }
+.experience[data-scene="listening"] .experience-controls { visibility: hidden; }
 .experience-controls button { border: 0; background: none; padding: 0 0 7px; color: inherit; font-size: 11px; font-weight: 600; }
 .experience-controls button:hover { color: #ee9d83; }
 .experience-anchor { position: absolute; top: 0; left: 0; width: 1px; height: 1px; }
 /* One Duo viewport. The selector changes both copy and Librox screen content. */
 .story { --story-bg:#e9e3d8; --story-ink:#24352b; --story-muted:#617165; background:var(--story-bg); color:var(--story-ink); }
-.story[data-mode="reading"],.story[data-mode="listening"] { --story-bg:#e9e3d8; --story-ink:#24352b; --story-muted:#617165; }
+.story[data-mode="reading"] { --story-bg:#e9e3d8; --story-ink:#24352b; --story-muted:#617165; }
+.story[data-mode="listening"] { --story-bg:#0b211a; --story-ink:#f3f0e4; --story-muted:#bfcec0; }
 .story-grid { display: grid; grid-template-columns: minmax(0,1fr); position: relative; height: min(100svh,980px); min-height: 680px; }
 .story-copy { grid-column: 1; grid-row: 1; position: relative; z-index: 3; pointer-events: none; }
 .story-stage {
@@ -92,8 +99,11 @@
   z-index: 1;
   background: radial-gradient(ellipse 52% 65% at 75% 46%, #f9f6ed, #e9e3d8 82%);
 }
-.story-stage[data-mode="reading"],.story-stage[data-mode="listening"] {
+.story-stage[data-mode="reading"] {
   background: radial-gradient(ellipse 52% 65% at 75% 46%, #f9f6ed, #e9e3d8 82%);
+}
+.story-stage[data-mode="listening"] {
+  background: radial-gradient(ellipse 58% 76% at 75% 46%, #24513b 0%, #103122 49%, #081b16 100%);
 }
 .story-chapter,.story-intro {
   position: absolute;
@@ -118,11 +128,13 @@
 .stage-controls { bottom: 30px; left: 46px; right: 46px; justify-content: flex-end; }
 .stage-caption { display: none; }
 .stage-wash { inset: 9% 0; }
-.story[data-mode="listening"] .story-copy { color: #24352b; }
+.story[data-mode="listening"] .story-copy { color: #f3f0e4; }
 .story[data-mode="listening"] .chapter-detail,
-.story[data-mode="listening"] .chapter-footnote { color: #617165; }
+.story[data-mode="listening"] .chapter-footnote { color: #bfcec0; }
 .story-stage[data-mode="listening"] .stage-topline,
-.story-stage[data-mode="listening"] .stage-controls { color: #526356; }
+.story-stage[data-mode="listening"] .stage-controls { color: #d2decf; }
+.story[data-mode="listening"] .eyebrow,
+.story[data-mode="listening"] h2 em { color: #eda284; }
 
 .home .personal { min-height: 0; padding-block: 80px; }
 .home .values { padding-block: 54px 64px; }
