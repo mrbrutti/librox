@@ -14,7 +14,7 @@ Reference: [GPT-6 Can Now Build 3D Interactive Websites](https://www.youtube.com
 - Preserve Librox's ocean cover artwork, warm paper, dark green cloth, and coral accent.
 - Make the book's cover, hinge, leaf, and cast shadow move as one physical object. Do not model or animate Apple hardware.
 - Keep real app recordings separate and visibly labeled. Generated imagery may establish an environment or light treatment; it must not be presented as app footage.
-- Pause WebGL rendering and app video offscreen. Reduced-motion visitors get a stable still state, and every autoplay scene has a manual replay or pause control.
+- Pause WebGL rendering and app video offscreen. Reduced-motion visitors get a stable still state on load; explicit play or drag still works. Every autoplay scene has a manual replay or pause control.
 - Prefer one purposeful interaction per chapter over decorative motion everywhere.
 
 ## Three-day delivery path

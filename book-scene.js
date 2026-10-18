@@ -332,9 +332,8 @@ if (canvas && hero && replay && motionToggle) {
   function replayOpening() {
     start = performance.now();
     currentProgress = 0;
-    playing = !reducedMotion.matches;
-    motionToggle.textContent = playing ? "Pause motion" : "Play motion";
-    if (reducedMotion.matches) { currentProgress = 1; setBook(1); render(); }
+    playing = true;
+    motionToggle.textContent = "Pause motion";
   }
   replay.addEventListener("click", replayOpening);
   motionToggle.addEventListener("click", () => {
@@ -344,7 +343,7 @@ if (canvas && hero && replay && motionToggle) {
     motionToggle.textContent = playing ? "Pause motion" : "Play motion";
   });
   canvas.addEventListener("pointerdown", (event) => {
-    if (reducedMotion.matches || (event.pointerType === "mouse" && event.button !== 0)) return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
     drag = { id: event.pointerId, x: event.clientX, progress: currentProgress, moved: false };
     playing = false;
     motionToggle.textContent = "Play motion";
@@ -369,6 +368,14 @@ if (canvas && hero && replay && motionToggle) {
   }
   canvas.addEventListener("pointerup", endDrag);
   canvas.addEventListener("pointercancel", endDrag);
+  reducedMotion.addEventListener("change", () => {
+    if (!reducedMotion.matches) return;
+    playing = false;
+    currentProgress = 1;
+    motionToggle.textContent = "Replay motion";
+    setBook(currentProgress);
+    render();
+  });
   hero.addEventListener("pointermove", (event) => {
     if (reducedMotion.matches || drag || event.pointerType === "touch") return;
     pointerX = (event.clientX / innerWidth - 0.5) * 2;

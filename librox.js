@@ -37,19 +37,31 @@
     var motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
     var videoVisible = false;
     var videoPausedByUser = false;
+    var videoPlayRequested = false;
+    function updateVideoToggle() {
+      videoToggle.textContent = featureVideo.paused ? "Play" : "Pause";
+      videoToggle.setAttribute("aria-label", featureVideo.paused ? "Play app video" : "Pause app video");
+    }
     function syncFeatureVideo() {
-      if (videoVisible && !videoPausedByUser && !motionPreference.matches) {
+      if (videoVisible && (videoPlayRequested || (!videoPausedByUser && !motionPreference.matches))) {
         featureVideo.play().catch(function () {});
       } else {
         featureVideo.pause();
       }
-      videoToggle.textContent = featureVideo.paused ? "Play" : "Pause";
-      videoToggle.setAttribute("aria-label", featureVideo.paused ? "Play app video" : "Pause app video");
+      updateVideoToggle();
     }
     videoToggle.addEventListener("click", function () {
-      videoPausedByUser = !videoPausedByUser;
+      if (featureVideo.paused) {
+        videoPlayRequested = true;
+        videoPausedByUser = false;
+      } else {
+        videoPlayRequested = false;
+        videoPausedByUser = true;
+      }
       syncFeatureVideo();
     });
+    featureVideo.addEventListener("play", updateVideoToggle);
+    featureVideo.addEventListener("pause", updateVideoToggle);
     new IntersectionObserver(function (entries) {
       videoVisible = entries[0].isIntersecting;
       featureVideo.closest(".capture-section").classList.toggle("is-active", videoVisible);
