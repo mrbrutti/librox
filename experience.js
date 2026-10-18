@@ -1,57 +1,42 @@
-/* The recorded app scenes switch in place. Apple's bezel remains static. */
+/* Actual Librox recordings play inside Apple's unmodified, static bezels. */
 (function () {
   "use strict";
 
   var experience = document.querySelector("[data-experience]");
   if (!experience) return;
 
+  var devices = {
+    duo: experience.querySelector('[data-experience-device="duo"]'),
+    iphone: experience.querySelector('[data-experience-device="iphone"]'),
+  };
   var videos = {
-    opening: experience.querySelector('[data-experience-video="opening"]'),
-    reading: experience.querySelector('[data-experience-video="reading"]'),
+    duo: experience.querySelector('[data-experience-video="duo"]'),
+    iphone: experience.querySelector('[data-experience-video="iphone"]'),
   };
-  var panels = {
-    book: experience.querySelector('[data-experience-panel="book"]'),
-    opening: experience.querySelector('[data-experience-panel="opening"]'),
-    reading: experience.querySelector('[data-experience-panel="reading"]'),
-  };
-  var fallbacks = Array.prototype.slice.call(experience.querySelectorAll("[data-experience-fallback]"));
-  var toggle = experience.querySelector("[data-experience-toggle]");
+  var tabs = Array.prototype.slice.call(experience.querySelectorAll("[data-experience-select]"));
   var replay = experience.querySelector("[data-experience-replay]");
+  var toggle = experience.querySelector("[data-experience-toggle]");
   var caption = experience.querySelector("[data-experience-caption]");
-  var number = experience.querySelector("[data-experience-number]");
-  var next = experience.querySelector("[data-experience-next]");
   var motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
-  var manualChoice = { opening: null, reading: null };
-  var activeScene = "book";
+  var manualChoice = { duo: null, iphone: null };
+  var activeDevice = "duo";
   var visible = false;
 
-  function showFallback() {
-    if (activeScene === "book") return;
-    var fallbackName = activeScene === "opening" && videos.opening.ended
-      ? "opening-end"
-      : activeScene;
-    fallbacks.forEach(function (image) {
-      image.classList.toggle("is-active", image.dataset.experienceFallback === fallbackName);
-    });
-  }
-
   function updateToggle() {
-    if (activeScene === "book") return;
-    var video = videos[activeScene];
+    var video = videos[activeDevice];
     var paused = video.paused || video.ended;
     toggle.textContent = paused ? "Play" : "Pause";
-    toggle.setAttribute("aria-label", (paused ? "Play" : "Pause") + " app film");
+    toggle.setAttribute("aria-label", (paused ? "Play" : "Pause") + " app video");
   }
 
   function syncPlayback() {
-    var activeVideo = videos[activeScene];
-    Object.keys(videos).forEach(function (scene) {
-      if (scene !== activeScene) videos[scene].pause();
+    var activeVideo = videos[activeDevice];
+    Object.keys(videos).forEach(function (name) {
+      if (name !== activeDevice) videos[name].pause();
     });
-    if (!activeVideo) return;
     var canPlay = visible && document.visibilityState !== "hidden" && !activeVideo.ended &&
-      (manualChoice[activeScene] === true ||
-        (manualChoice[activeScene] === null && !motionPreference.matches));
+      (manualChoice[activeDevice] === true ||
+        (manualChoice[activeDevice] === null && !motionPreference.matches));
     if (canPlay) {
       if (activeVideo.paused) activeVideo.play().catch(updateToggle);
     } else {
@@ -60,100 +45,62 @@
     updateToggle();
   }
 
-  function showScene(scene) {
-    if (!panels[scene]) return;
-    if (scene !== activeScene) {
-      if (videos[activeScene]) videos[activeScene].pause();
-      activeScene = scene;
-      if (videos[scene]) {
-        videos[scene].currentTime = 0;
-        videos[scene].classList.remove("has-frame");
-      }
+  function showDevice(name) {
+    if (!devices[name]) return;
+    if (name !== activeDevice) {
+      videos[activeDevice].pause();
+      activeDevice = name;
     }
-    experience.dataset.scene = scene;
-    experience.classList.remove("is-book-opening");
-    Object.keys(panels).forEach(function (name) {
-      var active = name === scene;
-      panels[name].classList.toggle("is-active", active);
-      panels[name].inert = !active;
-      panels[name].setAttribute("aria-hidden", active ? "false" : "true");
-      if (videos[name]) {
-        videos[name].classList.toggle("is-active", active);
-        videos[name].setAttribute("aria-hidden", active ? "false" : "true");
-      }
+    experience.dataset.scene = name;
+    Object.keys(devices).forEach(function (deviceName) {
+      var active = deviceName === name;
+      devices[deviceName].classList.toggle("is-active", active);
+      devices[deviceName].setAttribute("aria-hidden", String(!active));
     });
-    number.textContent = { book: "01", opening: "02", reading: "03" }[scene];
-    caption.textContent = {
-      book: "Interactive render of Librox design-lab artwork",
-      opening: "Native opening study · development build · sequence shortened",
-      reading: "Real app capture · development build · continuous recording"
-    }[scene];
-    next.firstChild.nodeValue = {
-      book: "SEE THE APP ",
-      opening: "SEE THE READER ",
-      reading: "RETURN TO THE BOOK "
-    }[scene];
-    if (scene === "book" && window.libroxBookScene) window.libroxBookScene.reset();
-    showFallback();
+    tabs.forEach(function (tab) {
+      tab.setAttribute("aria-pressed", String(tab.dataset.experienceSelect === name));
+    });
+    caption.textContent = name === "duo"
+      ? "Native Duo opening study · development build · sequence shortened"
+      : "Real iPhone app capture · development build · continuous recording";
     syncPlayback();
   }
 
-  function replayScene() {
-    if (activeScene === "book") return;
-    var video = videos[activeScene];
+  function replayVideo() {
+    var video = videos[activeDevice];
     video.currentTime = 0;
-    video.classList.remove("has-frame");
-    manualChoice[activeScene] = true;
-    showFallback();
+    manualChoice[activeDevice] = true;
     syncPlayback();
   }
 
-  experience.querySelectorAll("[data-experience-go]").forEach(function (button) {
-    button.addEventListener("click", function () {
-      showScene(button.dataset.experienceGo);
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var name = tab.dataset.experienceSelect;
+      if (name === activeDevice) replayVideo();
+      else showDevice(name);
     });
   });
-  experience.querySelector("[data-book-open]").addEventListener("click", function () {
-    var button = this;
-    button.disabled = true;
-    experience.classList.add("is-book-opening");
-    var animation = window.libroxBookScene
-      ? window.libroxBookScene.open()
-      : Promise.resolve();
-    animation.then(function (completed) {
-      if (completed !== false && activeScene === "book") showScene("opening");
-      button.disabled = false;
-    });
-  });
-  next.addEventListener("click", function () {
-    showScene(activeScene === "book" ? "opening" : activeScene === "opening" ? "reading" : "book");
-  });
+  replay.addEventListener("click", replayVideo);
   toggle.addEventListener("click", function () {
-    var video = videos[activeScene];
+    var video = videos[activeDevice];
     if (video.ended) {
-      replayScene();
+      replayVideo();
     } else {
-      manualChoice[activeScene] = video.paused;
+      manualChoice[activeDevice] = video.paused;
       syncPlayback();
     }
   });
-  replay.addEventListener("click", replayScene);
 
-  Object.keys(videos).forEach(function (scene) {
-    var video = videos[scene];
+  Object.keys(videos).forEach(function (name) {
+    var video = videos[name];
     video.addEventListener("playing", function () {
       video.classList.add("has-frame");
       updateToggle();
     });
     video.addEventListener("pause", updateToggle);
-    video.addEventListener("ended", function () {
-      video.classList.remove("has-frame");
-      showFallback();
-      updateToggle();
-    });
+    video.addEventListener("ended", updateToggle);
     video.addEventListener("error", function () {
       video.classList.remove("has-frame");
-      showFallback();
       updateToggle();
     });
   });
@@ -168,10 +115,10 @@
   }
   document.querySelectorAll('a[href="#app-in-motion"],a[href="#experience"]').forEach(function (link) {
     link.addEventListener("click", function () {
-      showScene(link.getAttribute("href") === "#app-in-motion" ? "opening" : "book");
+      showDevice(link.getAttribute("href") === "#app-in-motion" ? "iphone" : "duo");
     });
   });
   document.addEventListener("visibilitychange", syncPlayback);
   motionPreference.addEventListener("change", syncPlayback);
-  showScene(location.hash === "#app-in-motion" ? "opening" : "book");
+  showDevice(location.hash === "#app-in-motion" ? "iphone" : "duo");
 })();

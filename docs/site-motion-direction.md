@@ -1,20 +1,19 @@
 # Librox motion direction · October 18–21, 2026
 
-The user shared [Townhouse](https://townhouse.dev/), [Armor](https://www.armor-bd.com/), [Mapa do Astro](https://www.mapadoastro.com.br/), [Orizon](https://orizon.one/), [Reel Motion](https://reelmotion.fit/), [Morpho](https://morphowater.com/), and a [3D website video](https://www.youtube.com/watch?v=fwWGfWjwEl0). The current draft responds with one large physical object, a lit studio setting, an interaction that reveals the real app, and a short section sequence. The page no longer uses long pinned scroll chapters.
+The user shared [Townhouse](https://townhouse.dev/), [Armor](https://www.armor-bd.com/), [Mapa do Astro](https://www.mapadoastro.com.br/), [Orizon](https://orizon.one/), [Reel Motion](https://reelmotion.fit/), [Morpho](https://morphowater.com/), a [3D website video](https://www.youtube.com/watch?v=fwWGfWjwEl0), and three Sketchfab iPhone Duo models, including the [animated Star White fold](https://sketchfab.com/3d-models/apple-iphone-duo-fold-star-white-2026-animated-240492141edd4594ae13082a7fcbbb29). The site should feel cinematic and physical, but the brand and real app must lead. The hero therefore uses authentic Librox footage inside official static device artwork, with a short section sequence and direct device controls.
 
 ## Scene sequence
 
-1. **The book.** A Three.js book opens and turns leaves in the first viewport. Its printed face is the original Moby-Dick design-lab artwork; the case, paper, light, and studio setting are website renders. The studio backdrop is generated imagery. The scene is labeled an interactive render.
-2. **Inside the app.** The book hands off to the native SceneKit/Metal opening study, then a continuous page-turn recording. Both play inside Apple's official static iPhone 17 Pro bezel. The first is labeled a shortened development study; the second is labeled development-build footage. Video stills remain visible if playback ends or fails.
-3. **The Duo preview.** One viewport switches among Librox 2.0 library, page, and listening design previews inside Apple's official static iPhone Duo bezel. Only Librox screen content and copy change.
-4. **Reading and discovery.** Reading themes and catalog search remain functional. The closing download link detects Apple silicon Mac versus iPhone/iPad availability without claiming a native Mac app.
+1. **Librox on Duo.** The first frame is a Librox app capture, not a book render. A native simulator recording opens and closes the book inside Apple's official open Duo bezel. The device artwork stays static. The interface identifies the capture as a shortened development study.
+2. **Librox on iPhone.** A direct selector swaps to an iPhone 17 Pro frame with a continuous real app recording: open the reader and turn two pages. Replay and pause remain available. Still posters remain visible if video cannot play.
+3. **The Duo design preview.** One viewport switches among Librox 2.0 library, page, and listening views inside the official static Duo bezel. Only screen content and copy change.
+4. **Reading and discovery.** Reading themes and catalog search remain functional. The download link detects platform availability without claiming a native Mac app.
 
 ## Rules and verification
 
-- Keep the Moby-Dick printed artwork unchanged on the rendered cover. Treat the book model as a concept, not app footage.
-- Keep official Apple bezels static; only app content within them changes.
-- Pause app video when offscreen. Reduced-motion visitors see still media until they explicitly play it. Keep replay and pause controls.
-- Maintain a dependable image fallback for WebGL, video, and Duo screen loading.
-- Verify phone and desktop framing, transitions, page-turn playback, and console errors before each review.
+- Keep the Apple bezels unmodified and static. Their image, pose, shape, and scale do not animate. The Sketchfab models are not used in the public page because [Apple's marketing guidelines](https://developer.apple.com/app-store/marketing/guidelines/) prohibit 3D simulations of its devices in app marketing.
+- Animate the actual Librox content within the screen area. Pause offscreen. Reduced-motion visitors see still posters until they explicitly play.
+- Maintain posters for both videos. Check first frame, ended state, error state, device switching, and both desktop and phone framing.
+- Label development footage and design previews accurately; do not imply a released Duo app or verified physical-device behavior.
 
-This is a draft PR. The live domain remains on `main` until reviewed and merged. Higgsfield was explored but not used; no generation was submitted or charged there.
+This remains a draft PR. The live domain stays on `main` until reviewed and merged. Higgsfield was explored but no generation was submitted or charged there.
