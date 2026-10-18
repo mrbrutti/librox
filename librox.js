@@ -1,4 +1,4 @@
-/* Librox site behavior: theme chips + the Find Books search.
+/* Librox site behavior: Duo story, theme chips, and the Find Books search.
    Search talks directly to the same catalogs the app ships with —
    no server of ours in between, same as the app's Discover tab. */
 (function () {
@@ -39,31 +39,59 @@
     if (paperChip) paperChip.setAttribute("aria-pressed", "true");
   }
 
-  /* The cover opens into the Duo preview. Run once after paint; replay on tap. */
-  var scene = document.getElementById("duo-scene");
-  var openButton = document.getElementById("open-demo");
-  if (scene && openButton) {
-    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    function openScene() {
-      scene.classList.add("is-open");
-      openButton.firstChild.textContent = reducedMotion.matches
-        ? "See the Duo preview "
-        : "Replay opening ";
-    }
-    if (reducedMotion.matches) openScene();
-    else window.setTimeout(openScene, 650);
-    openButton.addEventListener("click", function () {
-      if (reducedMotion.matches) {
-        document.getElementById("duo").scrollIntoView();
-        return;
-      }
-      scene.classList.add("is-resetting");
-      scene.classList.remove("is-open");
-      void scene.offsetWidth;
-      window.requestAnimationFrame(function () {
-        scene.classList.remove("is-resetting");
-        window.requestAnimationFrame(openScene);
+  /* Keep the physical Duo beside the chapter currently crossing the viewport. */
+  var story = document.querySelector(".story");
+  if (story) {
+    var chapters = Array.prototype.slice.call(
+      story.querySelectorAll("[data-chapter]"),
+    );
+    var scrollFrame = 0;
+    function updateChapter() {
+      scrollFrame = 0;
+      var marker = innerHeight * (innerWidth <= 900 ? 0.67 : 0.52);
+      var selected = chapters.find(function (chapter) {
+        var bounds = chapter.getBoundingClientRect();
+        return bounds.top <= marker && bounds.bottom > marker;
       });
+      if (!selected) return;
+      chapters.forEach(function (chapter) {
+        chapter.classList.toggle("is-current", chapter === selected);
+      });
+      if (window.libroxStage) window.libroxStage.setMode(selected.dataset.chapter);
+    }
+    function scheduleChapter() {
+      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateChapter);
+    }
+    addEventListener("scroll", scheduleChapter, { passive: true });
+    addEventListener("resize", scheduleChapter);
+    addEventListener("librox-stage-ready", scheduleChapter);
+    scheduleChapter();
+  }
+
+  /* Editorial sections arrive as the reader reaches them. */
+  if (
+    "IntersectionObserver" in window &&
+    !matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    var reveals = document.querySelectorAll(
+      ".interlude h2, .interlude-bottom, .personal-copy, .personal-art, .value, .discover-head, .closing-inner",
+    );
+    reveals.forEach(function (element) {
+      element.classList.add("reveal-target");
+    });
+    document.documentElement.classList.add("motion-ready");
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-revealed");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.1 },
+    );
+    reveals.forEach(function (element) {
+      revealObserver.observe(element);
     });
   }
 
