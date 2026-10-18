@@ -4,6 +4,59 @@
 (function () {
   "use strict";
 
+  /* One App Store product ID serves the public listing. Tailor the wording,
+     but keep the country-neutral HTTPS link so Apple resolves the storefront. */
+  var storeURL = "https://apps.apple.com/app/id6796746657";
+  var platform = navigator.platform || "";
+  var userAgent = navigator.userAgent || "";
+  var isIPad = /iPad/.test(userAgent) || (platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var isIPhone = /iPhone|iPod/.test(userAgent);
+  var isMac = !isIPad && /Mac/.test(platform);
+  document.querySelectorAll("[data-store-link]").forEach(function (link) {
+    link.href = storeURL;
+  });
+  var storeLabel = document.querySelector("[data-store-label]");
+  if (storeLabel) {
+    storeLabel.textContent = isIPhone
+      ? "Get Librox for iPhone"
+      : isIPad
+        ? "Get Librox for iPad"
+        : isMac
+          ? "View Librox on the App Store"
+          : "Get Librox on the App Store";
+  }
+  var storeAvailability = document.querySelector("[data-store-availability]");
+  if (isMac && storeAvailability) {
+    storeAvailability.textContent = "The current iPhone and iPad app can run on compatible Apple silicon Macs; its Mac experience is not yet verified.";
+    storeAvailability.hidden = false;
+  }
+
+  var featureVideo = document.querySelector("[data-feature-video]");
+  var videoToggle = document.querySelector("[data-video-toggle]");
+  if (featureVideo && videoToggle) {
+    var motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+    var videoVisible = false;
+    var videoPausedByUser = false;
+    function syncFeatureVideo() {
+      if (videoVisible && !videoPausedByUser && !motionPreference.matches) {
+        featureVideo.play().catch(function () {});
+      } else {
+        featureVideo.pause();
+      }
+      videoToggle.textContent = featureVideo.paused ? "Play" : "Pause";
+      videoToggle.setAttribute("aria-label", featureVideo.paused ? "Play app video" : "Pause app video");
+    }
+    videoToggle.addEventListener("click", function () {
+      videoPausedByUser = !videoPausedByUser;
+      syncFeatureVideo();
+    });
+    new IntersectionObserver(function (entries) {
+      videoVisible = entries[0].isIntersecting;
+      syncFeatureVideo();
+    }, { threshold: 0.2 }).observe(featureVideo);
+    motionPreference.addEventListener("change", syncFeatureVideo);
+  }
+
   /* ---------- Themes ---------- */
   var THEMES = ["eink", "paper", "dark"];
   function applyTheme(name) {
