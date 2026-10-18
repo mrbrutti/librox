@@ -12,6 +12,7 @@
     <title>Librox — open a world of books</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="librox.css?v=7" />
+    <link rel="stylesheet" href="experience.css?v=3" />
     <script>
       (function () {
         try {
@@ -33,55 +34,48 @@
       </div>
     </header>
     <main id="main">
-      <section id="experience" class="film-hero" aria-labelledby="film-title">
-        <div class="film-device phone-device" role="group" aria-label="Native Librox book opening recorded on iPhone in a development build">
-          <div class="phone-display">
-            <video data-opening-video muted playsinline preload="metadata" poster="assets/librox-native-opening-poster.webp" aria-label="A Moby-Dick cover opens into the Librox reader in a native development build">
-              <source src="assets/librox-native-opening.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <img class="phone-bezel" src="assets/iphone-17-pro-deep-blue-portrait.png" width="1350" height="2760" alt="" />
-        </div>
-        <div class="film-grain" aria-hidden="true"></div>
-        <div class="film-vignette" aria-hidden="true"></div>
-        <div class="film-content wide">
-          <p class="film-kicker">LIBROX <span></span> NATIVE OPENING STUDY</p>
-          <h1 id="film-title">It starts<br />with <em>a book.</em></h1>
-          <p>Touch the cover. Let the world fall away. Read, listen, and find your way back to the story whenever you like.</p>
-          <div class="film-actions">
-            <a class="button button-cream" href="#app-in-motion">Step inside <span aria-hidden="true">↓</span></a>
-            <a class="film-store-link" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="film-controls" aria-label="Opening video controls">
-            <button type="button" data-opening-replay>Replay opening</button>
-            <span aria-hidden="true"></span>
-            <button type="button" data-opening-toggle aria-label="Pause opening video">Pause</button>
-          </div>
-        </div>
-        <p class="film-disclosure">Native app opening study · development build · sequence shortened</p>
-        <a class="film-scroll-cue" href="#app-in-motion">SCROLL TO STEP INSIDE <span aria-hidden="true">↓</span></a>
-      </section>
-      <section id="app-in-motion" class="capture-section" aria-labelledby="capture-title">
-        <div class="wide capture-grid">
-          <div class="capture-copy">
-            <p class="eyebrow"><span class="eyebrow-rule"></span> INSIDE LIBROX</p>
-            <h2 id="capture-title">Inside the<br /><em>reading space.</em></h2>
-            <p>A real capture from a Librox development build: touch the cover, open the reader, turn two pages. The Duo scenes below preview the wider 2.0 design.</p>
-            <a class="text-link" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox on the App Store <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="capture-screen">
-            <div class="capture-halo" aria-hidden="true"></div>
-            <div class="phone-device capture-device">
-              <div class="phone-display">
-                <video data-feature-video muted loop playsinline preload="metadata" poster="assets/librox-reader-poster.webp?v=2" aria-label="Librox development build recording showing a cover tap, the reader opening, and two page turns">
-                  <source src="assets/librox-reader-capture.mp4?v=3" type="video/mp4" />
-                </video>
-              </div>
-              <img class="phone-bezel" src="assets/iphone-17-pro-deep-blue-portrait.png" width="1350" height="2760" alt="" loading="lazy" />
+      <section id="experience" class="experience" data-experience data-scene="opening" aria-labelledby="experience-title">
+        <div class="experience-sticky">
+          <div class="experience-atmosphere" aria-hidden="true"></div>
+          <img class="experience-ocean" src="assets/cover-ocean.webp" width="900" height="1350" alt="" aria-hidden="true" />
+          <div class="experience-paper" aria-hidden="true"></div>
+          <div class="experience-rule" aria-hidden="true"></div>
+          <div class="experience-phone phone-device" role="group" aria-label="Librox app recordings inside Apple's official static iPhone 17 Pro bezel">
+            <div class="phone-display experience-display">
+              <video class="is-active" data-experience-video="opening" muted playsinline preload="metadata" poster="assets/librox-native-opening-poster.webp" aria-label="Native book opening from a Librox development study">
+                <source src="assets/librox-native-opening.mp4" type="video/mp4" />
+              </video>
+              <video data-experience-video="reading" muted loop playsinline preload="metadata" poster="assets/librox-reader-poster.webp?v=2" aria-label="Librox development build recording of a book opening and two page turns">
+                <source src="assets/librox-reader-capture.mp4?v=3" type="video/mp4" />
+              </video>
             </div>
-            <div class="capture-meta"><span>REAL APP CAPTURE / IN DEVELOPMENT</span><button type="button" data-video-toggle aria-label="Pause app video">Pause</button></div>
+            <img class="phone-bezel" src="assets/iphone-17-pro-deep-blue-portrait.png" width="1350" height="2760" alt="" />
+          </div>
+          <div class="experience-copy wide">
+            <article class="experience-panel is-active" data-experience-panel="opening">
+              <p class="experience-kicker">LIBROX / THE READING EXPERIENCE</p>
+              <h1 id="experience-title">Open a book.<br /><em>Enter its world.</em></h1>
+              <p class="experience-description">Touch the cover. Watch the book open. Stay for the story.</p>
+              <div class="experience-actions">
+                <a class="experience-primary" href="#app-in-motion">See it unfold <span aria-hidden="true">↘</span></a>
+                <a class="experience-secondary" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+            <article class="experience-panel" data-experience-panel="reading" aria-hidden="true" inert>
+              <p class="experience-kicker">A PAGE YOU CAN FEEL</p>
+              <h2>One page.<br /><em>Then another.</em></h2>
+              <p class="experience-description">A real app capture: open the reader and turn two pages. Let everything else disappear.</p>
+              <div class="experience-actions"><a class="experience-primary" href="#duo-story">Explore what’s next <span aria-hidden="true">↘</span></a></div>
+            </article>
+          </div>
+          <div class="experience-progress" aria-hidden="true"><span class="experience-progress-number" data-experience-number>01</span><span class="experience-progress-track"><span data-experience-progress></span></span><span>02</span></div>
+          <div class="experience-bottom wide">
+            <p data-experience-caption>Native opening study · development build · sequence shortened</p>
+            <div class="experience-controls" aria-label="App film controls"><button type="button" data-experience-replay>Replay scene</button><button type="button" data-experience-toggle aria-label="Pause app film">Pause</button></div>
+            <a href="#app-in-motion" class="experience-scroll" data-experience-next>SCROLL TO OPEN <span aria-hidden="true">↓</span></a>
           </div>
         </div>
+        <span id="app-in-motion" class="experience-anchor" aria-hidden="true"></span>
       </section>
       <section id="duo-story" class="story" data-mode="library" aria-label="Librox 2.0 Duo design preview">
         <div class="story-grid">
@@ -89,8 +83,8 @@
             <article class="story-chapter story-intro is-current" data-chapter="library" aria-labelledby="hero-title">
               <div class="chapter-inner">
                 <p class="eyebrow"><span class="eyebrow-rule"></span> LIBROX 2.0 <span class="eyebrow-dot">/</span> DESIGN PREVIEW</p>
-                <h1 id="hero-title">Open a<br /><em>world</em> of books<span class="full-stop">.</span></h1>
-                <p class="chapter-lede">A book in your pocket. A library when you open it. Explore the next Librox reading space on iPhone Duo.</p>
+                <h2 id="hero-title">Your library,<br /><em>unfolded.</em></h2>
+                <p class="chapter-lede">A book in your pocket. A reading space when you open it. Explore the next Librox design on iPhone Duo.</p>
                 <div class="hero-actions">
                   <button class="button button-dark" type="button" data-stage-tour>Watch the Duo story <span aria-hidden="true">↗</span></button>
                   <a class="text-link" href="#the-page">Explore the story <span aria-hidden="true">↓</span></a>
@@ -102,7 +96,7 @@
             <article id="the-page" class="story-chapter" data-chapter="reading" aria-labelledby="page-title">
               <div class="chapter-inner">
                 <p class="eyebrow"><span class="eyebrow-rule"></span> 02 / THE PAGE</p>
-                <h2 id="page-title">Then the world<br /><em>falls away.</em></h2>
+                <h2 id="page-title">The page,<br /><em>uninterrupted.</em></h2>
                 <p class="chapter-lede">The cover gives way to the words. Two pages settle into one quiet surface, with room to get lost.</p>
                 <p class="chapter-detail">Type that invites you to stay. A place held between every page. The familiar feel of a book, carried into a new form.</p>
               </div>
@@ -261,7 +255,8 @@
         <div class="footer-legal"><span>© 2026 Section 9 Labs</span><small>iPhone, iPad, Mac, App Store, and the Apple Logo are trademarks of Apple Inc., registered in the U.S. and other countries.</small></div>
       </div>
     </footer>
-    <script src="librox.js?v=5"></script>
-    <script type="module" src="duo-stage.bundle.js"></script>
+    <script src="librox.js?v=6"></script>
+    <script src="experience.js?v=1"></script>
+    <script type="module" src="duo-stage.bundle.js?v=3"></script>
   </body>
 </html>

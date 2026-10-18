@@ -1,6 +1,6 @@
 # Librox website
 
-Static GitHub Pages site for librox.app. The hero uses a recording of the app's native SceneKit/Metal book-opening study. The next section uses a continuous recording of the current Librox development build. Both recordings and the reader still are shown inside Apple's official static iPhone 17 Pro bezel. The iPhone Duo stage places Librox 2.0 design captures within Apple's official static iPhone Duo bezel. Only the screen content changes.
+Static GitHub Pages site for librox.app. The landing page is a two-scene, scroll-driven film: Librox's native SceneKit/Metal book-opening study gives way to a continuous recording of opening the reader and turning two pages. Both play inside Apple's official static iPhone 17 Pro bezel. The next pinned stage walks through Librox 2.0 library, page, and listening previews inside Apple's official static iPhone Duo bezel. The site uses the app's ocean cover artwork as its visual thread. Device artwork remains static; app content and the surrounding scene change.
 
 The [site motion direction](docs/site-motion-direction.md) records the product-led reference, scene sequence, interaction rules, and three-day review path.
 

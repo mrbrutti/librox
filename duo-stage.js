@@ -56,7 +56,17 @@ if (host && story && product && screens.length === 3) {
   }
 
   document.querySelectorAll("[data-scene-mode]").forEach((control) => {
-    control.addEventListener("click", () => setMode(control.dataset.sceneMode));
+    control.addEventListener("click", () => {
+      const mode = control.dataset.sceneMode;
+      setMode(mode);
+      const chapter = story.querySelector(`[data-chapter="${mode}"]`);
+      if (chapter) {
+        scrollTo({
+          top: scrollY + chapter.getBoundingClientRect().top,
+          behavior: reduceMotion.matches ? "auto" : "smooth",
+        });
+      }
+    });
   });
   screens.forEach((screen) => {
     screen.addEventListener("transitionend", (event) => {
