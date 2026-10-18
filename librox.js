@@ -9,26 +9,75 @@
   function applyTheme(name) {
     if (THEMES.indexOf(name) === -1) return;
     document.documentElement.setAttribute("data-theme", name);
-    try { localStorage.setItem("librox-theme", name); } catch (e) {}
+    try {
+      localStorage.setItem("librox-theme", name);
+    } catch (e) {}
     document.querySelectorAll(".theme-chip").forEach(function (chip) {
-      chip.setAttribute("aria-pressed", chip.dataset.theme === name ? "true" : "false");
+      chip.setAttribute(
+        "aria-pressed",
+        chip.dataset.theme === name ? "true" : "false",
+      );
     });
   }
   document.querySelectorAll(".theme-chip").forEach(function (chip) {
-    chip.addEventListener("click", function () { applyTheme(chip.dataset.theme); });
+    chip.addEventListener("click", function () {
+      applyTheme(chip.dataset.theme);
+    });
   });
   // Reflect a stored choice (set pre-paint by the inline head script) in the chips.
   var current = document.documentElement.getAttribute("data-theme");
   if (current) {
     document.querySelectorAll(".theme-chip").forEach(function (chip) {
-      chip.setAttribute("aria-pressed", chip.dataset.theme === current ? "true" : "false");
+      chip.setAttribute(
+        "aria-pressed",
+        chip.dataset.theme === current ? "true" : "false",
+      );
+    });
+  }
+  if (!current) {
+    var paperChip = document.querySelector('.theme-chip[data-theme="paper"]');
+    if (paperChip) paperChip.setAttribute("aria-pressed", "true");
+  }
+
+  /* The cover opens into the Duo preview. Run once after paint; replay on tap. */
+  var scene = document.getElementById("duo-scene");
+  var openButton = document.getElementById("open-demo");
+  if (scene && openButton) {
+    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function openScene() {
+      scene.classList.add("is-open");
+      openButton.firstChild.textContent = reducedMotion.matches
+        ? "See the Duo preview "
+        : "Replay opening ";
+    }
+    if (reducedMotion.matches) openScene();
+    else window.setTimeout(openScene, 650);
+    openButton.addEventListener("click", function () {
+      if (reducedMotion.matches) {
+        document.getElementById("duo").scrollIntoView();
+        return;
+      }
+      scene.classList.add("is-resetting");
+      scene.classList.remove("is-open");
+      void scene.offsetWidth;
+      window.requestAnimationFrame(function () {
+        scene.classList.remove("is-resetting");
+        window.requestAnimationFrame(openScene);
+      });
     });
   }
 
   /* ---------- Cover tints — the app's palette and its exact hash ----------
      LibrosStyle.coverTint: djb2 over UTF-8, wrapping at 64 bits, mod 6.
      Same title → same colour on the page and on the phone. */
-  var COVER_TINTS = ["#2F4A4A", "#8A4B2F", "#6B4A5C", "#4A5C4A", "#3F4E63", "#7A6A3F"];
+  var COVER_TINTS = [
+    "#2F4A4A",
+    "#8A4B2F",
+    "#6B4A5C",
+    "#4A5C4A",
+    "#3F4E63",
+    "#7A6A3F",
+  ];
   var MASK64 = (1n << 64n) - 1n;
   function coverTint(title) {
     var bytes = new TextEncoder().encode(title);
@@ -46,7 +95,9 @@
   var input = document.getElementById("book-query");
   var status = document.getElementById("search-status");
   var list = document.getElementById("search-results");
-  var sourceChips = Array.prototype.slice.call(document.querySelectorAll(".source-chip"));
+  var sourceChips = Array.prototype.slice.call(
+    document.querySelectorAll(".source-chip"),
+  );
   var activeSource = "all";
   var controller = null;
   var debounceTimer = null;
@@ -70,26 +121,46 @@
   input.addEventListener("input", function () {
     clearTimeout(debounceTimer);
     var q = input.value.trim();
-    if (q.length < 2) { setStatus(""); clear(list); return; }
-    debounceTimer = setTimeout(function () { runSearch(q); }, 400);
+    if (q.length < 2) {
+      if (controller) controller.abort();
+      setStatus("");
+      clear(list);
+      return;
+    }
+    debounceTimer = setTimeout(function () {
+      runSearch(q);
+    }, 400);
   });
 
-  function setStatus(text) { status.textContent = text; }
-  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function setStatus(text) {
+    status.textContent = text;
+  }
+  function clear(node) {
+    while (node.firstChild) node.removeChild(node.firstChild);
+  }
 
   function runSearch(query) {
     if (controller) controller.abort();
-    controller = new AbortController();
-    var signal = controller.signal;
+    var requestController = new AbortController();
+    controller = requestController;
+    var signal = requestController.signal;
+    var timedOut = false;
+    var timeout = setTimeout(function () {
+      timedOut = true;
+      requestController.abort();
+    }, 12000);
     setStatus("Searching the commons…");
     clear(list);
 
     var jobs = [];
-    if (activeSource === "all" || activeSource === "gutenberg") jobs.push(searchGutendex(query, signal));
-    if (activeSource === "all" || activeSource === "standardebooks") jobs.push(searchStandardEbooks(query, signal));
+    if (activeSource === "all" || activeSource === "gutenberg")
+      jobs.push(searchGutendex(query, signal));
+    if (activeSource === "all" || activeSource === "standardebooks")
+      jobs.push(searchStandardEbooks(query, signal));
 
     Promise.allSettled(jobs).then(function (settled) {
-      if (signal.aborted) return;
+      clearTimeout(timeout);
+      if (signal.aborted && !timedOut) return;
       var books = [];
       var failures = 0;
       settled.forEach(function (s) {
@@ -98,12 +169,19 @@
       });
       render(books);
       if (books.length === 0) {
-        setStatus(failures === jobs.length && jobs.length > 0
-          ? "The catalogs didn’t answer — try again in a moment."
-          : "Nothing in the commons for “" + query + "”. Try an author or a shorter title.");
+        setStatus(
+          failures === jobs.length && jobs.length > 0
+            ? "The catalogs didn’t answer — try again in a moment."
+            : "Nothing in the commons for “" +
+                query +
+                "”. Try an author or a shorter title.",
+        );
       } else {
-        setStatus(books.length + (books.length === 1 ? " book" : " books") +
-          (failures ? " · one catalog didn’t answer" : ""));
+        setStatus(
+          books.length +
+            (books.length === 1 ? " book" : " books") +
+            (failures ? " · one catalog didn’t answer" : ""),
+        );
       }
     });
   }
@@ -111,59 +189,91 @@
   /* Project Gutenberg via Gutendex — JSON, CORS-open. */
   function searchGutendex(query, signal) {
     var url = "https://gutendex.com/books/?search=" + encodeURIComponent(query);
-    return fetch(url, { signal: signal }).then(function (r) {
-      if (!r.ok) throw new Error("gutendex " + r.status);
-      return r.json();
-    }).then(function (json) {
-      return (json.results || []).slice(0, PER_SOURCE).map(function (item) {
-        var epub = null, cover = null;
-        for (var type in item.formats) {
-          var u = item.formats[type];
-          if (type.indexOf("image/") === 0 && !cover) cover = u;
-          if (type.indexOf("application/epub+zip") === 0 && !epub) epub = u;
-        }
-        return {
-          source: "Project Gutenberg",
-          // Gutendex titles sometimes leak MARC subfield markers ("… : $b …").
-          title: (item.title || "Untitled").replace(/\s*:\s*\$b\s*/g, ": "),
-          author: (item.authors && item.authors[0] && item.authors[0].name) || "",
-          cover: cover,
-          epub: epub
-        };
-      }).filter(function (b) { return !!b.epub; });
-    });
+    return fetch(url, { signal: signal })
+      .then(function (r) {
+        if (!r.ok) throw new Error("gutendex " + r.status);
+        return r.json();
+      })
+      .then(function (json) {
+        return (json.results || [])
+          .slice(0, PER_SOURCE)
+          .map(function (item) {
+            var epub = null,
+              cover = null;
+            for (var type in item.formats) {
+              var u = item.formats[type];
+              if (type.indexOf("image/") === 0 && !cover) cover = u;
+              if (type.indexOf("application/epub+zip") === 0 && !epub) epub = u;
+            }
+            return {
+              source: "Project Gutenberg",
+              // Gutendex titles sometimes leak MARC subfield markers ("… : $b …").
+              title: (item.title || "Untitled").replace(/\s*:\s*\$b\s*/g, ": "),
+              author:
+                (item.authors && item.authors[0] && item.authors[0].name) || "",
+              cover: cover,
+              epub: epub,
+            };
+          })
+          .filter(function (b) {
+            return !!b.epub;
+          });
+      });
   }
 
   /* Standard Ebooks via their OPDS feed — Atom XML, CORS-open. */
   function searchStandardEbooks(query, signal) {
-    var url = "https://standardebooks.org/feeds/opds/all?query=" + encodeURIComponent(query);
-    return fetch(url, { signal: signal }).then(function (r) {
-      if (!r.ok) throw new Error("standardebooks " + r.status);
-      return r.text();
-    }).then(function (text) {
-      var doc = new DOMParser().parseFromString(text, "application/xml");
-      var entries = Array.prototype.slice.call(doc.getElementsByTagName("entry"));
-      return entries.slice(0, PER_SOURCE).map(function (entry) {
-        var title = textOf(entry, "title");
-        var author = "";
-        var authorEl = entry.getElementsByTagName("author")[0];
-        if (authorEl) author = textOf(authorEl, "name");
-        var epub = null, cover = null;
-        var links = entry.getElementsByTagName("link");
-        for (var i = 0; i < links.length; i++) {
-          var rel = links[i].getAttribute("rel") || "";
-          var type = links[i].getAttribute("type") || "";
-          var href = links[i].getAttribute("href") || "";
-          if (!href) continue;
-          var abs = new URL(href, "https://standardebooks.org").href;
-          if (rel === "http://opds-spec.org/acquisition/open-access" &&
-              type.indexOf("application/epub+zip") === 0 &&
-              abs.indexOf("_advanced") === -1 && !epub) epub = abs;
-          if (rel === "http://opds-spec.org/image/thumbnail" && !cover) cover = abs;
-        }
-        return { source: "Standard Ebooks", title: title || "Untitled", author: author, cover: cover, epub: epub };
-      }).filter(function (b) { return !!b.epub; });
-    });
+    var url =
+      "https://standardebooks.org/feeds/opds/all?query=" +
+      encodeURIComponent(query);
+    return fetch(url, { signal: signal })
+      .then(function (r) {
+        if (!r.ok) throw new Error("standardebooks " + r.status);
+        return r.text();
+      })
+      .then(function (text) {
+        var doc = new DOMParser().parseFromString(text, "application/xml");
+        var entries = Array.prototype.slice.call(
+          doc.getElementsByTagName("entry"),
+        );
+        return entries
+          .slice(0, PER_SOURCE)
+          .map(function (entry) {
+            var title = textOf(entry, "title");
+            var author = "";
+            var authorEl = entry.getElementsByTagName("author")[0];
+            if (authorEl) author = textOf(authorEl, "name");
+            var epub = null,
+              cover = null;
+            var links = entry.getElementsByTagName("link");
+            for (var i = 0; i < links.length; i++) {
+              var rel = links[i].getAttribute("rel") || "";
+              var type = links[i].getAttribute("type") || "";
+              var href = links[i].getAttribute("href") || "";
+              if (!href) continue;
+              var abs = new URL(href, "https://standardebooks.org").href;
+              if (
+                rel === "http://opds-spec.org/acquisition/open-access" &&
+                type.indexOf("application/epub+zip") === 0 &&
+                abs.indexOf("_advanced") === -1 &&
+                !epub
+              )
+                epub = abs;
+              if (rel === "http://opds-spec.org/image/thumbnail" && !cover)
+                cover = abs;
+            }
+            return {
+              source: "Standard Ebooks",
+              title: title || "Untitled",
+              author: author,
+              cover: cover,
+              epub: epub,
+            };
+          })
+          .filter(function (b) {
+            return !!b.epub;
+          });
+      });
 
     function textOf(parent, tag) {
       var el = parent.getElementsByTagName(tag)[0];
@@ -190,7 +300,9 @@
         img.alt = "";
         img.loading = "lazy";
         img.referrerPolicy = "no-referrer";
-        img.addEventListener("error", function () { img.remove(); });
+        img.addEventListener("error", function () {
+          img.remove();
+        });
         img.src = book.cover;
         cover.appendChild(img);
       }
@@ -202,7 +314,8 @@
       title.textContent = book.title;
       var author = el("div", "author");
       author.textContent = book.author;
-      meta.appendChild(eyebrow); meta.appendChild(title);
+      meta.appendChild(eyebrow);
+      meta.appendChild(title);
       if (book.author) meta.appendChild(author);
 
       var actions = el("div", "actions");
@@ -216,9 +329,12 @@
       epub.href = book.epub;
       epub.textContent = "EPUB";
       epub.setAttribute("aria-label", "Download " + book.title + " as EPUB");
-      actions.appendChild(add); actions.appendChild(epub);
+      actions.appendChild(add);
+      actions.appendChild(epub);
 
-      li.appendChild(cover); li.appendChild(meta); li.appendChild(actions);
+      li.appendChild(cover);
+      li.appendChild(meta);
+      li.appendChild(actions);
       list.appendChild(li);
     });
   }
