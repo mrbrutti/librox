@@ -341,13 +341,13 @@ h2 em {
   left: 9%;
   top: 5%;
   background: #f4f3ee;
-  padding: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 9px solid #f4f3ee;
   border-radius: 22px;
   box-shadow:
     0 40px 65px -22px #07120cbf,
     0 0 0 3px #17201d;
   overflow: hidden;
+  perspective: 900px;
   opacity: 0;
   transform: translateX(9%) scale(0.58) rotateY(-25deg);
   transition:
@@ -355,11 +355,28 @@ h2 em {
     opacity 0.55s 0.35s;
   will-change: transform, opacity;
 }
-.duo-device img {
-  width: 100%;
+.duo-leaf {
+  position: absolute;
+  top: 0;
+  width: 50%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
+  background-image: url("assets/duo-library.webp");
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  transition: transform 1.4s 0.15s cubic-bezier(0.19, 0.74, 0.13, 1);
+  backface-visibility: hidden;
+}
+.duo-leaf-left {
+  left: 0;
+  background-position: left center;
+  transform-origin: right center;
+  transform: rotateY(82deg);
+}
+.duo-leaf-right {
+  right: 0;
+  background-position: right center;
+  transform-origin: left center;
+  transform: rotateY(-82deg);
 }
 .duo-hinge,
 .showcase-hinge {
@@ -386,6 +403,7 @@ h2 em {
   transform-origin: left center;
   transform: rotateY(0deg) rotateZ(-4deg);
   transform-style: preserve-3d;
+  backface-visibility: hidden;
   box-shadow:
     20px 30px 45px #07120d9e,
     0 0 0 3px #173225;
@@ -447,12 +465,16 @@ h2 em {
   opacity: 1;
   transform: translateX(0) scale(1) rotateY(0);
 }
+.duo-scene.is-open .duo-leaf {
+  transform: rotateY(0);
+}
 .duo-scene.is-open .book-cover {
   transform: rotateY(-170deg) rotateZ(0);
   opacity: 0;
 }
 .duo-scene.is-resetting .book-cover,
-.duo-scene.is-resetting .duo-device {
+.duo-scene.is-resetting .duo-device,
+.duo-scene.is-resetting .duo-leaf {
   transition: none;
 }
 .scene-caption {
@@ -1196,6 +1218,9 @@ footer.site .copy {
   }
   .duo-device {
     opacity: 1;
+    transform: none;
+  }
+  .duo-leaf {
     transform: none;
   }
   .book-cover {
