@@ -6,7 +6,6 @@
     "build": "esbuild duo-stage.js --bundle --minify --format=esm --target=es2022 --outfile=duo-stage.bundle.js"
   },
   "devDependencies": {
-    "esbuild": "0.25.12",
-    "three": "0.186.1"
+    "esbuild": "0.25.12"
   }
 }
