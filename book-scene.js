@@ -271,9 +271,16 @@ if (stage && mount) {
         leaves[0].rotation.y = -Math.PI * turnOne;
         leaves[1].rotation.y = -Math.PI * turnTwo;
         const breathing = reduceMotion.matches ? 0 : Math.sin(now * .58) * .012;
-        book.position.y = -.11 * (1 - intro) + breathing;
-        book.rotation.set(-.09 + pointerY * .045, .32 + pointerX * .12, -.035 + pointerX * .025);
-        camera.position.z = (camera.aspect < .8 ? 7.55 : 7.2) + open * (camera.aspect < .8 ? 3.35 : 2.85);
+        book.position.x = reduceMotion.matches ? 0 : .42 * (1 - intro);
+        book.position.y = -.22 * (1 - intro) + breathing;
+        book.rotation.set(
+          -.09 + pointerY * .045,
+          .32 - (reduceMotion.matches ? 0 : .72 * (1 - intro)) + pointerX * .12,
+          -.035 + (reduceMotion.matches ? 0 : .075 * (1 - intro)) + pointerX * .025
+        );
+        camera.position.z = (camera.aspect < .8 ? 7.55 : 7.2) +
+          open * (camera.aspect < .8 ? 3.35 : 2.85) -
+          (reduceMotion.matches ? 0 : .5 * (1 - intro));
         renderer.render(scene, camera);
         if (resolveOpen && elapsed >= 3.02) {
           resolveOpen(true);

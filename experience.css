@@ -28,7 +28,10 @@
   position: absolute;
   inset: 0;
   background: #0b1d19 url("assets/book-studio.webp") center center / cover no-repeat;
+  transform: scale(1);
+  transition: transform 3200ms cubic-bezier(.2,.7,.2,1);
 }
+.experience.is-book-opening .book-studio { transform: scale(1.045); }
 .book-studio:after {
   content: "";
   position: absolute;
@@ -364,5 +367,6 @@
   .story-chapter { transition-duration: .01ms; }
   .experience.is-book-opening .experience-copy,
   .experience.is-book-opening .experience-progress,
-  .experience.is-book-opening .experience-bottom { transition-duration: .01ms; }
+  .experience.is-book-opening .experience-bottom,
+  .book-studio { transition-duration: .01ms; }
 }
