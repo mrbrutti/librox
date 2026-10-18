@@ -87,7 +87,7 @@ if (canvas && hero && replay && motionToggle) {
     box(0.16, 0.08, 0.4, matte("#ba9560", 0.55), -0.047, offset, 0.025);
   }
 
-  function pageTexture(left = false, turn = false) {
+  function pageTexture(kind) {
     const surface = document.createElement("canvas");
     surface.width = 768;
     surface.height = 1100;
@@ -103,30 +103,52 @@ if (canvas && hero && replay && motionToggle) {
       grain.data[i + 3] = 255;
     }
     ctx.putImageData(grain, 0, 0);
-    const gutter = ctx.createLinearGradient(left ? 768 : 0, 0, left ? 610 : 158, 0);
+    const gutter = ctx.createLinearGradient(kind === "title" ? 768 : 0, 0, kind === "title" ? 610 : 158, 0);
     gutter.addColorStop(0, "rgba(52,42,30,.27)");
     gutter.addColorStop(1, "rgba(52,42,30,0)");
     ctx.fillStyle = gutter;
     ctx.fillRect(0, 0, 768, 1100);
     ctx.fillStyle = "#383c33";
     ctx.textAlign = "center";
-    ctx.font = "small-caps 23px Georgia";
-    ctx.fillText(turn ? "THE VOYAGE" : left ? "MOBY-DICK" : "CHAPTER I", 384, 124);
-    ctx.fillRect(313, 147, 142, 1);
-    ctx.textAlign = "left";
-    ctx.font = "30px Georgia";
-    const lines = turn
-      ? ["The sea had a way of making", "every familiar thought strange.", "I turned the page and found", "another horizon waiting there."]
-      : left
-        ? ["Whenever I find myself growing", "grim about the mouth; whenever", "it is a damp, drizzly November", "in my soul; then, I account it", "high time to get to sea."]
-        : ["Call me Ishmael. Some years", "ago—never mind how long", "precisely—having little or no", "money in my purse, and nothing", "particular to interest me on shore,"];
-    for (let i = 0; i < 15; i++) {
-      const line = lines[i % lines.length];
-      ctx.fillText(line, 85, 230 + i * 53);
+    if (kind === "title") {
+      ctx.font = "small-caps 31px Georgia";
+      ctx.fillText("HERMAN MELVILLE", 384, 284);
+      ctx.fillRect(313, 337, 142, 1);
+      ctx.font = "72px Georgia";
+      ctx.fillText("MOBY-DICK", 384, 495);
+      ctx.font = "italic 29px Georgia";
+      ctx.fillText("or, The Whale", 384, 552);
+      ctx.font = "small-caps 23px Georgia";
+      ctx.fillText("A STORY OF THE SEA", 384, 711);
+      ctx.fillText("1851", 384, 847);
+    } else {
+      ctx.font = "small-caps 23px Georgia";
+      ctx.fillText(kind === "second" ? "LOOMINGS · CONTINUED" : "CHAPTER I · LOOMINGS", 384, 124);
+      ctx.fillRect(313, 147, 142, 1);
+      ctx.textAlign = "left";
+      ctx.font = "33px Georgia";
+      const paragraph = kind === "second"
+        ? "There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me. There now is your insular city of the Manhattoes, belted round by wharves as Indian isles by coral reefs—commerce surrounds it with her surf. Right and left, the streets take you waterward. Its extreme downtown is the battery, where that noble mole is washed by waves, and cooled by breezes, which a few hours previous were out of sight of land."
+        : "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; then, I account it high time to get to sea as soon as I can.";
+      const words = paragraph.split(" ");
+      let line = "";
+      let y = 240;
+      for (const word of words) {
+        const next = line ? `${line} ${word}` : word;
+        if (ctx.measureText(next).width > 602 && line) {
+          ctx.fillText(line, 80, y);
+          y += 49;
+          if (y > 940) break;
+          line = word;
+        } else {
+          line = next;
+        }
+      }
+      if (line && y <= 940) ctx.fillText(line, 80, y);
+      ctx.textAlign = "center";
+      ctx.font = "24px Georgia";
+      ctx.fillText(kind === "second" ? "2" : "1", 384, 1035);
     }
-    ctx.textAlign = "center";
-    ctx.font = "24px Georgia";
-    ctx.fillText(left ? "12" : turn ? "14" : "13", 384, 1035);
     const texture = new THREE.CanvasTexture(surface);
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
@@ -135,14 +157,14 @@ if (canvas && hero && replay && motionToggle) {
 
   const leftPage = new THREE.Mesh(
     new THREE.PlaneGeometry(width - 0.12, height - 0.17),
-    new THREE.MeshStandardMaterial({ map: pageTexture(true), side: THREE.DoubleSide, roughness: 1 }),
+    new THREE.MeshStandardMaterial({ map: pageTexture("title"), side: THREE.DoubleSide, roughness: 1 }),
   );
   leftPage.position.set(-width / 2, 0, 0.355);
   leftPage.receiveShadow = true;
   book.add(leftPage);
   const rightPage = new THREE.Mesh(
     new THREE.PlaneGeometry(width - 0.12, height - 0.17),
-    new THREE.MeshStandardMaterial({ map: pageTexture(), side: THREE.DoubleSide, roughness: 1 }),
+    new THREE.MeshStandardMaterial({ map: pageTexture("second"), side: THREE.DoubleSide, roughness: 1 }),
   );
   rightPage.position.set(width / 2, 0, 0.178);
   rightPage.receiveShadow = true;
@@ -193,7 +215,7 @@ if (canvas && hero && replay && motionToggle) {
     (width + 0.2) / 2, 0, 0, coverPivot);
   box(0.09, height + 0.17, 0.098, clothEdge, 0.062, 0, 0.01, coverPivot);
 
-  const paperMaterial = new THREE.MeshStandardMaterial({ map: pageTexture(false, true), side: THREE.DoubleSide, roughness: 1 });
+  const paperMaterial = new THREE.MeshStandardMaterial({ map: pageTexture("first"), side: THREE.DoubleSide, roughness: 1 });
   const turnGeometry = new THREE.PlaneGeometry(width - 0.1, height - 0.14, 28, 1);
   turnGeometry.translate((width - 0.1) / 2, 0, 0);
   const turnPage = new THREE.Mesh(turnGeometry, paperMaterial);
