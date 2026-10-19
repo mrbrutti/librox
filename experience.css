@@ -56,17 +56,16 @@
 [aria-pressed="true"] .mode-arrow { opacity:1; }
 .native-modes i { position:absolute; bottom:-1px; left:0; right:0; height:1px; background:#d9a181; transform:scaleX(var(--progress,0)); transform-origin:left; }
 .native-pause { display:flex; align-items:center; gap:12px; min-height:44px; margin-top:10px; padding:8px 0; color:#a5b59d; font-size:11px; background:none; border:0; }
-.native-stage { --stage-height:540px; position:relative; min-width:0; height:var(--stage-height); }
-.native-panel { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; padding-bottom:44px; opacity:0; visibility:hidden; transform:translateY(14px); transition:opacity 500ms ease,transform 700ms cubic-bezier(.22,1,.36,1),visibility 500ms; }
-.native-panel.is-active { opacity:1; visibility:visible; transform:none; }
-.reader-frame { width:100%; max-width:calc((var(--stage-height) - 44px) * 1.45); border-radius:13px; overflow:hidden; box-shadow:0 0 0 1px #d4ded640,0 18px 60px #0007,0 45px 90px #0004; }
-.reader-frame video { display:block; width:100%; aspect-ratio:2420/1668; background:#f8f7f1; }
-.native-panel figcaption { display:flex; justify-content:space-between; width:100%; position:absolute; bottom:0; color:#a2b39b; font-size:11px; gap:15px; line-height:1.4; }
-.native-panel figcaption span:first-child { letter-spacing:.13em; }
-.listening-device { height:490px; max-height:calc(100% - 30px); z-index:1; }
-.listening-glow { position:absolute; inset:4% 0; background:radial-gradient(ellipse at 50% 45%,#77724748 0%,#2c493535 36%,transparent 69%); }
-.mac-frame { width:100%; max-width:calc((var(--stage-height) - 44px) * 1.347); overflow:hidden; border-radius:11px; box-shadow:0 24px 70px #0007; }
-.mac-frame video { display:block; width:100%; background:#0b1913; }
+.native-stage { position:relative; min-width:0; margin:0; }
+.family-media { position:relative; aspect-ratio:4/3; overflow:clip; isolation:isolate; }
+.family-film,.family-poster,.family-poster img { display:block; width:100%; height:100%; object-fit:contain; }
+.family-film { opacity:0; transition:opacity 450ms ease; }
+.family-film.is-ready { opacity:1; }
+.family-poster { position:absolute; inset:0; pointer-events:none; }
+.family-poster[hidden] { display:none; }
+.family-media::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,var(--studio),transparent 12%,transparent 88%,var(--studio)),linear-gradient(0deg,var(--studio),transparent 22%,transparent 85%,var(--studio)); box-shadow:inset 0 0 30px 24px var(--studio); }
+.family-stage figcaption { display:flex; justify-content:space-between; gap:16px; padding-top:18px; color:var(--studio-muted); font-size:11px; line-height:1.5; }
+.family-stage figcaption span:first-child { letter-spacing:.08em; }
 .next-chapter { display:grid; grid-template-columns:1.3fr .7fr; gap:80px; padding-block:64px 70px; border-top:1px solid #9bad912e; }
 .download-chapter h2 { font-size:clamp(40px,4vw,65px); line-height:1.04; margin:24px 0; }
 .download-chapter h2 em { color:#c5cbb8; }
@@ -95,7 +94,6 @@
 @media (max-width:1100px) {
   .studio-explore { display:none; }
   .native-story { gap:45px; grid-template-columns:.85fr 1.15fr; }
-  .native-stage { --stage-height:500px; }
   .native-copy h2 { letter-spacing:-.04em; font-size:54px; }
   .next-chapter { gap:50px; }
 }
@@ -129,10 +127,10 @@
   .native-modes button small,.native-modes .mode-arrow { display:none; }
   .native-modes i { top:0; bottom:auto; }
   .native-pause { margin-top:0; font-size:11px; }
-  .native-stage { --stage-height:350px; width:100%; }
-  .native-panel { justify-content:center; padding-top:0; }
-  .listening-device { height:306px; max-height:100%; }
-  .native-panel figcaption { bottom:0; font-size:11px; }
+  .native-stage { width:100%; }
+  .family-media { aspect-ratio:9/10; }
+  .family-media::after { box-shadow:inset 0 0 16px 10px var(--studio); }
+  .family-stage figcaption { flex-direction:column; gap:4px; padding-top:8px; }
   .next-chapter { grid-template-columns:1fr; gap:36px; padding-block:42px; }
   .download-chapter h2 { font-size:44px; margin:20px 0; }
   .download-line { gap:20px; }

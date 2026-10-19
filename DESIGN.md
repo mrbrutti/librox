@@ -73,8 +73,6 @@ typography:
 rounded:
   flat: "0px"
   mark: "2px"
-  reader: "13px"
-  mac: "11px"
   playback: "50%"
 spacing:
   control-gap: "18px"
@@ -112,6 +110,11 @@ components:
     textColor: "#f4ecda"
     rounded: "{rounded.flat}"
     padding: "22px 0"
+  button-family-playback:
+    backgroundColor: "transparent"
+    textColor: "#a5b59d"
+    rounded: "{rounded.flat}"
+    padding: "8px 0"
   card-plus:
     textColor: "#f1e8d8"
     rounded: "{rounded.flat}"
@@ -152,15 +155,15 @@ components:
 
 Librox places cream literary typography and the app's books inside a dark forest studio. Newsreader supplies the book-like headings; Manrope keeps navigation and controls quiet. Coral appears in italic phrases, fine progress marks and the small bookmark in the wordmark. The result is spacious around the media and compact around the controls.
 
-Depth comes from paper, light, device glass and reflective metal. The homepage expresses this world through an original rendered device film and native app recordings. Books and Plus retain the warm paper context for search and explanation. These are distinct surface expressions of the same reading identity.
+Depth comes from paper, light, device glass and reflective metal. The homepage expresses this world through the original Duo hero film and a continuous iPad/Mac family film, both carrying native app imagery. Books and Plus retain the warm paper context for search and explanation. These are distinct surface expressions of the same reading identity.
 
-This records the active implementation in `index.html`, `experience.css`, `experience.js`, `librox.css`, `books.html` and `plus.html`, including the Plus page's `commerce.css` dependency. The shared base stylesheet contains earlier homepage studies; their unused layouts, colors and ornaments are not this system. The accepted direction is recorded in [the studio direction contract](docs/studio-direction-contract.md). Existing desktop and mobile captures support the visual record; [studio verification](docs/studio-verification.md) states the local-browser, simulator and development-build boundaries.
+This records the active implementation in `index.html`, `experience.css`, `experience.js`, `film/blender/family.py`, `librox.css`, `books.html` and `plus.html`, including the Plus page's `commerce.css` dependency. The shared base stylesheet contains earlier homepage studies; their unused layouts, colors and ornaments are not this system. The accepted direction is recorded in [the studio direction contract](docs/studio-direction-contract.md). Capture provenance, completed render checks, browser acceptance and publication evidence are maintained separately in the project documentation and [studio verification](docs/studio-verification.md).
 
 **Key Characteristics:**
 
 - Forest studio surfaces, cream type and restrained coral emphasis.
 - Newsreader headings paired with small, clear Manrope controls.
-- Real app imagery contained in its screen, with visible capture or preview labels.
+- App imagery contained in its screen; customer-facing captions describe the reading experience.
 - Soft material depth around media; flat controls and fine dividing rules.
 - Compact responsive stages with direct playback controls.
 
@@ -206,7 +209,7 @@ Both families are served locally as variable fonts. Newsreader has separate norm
 - **Closing:** The download heading uses `closing` and becomes (44px) on mobile. Its tighter tracking is local to that heading, not the default for all display type.
 - **Title:** Native preview names use `title`; the horizontal mobile selectors use (11px) with (1.5) line height.
 - **Body:** The base reading UI uses `body`. Studio supporting copy is typically (12–14px); the Plus invitation description is (14px) with (1.7) line height.
-- **Label and control:** Chapters and catalog chips use `label`; film playback uses `control`. Capture captions use (11px) with (1.4) line height and remain outside the image. These roles describe information, not decorative heading prefixes.
+- **Label and control:** Chapters and catalog chips use `label`; film playback uses `control`. Family-film captions use (11px) with (1.5) line height and remain outside the image. These roles describe information, not decorative heading prefixes.
 - **Navigation:** Links use `navigation`. The wordmark is a separate brand treatment: Manrope (700), (14px), with (.17em) tracking; on the homepage it becomes (12px) on mobile.
 - **Catalog:** Search uses `search`, results use `result`, and the Books heading uses Newsreader at `clamp(48px, 5.3vw, 82px)` with unit line height.
 
@@ -216,36 +219,35 @@ Both families are served locally as variable fonts. Newsreader has separate norm
 
 The shared wide container centers content at a maximum of (1370px), with the desktop gutters recorded in the frontmatter. The studio mobile gutter applies at (700px) and below; the paper catalog uses its existing (18px) mobile gutter. The Plus and document shell caps at (1080px), with (28px) internal side padding. These are observed context rules, not a universal spacing scale.
 
-The homepage moves through a full-height film, one native showcase, a download/Plus row and a legal footer. Ordinary page scrolling remains available. The film uses (100svh), a desktop minimum of (720px), and a mobile range of (740–1000px). Above a (2:1) viewport aspect ratio, its height follows the wide film ratio. A portrait source is selected below the (6:5) aspect threshold or at the mobile width breakpoint; the portrait media uses contain sizing with the implemented scale treatment.
+The homepage moves through the full-height Duo film, one continuous iPad/Mac family film, a download/Plus row and a legal footer. Ordinary page scrolling remains available. The film uses (100svh), a desktop minimum of (720px), and a mobile range of (740–1000px). Above a (2:1) viewport aspect ratio, its height follows the wide film ratio. A portrait source is selected below the (6:5) aspect threshold or at the mobile width breakpoint; the portrait media uses contain sizing with the implemented scale treatment.
 
-The native showcase uses two columns: a narrower text column and a wider media column, with a gap of `clamp(50px, 7vw, 110px)`. Its desktop vertical padding is (110px) above and (90px) below. At (1100px) the gap is (45px) and the stage is (500px) high instead of (540px). On mobile the stage follows the copy, the selectors become three horizontal choices, the stage is (350px) high, and section padding contracts to (68px) above and (58px) below.
+The family showcase uses two columns: a narrower text column and a wider media column, with a gap of `clamp(50px, 7vw, 110px)`. Its desktop vertical padding is (110px) above and (90px) below. At (1100px) the gap is (45px). The film determines the stage height through its (4:3) ratio. On mobile the stage follows the copy, the selectors become three horizontal choices, the film uses a separate (9:10) composition, and section padding contracts to (68px) above and (58px) below. The family source changes at (700px), independently of the hero's aspect-ratio source selection.
 
 The download/Plus row uses a (1.3fr / .7fr) split, becoming one column on mobile. The invitation itself changes from a vertical stack to a compact two-column title/price row. Books uses a ruled search field and result list; mobile result actions move beneath their metadata. Full Plus details use the existing paper surface and collapse to a single column at the mobile breakpoint.
 
-**The Caption Clearance Rule.** Keep capture captions outside the media bounds and preserve the reserved caption strip.
+**The Caption Clearance Rule.** Keep capture captions outside the media bounds in their own document flow.
 
-The native panels reserve (44px) below their media. Frame widths are limited by both stage height and media ratio, so a wider viewport does not push footage through its caption. The listening device scales down within this same stage instead of creating a second tall mobile section.
+The family film edges fade into the forest background with horizontal and vertical overlays; the rendered device and contact shadow stay visible. The family caption follows the film with (18px) top padding on desktop. At the mobile breakpoint its scene label uses (8px) top padding. The same film stage contains reading and live listening on both devices, so those scenes share one responsive media area.
 
 ## Elevation & Depth
 
-The system combines real material lighting inside the imagery with soft shadows around the media frames. Fine translucent rules separate interface groups. Navigation uses a dark-to-transparent overlay so it stays legible over bright paper in the film. During the macro passage, a dark gradient covers the lower (30%) of the film to preserve contrast for the controls over close paper detail. The final gradients and shadow values live in the sidecar snippets. The Plus invitation uses a subtle tonal gradient and an inset highlight, with square outer corners.
+The system combines material lighting, reflections and contact shadows inside the rendered imagery with a soft edge blend between the family film and the studio background. Fine translucent rules separate interface groups. Navigation uses a dark-to-transparent overlay so it stays legible over bright paper in the film. During the macro passage, a dark gradient covers the lower (30%) of the film to preserve contrast for the controls over close paper detail. The final gradients and shadow values live in the sidecar snippets. The Plus invitation uses a subtle tonal gradient and an inset highlight, with square outer corners.
 
 ### Shadow Vocabulary
 
-- **Reader frame:** A fine pale edge with two diffuse black shadows separates the native reading spread from the studio.
-- **Mac frame:** One diffuse shadow grounds the native desktop capture.
+- **Family film edge:** An inset forest shadow blends the film boundary into the page, with a tighter version on mobile. Device depth comes from the Blender render.
 - **Invitation inset:** A faint top highlight gives the compact Plus link a quiet material edge.
 - **Catalog cover:** A small diffuse shadow supports the book thumbnail as an object.
 
 **The Quiet Frame Rule.** Let app imagery carry the physical depth; keep surrounding controls flat.
 
-The retained full Plus card has a book-like spine and layered offset shadows. That existing treatment is not a reusable shadow token for new surfaces; only the soft media and thumbnail shadows are included in the sidecar vocabulary.
+The retained full Plus card has a book-like spine and layered offset shadows. That existing treatment is not a reusable shadow token for new surfaces; only the active film edge blend, invitation highlight and thumbnail shadow are included in the sidecar vocabulary.
 
 ## Shapes
 
-Controls, chips, result rows and the compact Plus invitation use straight edges and fine rules. Rounded shapes are tied to objects: the wordmark's small outlined book, the native reader and Mac frames, and the circular playback icon. Their observed radii are recorded in the frontmatter; there is no generic rounded-card family.
+Controls, chips, result rows and the compact Plus invitation use straight edges and fine rules. Rounded interface shapes are tied to the wordmark's small outlined book and the circular playback icon. Their observed radii are recorded in the frontmatter; there is no generic rounded-card family.
 
-The listening device keeps its source bezel proportions. Its screen mask follows the device's curved corners, while the image stays inside the bezel. Inline SVG strokes supply the homepage's arrows; filled SVG paths supply play and pause.
+The family film carries original iPad Pro 11 and MacBook Pro 14 geometry. Device edges, glass, camera details, keyboard, trackpad and hinge are rendered objects; native recordings are mapped into their screens with their aspect preserved. The page displays that film without CSS device frames. Inline SVG strokes supply the homepage's arrows; filled SVG paths supply play and pause.
 
 ## Components
 
@@ -255,13 +257,13 @@ The wordmark, centered links and quiet underlined download link sit over the fil
 
 ### Buttons
 
-Film chapters are flat text buttons with a fine baseline and a coral progress line. The selected chapter has warmer, brighter text. Playback pairs an inline SVG with a text label and keeps a minimum hit height of (44px); sound is off until explicitly enabled. Hover brightens the playback text. The homepage keyboard outline uses the studio focus color with a (2px) stroke and (6px) offset. With the film play/pause button focused, ArrowLeft and ArrowRight seek backward or forward by (5 seconds) once video metadata is available, clamped to the clip bounds. The button exposes these keys through `aria-keyshortcuts` and explains them in its title; seeking preserves the current play/pause state.
+Film chapters are flat text buttons with a fine baseline and a coral progress line. The selected chapter has warmer, brighter text. Playback pairs an inline SVG with a text label and keeps a minimum hit height of (44px); sound is off until explicitly enabled. Hover brightens the playback text. The homepage keyboard outline uses the studio focus color with a (2px) stroke and (6px) offset. With either film's play/pause button focused, ArrowLeft and ArrowRight seek backward or forward by (5 seconds) once video metadata is available, clamped to that clip's bounds. Each button exposes these keys through `aria-keyshortcuts` and explains them in its title; seeking preserves the current play/pause state. The family player has its own flat pause control and remains muted; the hero retains its separate opt-in sound control.
 
 The App Store action uses the existing badge asset rather than a newly drawn button; it is (150px) wide in the download row. Catalog result actions retain the dark rectangular Add to Librox link and the quieter underlined EPUB link. No extra hover movement is added to those result links.
 
-### Native preview selector
+### Family film chapter controls
 
-The desktop selector is a ruled vertical list. Only the active row shows its supporting sentence and arrow; the progress line follows the active media time. On mobile the row labels become three compact columns and supporting sentences are hidden. Selection resets the chosen clip to the beginning, pauses inactive videos and marks inactive panels inert.
+The desktop selector is a ruled vertical list of three chapters. Only the active row shows its supporting sentence and arrow; the progress line follows the current beat within one continuous film. On mobile the labels become three compact columns and supporting sentences are hidden. The chapter buttons seek to (0 seconds) for reading, (6.2 seconds) for listening and (12.2 seconds) for Mac. The live listening beat can activate the listening chapter for either device. The pause button changes to Retry film after a media error, and the poster returns until the film is ready.
 
 ### Cards / Containers
 
@@ -279,19 +281,29 @@ Catalog source choices use flat outlined rectangles. The selected choice reverse
 
 ### Film and motion
 
-The original film is a (22-second) local rendered study with separate wide and portrait compositions. Live HTML headings give way to the detail view, with the detail title hidden during the macro passage. On wide layouts, the subtitle fades out during listening so the tilted device clears the text. The poster remains visible until playback is ready and returns if the film errors. Hardware orientation and proportions follow the linked Apple views in `docs/duo-hardware-reference.md`; the geometry remains an original visual model.
+The original Duo hero is a (22-second) rendered study with its own wide and portrait compositions. Live HTML headings give way to the detail view, with the detail title hidden during the macro passage. On wide layouts, the subtitle fades out during listening so the tilted device clears the text. The poster remains visible until playback is ready and returns if the film errors. Hardware orientation and proportions follow the linked Apple views in `docs/duo-hardware-reference.md`; the geometry remains an original visual model.
 
-The native stage cycles through reading, the listening design preview and the Mac development capture. Video duration drives reading and Mac progress; the static listening preview has its own dwell. The sidecar records the actual fade, translation and interaction timings. Soft light gradients support the physical subject; they are part of this world.
+The family film is a separate (24-second), (30 fps) Blender Cycles sequence. Its wide composition is (1600 × 1200); its mobile composition is (900 × 1000). Native reading, page-curl and live-listening recordings play on the iPad and Mac screens. Opaque device bodies move through one forest studio while the camera follows the handoff and the Mac lid opens. Screen content transitions within the rendered scene; the page does not swap independent device panels.
+
+| Family caption timeline | Scene | Active chapter |
+| --- | --- | --- |
+| 0–5.7 seconds | iPad reading and page curl | Reading |
+| 5.7–11 seconds | iPad live listening | Listening |
+| 11–17.7 seconds | Mac reading | Mac |
+| 17.7–23 seconds | Mac live listening | Listening |
+| 23–24 seconds | Return to iPad reading | Reading |
+
+The family timeline is independent of the approved Duo hero choreography. Device handoffs begin at (10 seconds) and (22 seconds); captions change at their midpoints, (11 seconds) and (23 seconds). The rendered return restores the first reading pose for the loop. The sidecar records the video reveal and interface timings alongside the rendered loop and handoff durations. Soft light gradients support the physical subject; they remain part of this world.
 
 **The Playback Choice Rule.** Preserve pause, keyboard seeking, opt-in sound, visible-state playback and explicit play under reduced motion.
 
-Both media sequences stop when the page is hidden or their stage is offscreen. The reduced-motion path disables automatic playback and CSS transitions; a visitor can still explicitly start a demonstration. Capture labels distinguish native development recordings and design previews. The local verification record does not establish physical-device Safari, VoiceOver or OS reduced-motion acceptance.
+Both media sequences stop when the page is hidden or their stage is offscreen. The family video source is loaded when at least (15%) of its stage is visible or a control is used; changing between wide and portrait sources preserves the playback position. Under reduced motion the poster remains the resting view, automatic playback and CSS transitions stop, and a visitor can explicitly start the film. Chapter selection and arrow seeking can inspect a frame without starting paused playback. Captions identify the reading or listening scene and device. The user requested that internal preview and production labels stay out of the public interface. Capture provenance and physical-device, accessibility, completed-render and release acceptance remain in the separate verification record.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** keep app artwork in its screen and retain the capture or design-preview label.
+- **Do** keep app artwork in its screen and keep capture provenance in the source documentation.
 - **Do** pair Newsreader headings with Manrope controls and supporting information.
 - **Do** use the studio and paper contexts deliberately instead of mixing their defaults.
 - **Do** reserve space below native footage for captions at every supported width.
@@ -305,5 +317,6 @@ Both media sequences stop when the page is hidden or their stage is offscreen. T
 - **Don't** let headline overlays or captions obscure the app's paper detail.
 - **Don't** present a rendered device study or labeled design preview as a capture of shipping hardware or verified production UI.
 - **Don't** inherit a long pinned or scroll-locked sequence when extending the compact studio surface.
+- **Don't** replace the family film's rendered devices with CSS mock-device frames.
 
 Not canonized or repaired: the retained Books/Plus decorative eyebrows and text-glyph arrows, and the full Plus card's hard offset shadows, remain inherited subpage drift outside this documentation pass. The corrected catalog keyboard outline, final studio header and macro gradients, and film keyboard seeking are included.

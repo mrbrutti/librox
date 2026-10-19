@@ -29,8 +29,9 @@ book artwork. Keep the page compact; avoid long scroll-locked sequences.
 - Plus is proposed at US $9.99 per year. No live purchase is implemented.
 - Use full real books with reference covers, never the excerpt fixture as hero.
 - No physical Duo is available. Captures come from development simulators.
-- The 3D device film is a local creative study. It is not official Apple art;
-  Apple's marketing guidelines must be resolved before public release.
+- The user authorized shipping the original 3D studio films on October 19,
+  2026. They are original studies, not official Apple art or physical footage.
+  Public pages omit internal preview labels at the user’s request.
 - Existing Privacy, Terms, Support and platform-aware App Store links remain.
 - Custom OPDS catalogs stay free. Plus proposes offline voices, queues and
   per-book listening preferences, as the existing Plus page specifies.

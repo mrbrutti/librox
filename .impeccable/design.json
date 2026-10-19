@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-19T20:45:59.675168Z",
+  "generatedAt": "2026-10-19T22:39:39.040008Z",
   "title": "Design System: Librox",
   "extensions": {
     "colorMeta": {
@@ -231,14 +231,14 @@
     },
     "shadows": [
       {
-        "name": "reader-frame",
-        "value": "0 0 0 1px #d4ded640, 0 18px 60px #0007, 0 45px 90px #0004",
-        "purpose": "A pale edge and diffuse depth around the native reading spread."
+        "name": "family-edge-blend",
+        "value": "inset 0 0 30px 24px var(--studio)",
+        "purpose": "Join the 4:3 family film to the forest page background; the device depth is rendered in Blender."
       },
       {
-        "name": "mac-frame",
-        "value": "0 24px 70px #0007",
-        "purpose": "Soft grounding for the native Mac capture."
+        "name": "family-edge-blend-mobile",
+        "value": "inset 0 0 16px 10px var(--studio)",
+        "purpose": "The tighter edge blend around the 9:10 mobile family composition."
       },
       {
         "name": "invitation-inset",
@@ -255,12 +255,12 @@
       {
         "name": "film-ready",
         "value": "opacity 450ms ease",
-        "purpose": "Reveal decoded video over its poster."
+        "purpose": "Reveal decoded hero or family video over its corresponding poster."
       },
       {
-        "name": "stage-and-title",
+        "name": "film-title",
         "value": "opacity 500ms ease, transform 700ms cubic-bezier(.22,1,.36,1)",
-        "purpose": "Fade and settle the native panels and live film typography."
+        "purpose": "Fade and settle the live HTML hero typography."
       },
       {
         "name": "wide-listening-subtitle",
@@ -270,7 +270,7 @@
       {
         "name": "preview-selection",
         "value": "color 180ms ease, opacity 180ms ease",
-        "purpose": "Native selector text and arrow states."
+        "purpose": "Family chapter text and arrow states follow the active film beat."
       },
       {
         "name": "invitation-arrow",
@@ -281,6 +281,21 @@
         "name": "explore-arrow",
         "value": "transform 200ms ease-out",
         "purpose": "Move the film exploration arrow down by 4px on hover."
+      },
+      {
+        "name": "family-loop",
+        "value": "24s at 30fps",
+        "purpose": "Independent rendered loop: iPad reading 0–5.7s, iPad live listening 5.7–11s, Mac reading 11–17.7s, Mac live listening 17.7–23s, return 23–24s."
+      },
+      {
+        "name": "family-screen-transition",
+        "value": "600ms; ease(t) = t*t*(3-2*t)",
+        "purpose": "Blend reading and live-listening screen footage within the Blender scene at 5.7s and 17.7s."
+      },
+      {
+        "name": "family-device-handoff",
+        "value": "2s; ease(t) = t*t*(3-2*t)",
+        "purpose": "Move opaque rendered devices through the studio during the incoming and return handoffs."
       }
     ],
     "breakpoints": [
@@ -297,7 +312,7 @@
         "value": "700px"
       },
       {
-        "name": "portrait-media-aspect",
+        "name": "hero-portrait-media-aspect",
         "value": "6/5"
       },
       {
@@ -332,12 +347,12 @@
       "css": ".ds-studio-sample{background:var(--studio,#0b1913);color:var(--studio-ink,#f2eddf);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-playback{background:none;border:0;padding:12px 0;min-height:44px;color:#dce3d5;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);font-size:11px;font-weight:650;line-height:1.55;letter-spacing:.035em;cursor:pointer}.ds-play-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:7px;border:1px solid #c4d3bc70;border-radius:50%;vertical-align:middle}.ds-play-icon svg{width:12px;height:12px}.ds-playback:hover{color:#fff}.ds-playback:focus-visible{outline:2px solid #efac91;outline-offset:6px;}@media(max-width:700px){.ds-playback{padding:5px 0}}.ds-film-control-context{position:relative;isolation:isolate}.ds-film-control-context::after{content:\"\";position:absolute;inset:auto 0 0;height:28%;z-index:1;pointer-events:none;background:linear-gradient(transparent,#0b1913)}.ds-film-control-context.ds-macro::after{height:30%;background:linear-gradient(transparent,#07110dee 55%,#07110d)}.ds-film-control-context .ds-playback{position:relative;z-index:3}"
     },
     {
-      "name": "Native preview selector",
+      "name": "Family film chapter controls",
       "kind": "custom",
       "refersTo": "button-preview",
-      "description": "A ruled active row shows a description and SVG arrow; mobile contracts the same selector into a small column.",
-      "html": "<div class=\"ds-studio-sample\"><div class=\"ds-preview-list\"><button class=\"ds-preview\" type=\"button\" aria-pressed=\"true\" style=\"--progress:.38\"><span class=\"ds-mode-number\">01</span><span><strong>A page you can feel.</strong><small>Paper, light, and the quiet pleasure of turning a page.</small></span><span class=\"ds-mode-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span><i></i></button></div></div>",
-      "css": ".ds-studio-sample{background:var(--studio,#0b1913);color:var(--studio-ink,#f2eddf);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-preview-list{border-top:1px solid #a2b39a30}.ds-preview{position:relative;display:flex;align-items:baseline;gap:16px;width:100%;padding:22px 0;color:#a5b39f;background:none;border:0;border-bottom:1px solid #a2b39a30;text-align:left;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);transition:color 180ms ease;cursor:pointer}.ds-preview[aria-pressed=\"true\"]{color:#f4ecda}.ds-preview strong{display:block;font-size:16px;font-weight:550;line-height:1.4}.ds-preview small{display:block;max-width:330px;margin-top:8px;color:#b0bda9;font-size:12px;line-height:1.65}.ds-preview:not([aria-pressed=\"true\"]) small{display:none}.ds-mode-number{font-size:11px;font-variant-numeric:tabular-nums}.ds-mode-arrow{margin-left:auto;opacity:0;transition:opacity 180ms ease}.ds-mode-arrow svg{width:16px;height:16px}.ds-preview[aria-pressed=\"true\"] .ds-mode-arrow{opacity:1}.ds-preview i{position:absolute;bottom:-1px;left:0;right:0;height:1px;background:#d9a181;transform:scaleX(var(--progress,0));transform-origin:left}.ds-preview:focus-visible{outline:2px solid #efac91;outline-offset:6px;}@media(hover:hover){.ds-preview:hover{color:#f2ead8}}@media(max-width:700px){.ds-preview{display:block;padding:14px 0;border-bottom:0}.ds-preview strong{font-size:11px;line-height:1.5;margin-top:7px}.ds-preview small,.ds-mode-arrow{display:none}.ds-preview i{top:0;bottom:auto}}@media(prefers-reduced-motion:reduce){.ds-preview,.ds-mode-arrow{transition:none}}"
+      "description": "Three chapters seek within one 24-second native iPad/Mac film at 0s, 6.2s and 12.2s. Progress follows five independent beats. Its own pause button supports five-second arrow seeking and retry after errors. The accompanying film uses 4:3 wide and 9:10 mobile compositions with captions in normal flow.",
+      "html": "<div class=\"ds-studio-sample\"><div class=\"ds-preview-list\" role=\"group\" aria-label=\"App demonstrations\"><button class=\"ds-preview\" type=\"button\" aria-pressed=\"true\" data-family-seek=\"0\" style=\"--progress:.38\"><span class=\"ds-mode-number\">01</span><span><strong>A page you can feel.</strong><small>Paper, light, and the quiet pleasure of turning a page.</small></span><span class=\"ds-mode-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span><i></i></button><button class=\"ds-preview\" type=\"button\" aria-pressed=\"false\" data-family-seek=\"6.2\"><span class=\"ds-mode-number\">02</span><span><strong>Let the story follow you.</strong><small>A listening room colored by the book you’re in.</small></span><span class=\"ds-mode-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span><i></i></button><button class=\"ds-preview\" type=\"button\" aria-pressed=\"false\" data-family-seek=\"12.2\"><span class=\"ds-mode-number\">03</span><span><strong>A little more room.</strong><small>The same thoughtful reading space, on your Mac.</small></span><span class=\"ds-mode-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span><i></i></button></div><button class=\"ds-family-pause\" type=\"button\" aria-label=\"Pause app demonstrations\" aria-keyshortcuts=\"ArrowLeft ArrowRight\" title=\"Play or pause. Use the arrow keys to seek five seconds.\">Pause previews <svg viewBox=\"0 0 16 16\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M4 3h3v10H4zm5 0h3v10H9z\"/></svg></button></div>",
+      "css": ".ds-studio-sample{background:var(--studio,#0b1913);color:var(--studio-ink,#f2eddf);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-preview-list{border-top:1px solid #a2b39a30}.ds-preview{font:inherit;position:relative;display:flex;align-items:baseline;gap:16px;width:100%;padding:22px 0;color:#a5b39f;background:none;border:0;border-bottom:1px solid #a2b39a30;text-align:left;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);transition:color 180ms ease;cursor:pointer}.ds-preview[aria-pressed=\"true\"]{color:#f4ecda}.ds-preview strong{display:block;font-size:16px;font-weight:550;line-height:1.4}.ds-preview small{display:block;max-width:330px;margin-top:8px;color:#b0bda9;font-size:12px;line-height:1.65}.ds-preview:not([aria-pressed=\"true\"]) small{display:none}.ds-mode-number{font-size:11px;font-variant-numeric:tabular-nums}.ds-mode-arrow{margin-left:auto;opacity:0;transition:opacity 180ms ease}.ds-mode-arrow svg{width:16px;height:16px}.ds-preview[aria-pressed=\"true\"] .ds-mode-arrow{opacity:1}.ds-preview i{position:absolute;bottom:-1px;left:0;right:0;height:1px;background:#d9a181;transform:scaleX(var(--progress,0));transform-origin:left}.ds-preview:focus-visible{outline:2px solid #efac91;outline-offset:6px;}@media(hover:hover){.ds-preview:hover{color:#f2ead8}}@media(max-width:700px){.ds-preview{display:block;padding:14px 0;border-bottom:0}.ds-preview strong{font-size:11px;line-height:1.5;margin-top:7px}.ds-preview small,.ds-mode-arrow{display:none}.ds-preview i{top:0;bottom:auto}}@media(prefers-reduced-motion:reduce){.ds-preview,.ds-mode-arrow{transition:none}}.ds-family-pause{display:flex;align-items:center;gap:12px;min-height:44px;margin-top:10px;padding:8px 0;color:#a5b59d;font:inherit;font-size:11px;background:none;border:0;cursor:pointer}.ds-family-pause svg{width:12px;height:12px}.ds-family-pause:focus-visible{outline:2px solid #efac91;outline-offset:6px}@media(hover:hover){.ds-family-pause:hover{color:#f2ead8}}@media(max-width:700px){.ds-preview-list{display:flex;gap:14px;border:0}.ds-preview{flex:1;width:0;border-top:1px solid #a2b39a30}.ds-family-pause{margin-top:0}}"
     },
     {
       "name": "Planned Plus invitation",
@@ -382,11 +397,11 @@
   ],
   "narrative": {
     "northStar": "The Forest Reading Studio",
-    "overview": "Librox places cream literary typography and the app's books inside a dark forest studio. Newsreader supplies the book-like headings; Manrope keeps navigation and controls quiet. Coral appears in italic phrases, fine progress marks and the small bookmark in the wordmark. The result is spacious around the media and compact around the controls.\n\nDepth comes from paper, light, device glass and reflective metal. The homepage expresses this world through an original rendered device film and native app recordings. Books and Plus retain the warm paper context for search and explanation. These are distinct surface expressions of the same reading identity.",
+    "overview": "Librox places cream literary typography and the app's books inside a dark forest studio. Newsreader supplies the book-like headings; Manrope keeps navigation and controls quiet. Coral appears in italic phrases, fine progress marks and the small bookmark in the wordmark. The result is spacious around the media and compact around the controls.\n\nDepth comes from paper, light, device glass and reflective metal. The homepage expresses this world through the original Duo hero film and a continuous iPad/Mac family film, both carrying native app imagery. Books and Plus retain the warm paper context for search and explanation. These are distinct surface expressions of the same reading identity.",
     "keyCharacteristics": [
       "Forest studio surfaces, cream type and restrained coral emphasis.",
       "Newsreader headings paired with small, clear Manrope controls.",
-      "Real app imagery contained in its screen, with visible capture or preview labels.",
+      "Real app imagery contained in its screen, with capture provenance in source documentation.",
       "Soft material depth around media; flat controls and fine dividing rules.",
       "Compact responsive stages with direct playback controls."
     ],
@@ -408,7 +423,7 @@
       },
       {
         "name": "The Caption Clearance Rule",
-        "body": "Keep capture captions outside the media bounds and preserve the reserved caption strip.",
+        "body": "Keep capture captions outside the media bounds in their own document flow.",
         "section": "layout"
       },
       {
@@ -423,7 +438,7 @@
       }
     ],
     "dos": [
-      "Do keep app artwork in its screen and retain the capture or design-preview label.",
+      "Do keep app artwork in its screen and record capture provenance in the source documentation.",
       "Do pair Newsreader headings with Manrope controls and supporting information.",
       "Do use the studio and paper contexts deliberately instead of mixing their defaults.",
       "Do reserve space below native footage for captions at every supported width.",
@@ -435,7 +450,8 @@
       "Don't use decorative eyebrows, text-glyph interface icons or hard offset card shadows as new house rules.",
       "Don't let headline overlays or captions obscure the app's paper detail.",
       "Don't present a rendered device study or labeled design preview as a capture of shipping hardware or verified production UI.",
-      "Don't inherit a long pinned or scroll-locked sequence when extending the compact studio surface."
+      "Don't inherit a long pinned or scroll-locked sequence when extending the compact studio surface.",
+      "Don't replace the family film's rendered devices with CSS mock-device frames."
     ]
   }
 }

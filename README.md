@@ -1,16 +1,17 @@
 # Librox website
 
-Static site for librox.app. The current local draft opens with a 22-second
+Static site for librox.app. The homepage opens with a 22-second
 Blender Cycles product film: a folding-device study opens, shows Librox's native
 Metal book opening and iPad page turns, moves into the listening preview, then
 closes. Wide and portrait camera compositions adapt to screen shape. Playback
 starts muted, has pause and sound controls, and respects reduced motion.
 
-The next section automatically demonstrates iPad reading, the colorful listening
-design, and the native Mac development reader. A compact download and Plus
+The next section automatically plays a 24-second 3D iPad/Mac film with native
+page turns, reading and live narration captures. A compact download and Plus
 section follows. Book search is on `books.html`; Privacy, Terms and Support
-remain separate pages. The 3D hardware film is a creative draft and requires
-marketing review before a public Apple-device campaign.
+remain separate pages. The user authorized publication of these original
+studio studies on October 19, 2026. Capture and model provenance is recorded in the film documentation. Public
+pages use customer-facing copy, as requested for publication.
 
 The dedicated `plus.html` page is **a proposal, not a live purchase offer**. It shows the target US $9.99 annual price and proposed offline voice library, listening queue, and per-book listening profiles. Core owned-book reading, existing listening, notes, sync, and arbitrary OPDS catalog access stay free. Reconcile every paid benefit, device requirement, localized price, and renewal statement with the actual StoreKit product and reviewed app build before launch.
 
@@ -47,6 +48,8 @@ Commit `experience.bundle.js` with `experience.js`, since GitHub Pages serves co
 See [the Blender film README](film/blender/README.md) for exact media provenance,
 render settings, camera timing and capture limitations. Native footage comes
 from development simulators and a Catalyst build, not physical-device acceptance.
+See [the family-film guide](film/blender/FAMILY.md) for iPad/Mac source, native
+listening captures, device proportions and playback timing.
 The old Remotion compositions and official static Duo-bezel source remain
 available but are no longer loaded by the homepage.
 
@@ -54,6 +57,6 @@ The iPhone Reading image `assets/iphone-reading-home.webp` comes from `docs/libr
 
 The reading-theme iPhone image `assets/iphone-reader.webp` comes from `docs/appstore/screenshots/iphone-6.9/03-page-settings.png` in Libros. It shows the page controls over the full Moby-Dick book instead of the old excerpt fixture.
 
-The Duo listening image `assets/duo-listening.webp` comes from `docs/librox-2.0/reviews/native/listening-landscape.png` in Libros. That 951 × 669 point SwiftUI content render uses the illustrated Moby-Dick cover beside a reading page. Its transport is a fixture with no audio engine attached. The green iPhone listening image `assets/iphone-listening-concept.webp` comes from `docs/librox-2.0/cover-atmosphere-study/listening-concept.png` in Libros. Both are design studies rather than recordings or shipped app views, and the page labels them accordingly.
+The Duo listening image `assets/duo-listening.webp` comes from `docs/librox-2.0/reviews/native/listening-landscape.png` in Libros. That 951 × 669 point SwiftUI content render uses the illustrated Moby-Dick cover beside a reading page. Its transport is a fixture with no audio engine attached. The green iPhone listening image `assets/iphone-listening-concept.webp` comes from `docs/librox-2.0/cover-atmosphere-study/listening-concept.png` in Libros. Both are design studies rather than recordings or shipped app views, and their provenance remains recorded here.
 
-The bezel sources are Apple's **Bezel-iPhone-17.dmg** (PNG/iPhone 17 Pro/Deep Blue/Portrait) and **Bezel-iPhone-Duo.dmg** (PNG/Star White/Inner Open Landscape), both from [Apple Design Resources](https://developer.apple.com/design/resources/). Preserve the original PNG bytes. The App Store badge is Apple's unmodified English black SVG. [Apple's marketing guidelines](https://developer.apple.com/app-store/marketing/guidelines/) require official static device artwork for this usage and prohibit simulated 3D or spinning Apple devices. The provided Sketchfab Duo models are visual references only; the local 3D film uses original parametric geometry, not Apple-supplied artwork. This is not approval to publish simulated Apple hardware. The download link uses one country-neutral product ID; the public Mac listing is an iPad app compatible with Apple silicon, not a verified native Mac release.
+The bezel sources are Apple's **Bezel-iPhone-17.dmg** (PNG/iPhone 17 Pro/Deep Blue/Portrait) and **Bezel-iPhone-Duo.dmg** (PNG/Star White/Inner Open Landscape), both from [Apple Design Resources](https://developer.apple.com/design/resources/). Preserve the original PNG bytes. The App Store badge is Apple's unmodified English black SVG. [Apple's marketing guidelines](https://developer.apple.com/app-store/marketing/guidelines/) require official static device artwork for this usage and prohibit simulated 3D or spinning Apple devices. The provided Sketchfab Duo models are visual references only; the local 3D film uses original parametric geometry, not Apple-supplied artwork. The user authorized publication of the original studio studies; this is not Apple marketing approval. The download link uses one country-neutral product ID; the public Mac listing is an iPad app compatible with Apple silicon, not a verified native Mac release.

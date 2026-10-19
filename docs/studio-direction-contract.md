@@ -19,8 +19,10 @@ The screen always belongs to Librox; book artwork stays inside the app.
 
 An original folding-device study opens. Librox's native Metal opening becomes
 a reading spread. The camera moves close to native curls, then pulls back to
-the listening colors before the device closes. Below, an automatic showcase
-cycles through iPad reading, the listening design and native Mac footage.
+the listening colors before the device closes. Below, a second continuous
+studio film moves from native iPad page turns and narration to Mac reading
+and narration. Opaque devices move through the same lighting; the Mac lid
+opens during its entrance. The app screens crossfade over 600 ms.
 
 ## FIRST VIEWPORT
 
@@ -38,8 +40,12 @@ reduced motion, strong focus indicators, local media and content-hashed assets.
 ## Accuracy boundaries
 
 Original 3D study, not official Apple hardware. Simulator and Catalyst footage,
-not physical-device evidence. Library/listening views remain labeled design
-previews. Plus is proposed at US $9.99/year; custom catalogs remain free.
+not physical-device evidence. Duo library/listening views are design
+compositions; the family film uses live native listening captures. The user
+requested customer-facing copy without internal preview labels before
+publication. Plus remains coming soon
+at US $9.99/year; custom catalogs remain free. Publication was authorized by
+the user on October 19, 2026.
 The earlier Figma board is not synchronized to this rendered redesign.
 
 ## Visual quality reference

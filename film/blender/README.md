@@ -1,5 +1,7 @@
 # Librox 3D studio film
 
+The iPad/Mac companion film is documented in [FAMILY.md](FAMILY.md).
+
 This is the active landing-page film. It is an original parametric device
 study rendered in Blender Cycles, with physical materials and a continuous
 hinge, camera orbit, close-up and closing movement. It is not an Apple-supplied
@@ -46,7 +48,7 @@ The film is 22 seconds at 30 fps: 1600 × 900 wide and 900 × 1200 portrait.
 
 The final pose approaches the opening pose for a continuous loop. Hinge motion
 uses smooth acceleration/deceleration. The screen media uses real native
-captures or labeled development design views; the iPad footage is composited
+captures or development design views; the iPad footage is composited
 onto the folding device as an app demonstration, not evidence from a physical Duo.
 
 ## Media provenance
@@ -104,13 +106,13 @@ ffmpeg -i assets/librox-ipad-page-turns.mp4 -t 4 -an \
   -movflags +faststart film/public/ipad-page-turns.mp4
 ```
 
-## Release boundary
+## Provenance and publication
 
-The film is a local creative draft. Apple's App Store marketing guidelines
-prohibit simulated Apple hardware and 3D marketing renders. This original
-folding-device model has no Apple logo and is not official Apple product art;
-it still needs a marketing review before a public Apple-device campaign.
-Do not label the rendered device as approved Apple hardware or physical footage.
+The user authorized publication of the original studio studies on October 19,
+2026. The models contain no Apple logo or Apple-supplied geometry. The source
+documentation records rendered imagery and development footage; publication does not
+constitute Apple marketing approval or physical-device evidence. Official
+static bezel assets retain their separate licensing and usage restrictions.
 
 Website motion pauses when offscreen, in a background tab, or after the user
 pauses it. Reduced-motion visitors get the poster and explicit playback.

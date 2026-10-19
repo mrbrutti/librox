@@ -112,74 +112,103 @@
   var native = document.querySelector('[data-native-story]');
   if (!native) return;
   var buttons = Array.from(native.querySelectorAll('[data-native-mode]'));
-  var panels = Array.from(native.querySelectorAll('[data-native-panel]'));
+  var family = native.querySelector('[data-family-video]');
+  var familyPoster = native.querySelector('.family-poster');
+  var familyCaption = native.querySelector('[data-family-caption]');
   var nativeToggle = native.querySelector('[data-native-toggle]');
-  var modes = ['reading', 'listening', 'mac'];
-  var durations = [13500, 8000, 10000];
-  var index = 0;
-  var elapsed = 0;
-  var last = 0;
+  var familyPortrait = matchMedia('(max-width:700px)');
   var nativeVisible = false;
   var nativeManual = null;
   var nativeFrame = 0;
-
+  var familyPendingTime = 0;
+  var familyLoaded = false;
+  // Independent timeline: the approved Duo hero keeps its own choreography.
+  var beats = [
+    {start:0, end:5.7, mode:'reading', caption:'THE PAGE · iPAD'},
+    {start:5.7, end:11, mode:'listening', caption:'THE LISTENING ROOM · iPAD'},
+    {start:11, end:17.7, mode:'mac', caption:'ROOM TO READ · MAC'},
+    {start:17.7, end:23, mode:'listening', caption:'THE LISTENING ROOM · MAC'},
+    {start:23, end:24, mode:'reading', caption:'THE PAGE · iPAD'}
+  ];
   function shouldRun() { return nativeVisible && !document.hidden && (nativeManual === true || (nativeManual === null && !reduce.matches)); }
-  function syncNativeVideos() {
-    panels.forEach(function (panel, i) {
-      var media = panel.querySelector('video');
-      if (!media) return;
-      if (i === index && shouldRun()) media.play().catch(function () {
-        if (i === index && shouldRun()) { nativeManual = false; syncNative(); }
-      });
-      else media.pause();
+  function paintFamilyProgress(t) {
+    var beat = beats.find(function (item) { return t >= item.start && t < item.end; }) || beats[0];
+    native.dataset.active = beat.mode;
+    if (familyCaption.textContent !== beat.caption) familyCaption.textContent = beat.caption;
+    buttons.forEach(function (button) {
+      var active = button.dataset.nativeMode === beat.mode;
+      if (button.getAttribute('aria-pressed') !== String(active)) button.setAttribute('aria-pressed', String(active));
+      button.style.setProperty('--progress', active ? Math.min(1, Math.max(0, (t - beat.start) / (beat.end - beat.start))) : 0);
     });
   }
-  function selectNative(next) {
-    index = next;
-    elapsed = 0;
-    native.dataset.active = modes[index];
-    buttons.forEach(function (button, i) { button.setAttribute('aria-pressed', String(i === index)); button.style.setProperty('--progress', 0); });
-    panels.forEach(function (panel, i) {
-      panel.classList.toggle('is-active', i === index);
-      panel.setAttribute('aria-hidden', String(i !== index));
-      panel.inert = i !== index;
-      var media = panel.querySelector('video');
-      if (media && i === index) media.currentTime = 0;
-    });
-    syncNativeVideos();
+  function familyProgress() {
+    paintFamilyProgress(family.currentTime);
+    if (!family.paused) nativeFrame = requestAnimationFrame(familyProgress);
   }
-  function tick(now) {
-    if (!shouldRun()) return;
-    var activeVideo = panels[index].querySelector('video');
-    if (activeVideo && !activeVideo.error) elapsed = activeVideo.currentTime * 1000;
-    else if (last) elapsed += Math.min(now - last, 100);
-    last = now;
-    if (elapsed >= durations[index]) selectNative((index + 1) % modes.length);
-    buttons[index].style.setProperty('--progress', elapsed / durations[index]);
-    nativeFrame = requestAnimationFrame(tick);
+  function familyButton() {
+    var paused = family.paused;
+    nativeToggle.innerHTML = (family.error ? 'Retry film ' : paused ? 'Play film ' : 'Pause film ') + playbackIcon(paused);
+    nativeToggle.setAttribute('aria-label', family.error ? 'Retry app demonstrations' : paused ? 'Play app demonstrations' : 'Pause app demonstrations');
   }
   function syncNative() {
-    cancelAnimationFrame(nativeFrame);
-    last = 0;
-    var running = shouldRun();
-    nativeToggle.innerHTML = (running ? 'Pause previews ' : 'Play previews ') + playbackIcon(!running);
-    nativeToggle.setAttribute('aria-label', running ? 'Pause app demonstrations' : 'Play app demonstrations');
-    syncNativeVideos();
-    if (running) nativeFrame = requestAnimationFrame(tick);
+    if (shouldRun()) family.play().catch(familyButton);
+    else family.pause();
+    familyButton();
   }
-  panels.forEach(function (panel, i) {
-    var media = panel.querySelector('video');
-    if (!media) return;
-    media.addEventListener('loadedmetadata', function () {
-      if (Number.isFinite(media.duration) && media.duration > 0) durations[i] = media.duration * 1000;
-    });
-    media.addEventListener('ended', function () {
-      if (index === i && shouldRun()) { selectNative((index + 1) % modes.length); syncNative(); }
-    });
+  function familySource() {
+    if (!familyLoaded) return;
+    var src = familyPortrait.matches ? family.dataset.portrait : family.dataset.wide;
+    if (family.getAttribute('src') === src) return;
+    familyPendingTime = family.currentTime || familyPendingTime;
+    family.pause(); family.classList.remove('is-ready'); familyPoster.hidden = false;
+    family.preload = familyPendingTime ? 'auto' : 'metadata';
+    family.poster = familyPortrait.matches ? familyPoster.querySelector('source').srcset : familyPoster.querySelector('img').src;
+    family.src = src; family.load(); syncNative();
+  }
+  family.addEventListener('loadedmetadata', function () {
+    if (familyPendingTime) family.currentTime = Math.min(familyPendingTime, family.duration - .05);
+    familyPendingTime = 0;
   });
-  buttons.forEach(function (button, i) { button.addEventListener('click', function () { selectNative(i); syncNative(); }); });
-  nativeToggle.addEventListener('click', function () { nativeManual = !shouldRun(); syncNative(); });
-  observe(native.querySelector('.native-stage'), function (value) { nativeVisible = value; syncNative(); }, .35);
+  family.addEventListener('playing', function () {
+    familyPoster.hidden = true; family.classList.add('is-ready');
+    cancelAnimationFrame(nativeFrame); familyProgress(); familyButton();
+  });
+  family.addEventListener('pause', function () { cancelAnimationFrame(nativeFrame); familyButton(); });
+  family.addEventListener('seeked', function () {
+    cancelAnimationFrame(nativeFrame); familyProgress();
+    if (family.readyState >= 2) { familyPoster.hidden = true; family.classList.add('is-ready'); }
+  });
+  family.addEventListener('error', function () {
+    family.pause(); cancelAnimationFrame(nativeFrame);
+    familyPendingTime = 0;
+    familyPoster.hidden = false; family.classList.remove('is-ready');
+    paintFamilyProgress(0); familyButton();
+  });
+  buttons.forEach(function (button) { button.addEventListener('click', function () {
+    familyLoaded = true; familySource();
+    var time = Number(button.dataset.familySeek);
+    family.preload = 'auto';
+    if (family.readyState >= 1) family.currentTime = time;
+    else { familyPendingTime = time; family.load(); }
+    syncNative();
+  }); });
+  nativeToggle.addEventListener('click', function () {
+    nativeManual = family.paused;
+    familyLoaded = true;
+    if (family.error) family.load();
+    familySource(); syncNative();
+  });
+  nativeToggle.addEventListener('keydown', function (event) {
+    if ((event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') || family.readyState < 1) return;
+    event.preventDefault();
+    family.currentTime = Math.max(0, Math.min(family.duration - .05, family.currentTime + (event.key === 'ArrowRight' ? 5 : -5)));
+  });
+  observe(native.querySelector('.native-stage'), function (value) {
+    nativeVisible = value;
+    if (value) { familyLoaded = true; familySource(); }
+    syncNative();
+  }, .15);
+  familyPortrait.addEventListener('change', familySource);
   reduce.addEventListener('change', function () { nativeManual = null; syncNative(); });
   document.addEventListener('visibilitychange', syncNative);
 })();

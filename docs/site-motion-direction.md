@@ -13,8 +13,9 @@ the screen. It is an original device study, not official Apple geometry.
 
 1. One full-screen, 22-second product film. Unfold → native Metal book opening →
    native page turn → listening colors → close. No scroll locking.
-2. One compact, automatic showcase: native iPad reading; the iPhone listening
-   design inside Apple's original static bezel; native Mac reading footage.
+2. One compact, automatic 24-second family film: modeled iPad and Mac, native
+   reading/page curls and live listening footage. Device handoffs use opaque
+   lateral movement and the Mac's physical hinge; app screens dissolve softly.
 3. A download and proposed Plus membership, then privacy/support/terms links.
    Catalog search has its own page, `books.html`.
 
@@ -42,18 +43,17 @@ contains the preceding layout. The connected Starter account reached its MCP
 limit during the earlier design pass; it is not a synchronized version of this
 Blender redesign. Browser captures and source are the current visual evidence.
 
-## Public-release boundary
+## Publication and media identity
 
-[Apple's marketing guidelines](https://developer.apple.com/app-store/marketing/guidelines/)
-prohibit simulated Apple hardware and 3D device marketing artwork. The 3D film
-is a local creative draft, uses no Apple logo or official artwork as geometry,
-and is not labeled as approved hardware. Do not merge/deploy it as an Apple
-hardware campaign without resolving that review. Official static bezels remain
-unmodified for ordinary app screenshots.
+The user authorized shipping the original studio films on October 19, 2026.
+They use no Apple logo or official artwork as geometry, and are not labeled as
+approved Apple hardware. Publication is not Apple marketing approval. Retained
+official static bezels remain unmodified and retain their separate usage rules.
 
-Library and listening content are development design previews; the listening
-transport is a fixture. The native opening is a Metal simulator study. iPad
-page-turn footage and Mac reader footage were freshly recorded from native
-development builds. No physical Duo was filmed. No paid generation was submitted.
+The Duo hero's library/listening content remains a design preview with fixture
+transport. Its native opening is a Metal simulator study. The family film uses
+native iPad and Mac reading and live listening captures from development builds.
+See [family provenance](../film/blender/FAMILY.md). No physical Duo was filmed.
+No paid generation was submitted.
 Plus remains proposed at US $9.99/year, with no live purchase. Existing catalog
 access stays free. See the separate Plus page for the proposed listening benefits.
