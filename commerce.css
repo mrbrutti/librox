@@ -27,13 +27,13 @@
 }
 .membership-intro { max-width: 675px; }
 .membership .eyebrow { color: #ae4839; }
-.membership h2 {
+.membership h1, .membership h2 {
   font-size: clamp(57px, 5.7vw, 94px);
   line-height: .97;
   letter-spacing: -.065em;
   text-wrap: balance;
 }
-.membership h2 em { color: #a4493b; }
+.membership h1 em, .membership h2 em { color: #a4493b; }
 .membership-lede {
   max-width: 510px;
   margin-top: 28px;
@@ -170,8 +170,8 @@
 }
 .privacy-copy { max-width: 650px; }
 .privacy-copy .eyebrow { color: #e8a48b; }
-.privacy-copy h2 { font-size: clamp(62px, 6vw, 98px); line-height: .96; }
-.privacy-copy h2 em { color: #ed9c80; }
+.privacy-copy h1, .privacy-copy h2 { font-size: clamp(62px, 6vw, 98px); line-height: .96; }
+.privacy-copy h1 em, .privacy-copy h2 em { color: #ed9c80; }
 .privacy-copy > p:not(.eyebrow) { max-width: 520px; margin-top: 25px; color: #d6e2d4; font: clamp(18px, 1.5vw, 23px)/1.46 var(--serif); }
 .privacy-copy a { display: inline-flex; gap: 28px; align-items: center; border-bottom: 1px solid #f0e9d6b5; margin-top: 28px; padding-bottom: 5px; color: #f4f1e5; font-size: 13px; font-weight: 650; text-decoration: none; }
 .privacy-copy a:hover { color: #efa48a; border-color: currentColor; }
@@ -206,26 +206,26 @@
 
 @media (max-width: 900px) {
   .membership-shell, .privacy-shell { gap: 45px; grid-template-columns: minmax(0, 1fr) minmax(300px, .85fr); }
-  .membership h2 { font-size: clamp(53px, 6vw, 70px); }
+  .membership h1, .membership h2 { font-size: clamp(53px, 6vw, 70px); }
   .membership-free { display: block; margin-top: 35px; }
   .membership-free p { margin-top: 11px; }
   .membership-plan { padding: 30px 28px 32px 39px; }
   .membership-price { font-size: 67px; }
-  .privacy-copy h2 { font-size: clamp(56px, 6.5vw, 75px); }
+  .privacy-copy h1, .privacy-copy h2 { font-size: clamp(56px, 6.5vw, 75px); }
 }
 @media (max-width: 700px) {
   .home .site-links { display: flex; margin-left: auto; gap: 0; }
   .home .site-links a { display: none; }
-  .home .site-links a[href="#plus"] { display: block; }
+  .home .site-links a[href="plus.html"] { display: block; }
   .home .nav-download { margin-left: 13px; }
   .membership-shell { display: flex; flex-direction: column; align-items: stretch; gap: 52px; padding-block: 72px 80px; }
-  .membership h2 { font-size: clamp(50px, 11.7vw, 72px); }
+  .membership h1, .membership h2 { font-size: clamp(50px, 11.7vw, 72px); }
   .membership-lede { font-size: 19px; }
   .membership-free { margin-top: 32px; }
   .membership-plan { width: min(100% - 13px, 490px); align-self: center; }
   .membership-price { font-size: clamp(65px, 13vw, 78px); }
   .privacy-shell { display: flex; flex-direction: column; align-items: stretch; gap: 13px; min-height: 0; padding-block: 71px 36px; }
-  .privacy-copy h2 { font-size: clamp(59px, 12vw, 80px); }
+  .privacy-copy h1, .privacy-copy h2 { font-size: clamp(59px, 12vw, 80px); }
   .privacy-copy > p:not(.eyebrow) { font-size: 19px; }
   .privacy-folio { width: min(100%, 420px); height: 350px; align-self: center; }
   .privacy-leaf-line { font-size: 42px; }
@@ -242,4 +242,74 @@
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .membership-plan { transition: transform 600ms cubic-bezier(.23,1,.32,1), box-shadow 600ms cubic-bezier(.23,1,.32,1); }
   .membership-plan:hover, .motion-ready .membership-plan.reveal-target.is-revealed:hover { transform: translateY(-6px); box-shadow: inset 1px 1px 0 #ffffff2b, inset -1px 0 0 #07150e, 6px 7px 0 #c1c4b4, 11px 13px 0 #aeb4a6, 18px 31px 45px #19342843, 45px 54px 100px #27453232; }
+}
+
+/* A short editorial index keeps the product story moving on the home page. */
+.site-directory {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 90px);
+  padding-block: 35px 48px;
+  border-top: 1px solid var(--line);
+}
+.site-directory a {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 10px 40px 19px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-directory span, .subpage-next span {
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .16em;
+}
+.site-directory strong, .subpage-next strong {
+  font: clamp(27px, 2.6vw, 42px)/1.12 var(--serif);
+  letter-spacing: -.055em;
+}
+.site-directory small { color: var(--muted); font-size: 12px; }
+.site-directory b, .subpage-next b { position: absolute; right: 2px; bottom: 18px; color: var(--red); font-size: 20px; font-weight: 400; }
+.site-directory a:hover strong, .subpage-next a:hover strong { color: var(--red); }
+
+/* The full product and policy stories live on their own pages. */
+.subpage .membership, .subpage .privacy-promise {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+.subpage .membership-shell { padding-block: clamp(65px, 7vw, 105px); }
+.subpage .privacy-shell { min-height: 510px; }
+.subpage .privacy-copy h1 { margin: 0; }
+.privacy-page .page { padding-block: 74px 110px; }
+.privacy-page .page > h2:first-of-type { font-size: clamp(48px, 6vw, 70px); margin: 15px 0 22px; }
+.privacy-page .page h3 { font-size: 32px; margin-top: 38px; }
+.subpage-next {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 45px;
+  padding: 37px 0 58px;
+}
+.subpage-next a {
+  position: relative;
+  display: grid;
+  gap: 7px;
+  padding: 13px 38px 18px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.subpage-next strong { font-size: clamp(24px, 2.4vw, 36px); }
+
+@media (max-width: 700px) {
+  .subpage .shell header.site { flex-direction: row; align-items: center; gap: 14px; padding-block: 20px; }
+  .subpage .shell .site-links { justify-content: flex-end; gap: 17px; margin-left: auto; }
+  .subpage .site-links a[href="index.html"], .subpage .site-links a[href="terms.html"], .subpage .site-links a[href="support.html"] { display: none; }
+  .site-directory { grid-template-columns: 1fr; gap: 7px; padding-block: 23px 38px; }
+  .site-directory a { padding-bottom: 15px; }
+  .subpage-next { grid-template-columns: 1fr; gap: 7px; padding-block: 25px 44px; }
+  .subpage .privacy-shell { min-height: 0; }
+  .privacy-page .page { padding-block: 55px 75px; }
 }
