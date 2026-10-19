@@ -1,4 +1,4 @@
-/* The Duo recording stays inside Apple's static bezel; featured book art stands alone. */
+/* Librox app visuals remain inside Apple's unmodified static bezels. */
 (function () {
   "use strict";
 
@@ -7,7 +7,7 @@
 
   var devices = {
     duo: experience.querySelector('[data-experience-device="duo"]'),
-    book: experience.querySelector('[data-experience-device="book"]'),
+    iphone: experience.querySelector('[data-experience-device="iphone"]'),
     listening: experience.querySelector('[data-experience-device="listening"]'),
   };
   var videos = {
@@ -64,8 +64,8 @@
     });
     caption.textContent = name === "duo"
       ? "Native Duo opening study · development build · sequence shortened"
-      : name === "book"
-        ? "Moby-Dick · Herman Melville · illustrated book artwork"
+      : name === "iphone"
+        ? "Native iPhone Reading study · Moby-Dick in Librox · simulator capture"
         : "Cover-colored listening room · Librox 2.0 design study";
     syncPlayback();
   }
@@ -121,10 +121,10 @@
   }
   document.querySelectorAll('a[href="#app-in-motion"],a[href="#experience"]').forEach(function (link) {
     link.addEventListener("click", function () {
-      showDevice(link.getAttribute("href") === "#app-in-motion" ? "book" : "duo");
+      showDevice(link.getAttribute("href") === "#app-in-motion" ? "iphone" : "duo");
     });
   });
   document.addEventListener("visibilitychange", syncPlayback);
   motionPreference.addEventListener("change", syncPlayback);
-  showDevice(location.hash === "#app-in-motion" ? "book" : "duo");
+  showDevice(location.hash === "#app-in-motion" ? "iphone" : "duo");
 })();

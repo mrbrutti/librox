@@ -28,10 +28,6 @@
   background: radial-gradient(ellipse 40% 64% at 74% 46%, #1f714c 0%, #0c432c 42%, transparent 100%),
               linear-gradient(113deg, #081d17 8%, #0a2b20 66%, #103d2b);
 }
-.experience[data-scene="book"] .experience-shell:before {
-  background: radial-gradient(ellipse 42% 62% at 75% 46%, #245942 0%, #0d3526 58%, transparent 100%),
-              linear-gradient(113deg, #081d17 8%, #0d261d 66%, #103d2b);
-}
 .experience-shell:after {
   content: "";
   position: absolute;
@@ -67,9 +63,6 @@
 .experience-device.is-active { visibility: visible; }
 .experience-duo { width: min(60vw, 880px); aspect-ratio: 3093 / 2247; right: max(3vw, calc((100vw - 1450px) / 2)); top: 49%; transform: translateY(-50%); }
 .experience-duo-display { position: absolute; left: 3.88%; top: 5.34%; width: 92.24%; height: 89.32%; overflow: hidden; border-radius: 5.8% / 8%; background: #e9e3d8; }
-.experience-book { height: min(82svh, 750px); aspect-ratio: 564 / 744; right: max(10vw, calc((100vw - 1220px) / 2)); top: 49%; transform: translateY(-50%); filter: drop-shadow(0 26px 45px #0005); }
-.experience-book img { opacity: 0; transform: translate3d(0,20px,0) scale(.975); transition: opacity 700ms cubic-bezier(.23,1,.32,1), transform 900ms cubic-bezier(.23,1,.32,1); }
-.experience-book.is-active img { opacity: 1; transform: none; }
 .experience-iphone { height: min(77svh, 740px); aspect-ratio: 1350 / 2760; right: max(13vw, calc((100vw - 1220px) / 2)); top: 49%; transform: translateY(-50%); }
 .experience-listening { filter: drop-shadow(0 22px 50px #0008); }
 .experience-iphone-display { position: absolute; left: 5.333333%; right: 5.333333%; top: 2.5%; bottom: 2.5%; overflow: hidden; border-radius: 11% / 5%; background: #e9e3d8; }
@@ -85,7 +78,7 @@
 .experience-toolbar p { margin-inline: auto; max-width: 300px; font-size: 10px; line-height: 1.35; }
 .experience-controls { display: flex; gap: 18px; flex: none; }
 .experience[data-scene="listening"] .experience-controls,
-.experience[data-scene="book"] .experience-controls { visibility: hidden; }
+.experience[data-scene="iphone"] .experience-controls { visibility: hidden; }
 .experience-controls button { border: 0; background: none; padding: 0 0 7px; color: inherit; font-size: 11px; font-weight: 600; }
 .experience-controls button:hover { color: #ee9d83; }
 .experience-anchor { position: absolute; top: 0; left: 0; width: 1px; height: 1px; }
@@ -178,7 +171,6 @@
 @media (max-width: 1050px) {
   .experience-duo { width: 59vw; right: 2%; }
   .experience h1 { font-size: clamp(58px, 7.6vw, 90px); }
-  .experience-book { right: 7%; height: min(73svh, 670px); }
   .experience-iphone { right: 9%; height: min(70svh, 670px); }
   .story .chapter-inner { max-width: 43vw; }
   .story h2 { font-size: clamp(56px, 6.8vw, 83px); }
@@ -199,7 +191,6 @@
   .experience-shell:after { background: linear-gradient(0deg, #0b1d19 0%, #0b1d19e8 35%, transparent 58%); }
   .experience-media { z-index: 2; }
   .experience-duo { width: 94%; right: 3%; top: 105px; transform: none; }
-  .experience-book { height: min(47svh, 390px); right: 50%; top: 76px; transform: translateX(50%); }
   .experience-iphone { height: min(43svh, 365px); right: 50%; top: 86px; transform: translateX(50%); }
   .experience-copy { z-index: 4; align-items: end; padding-bottom: 101px; }
   .experience-copy-inner { width: 100%; padding: 0; }
@@ -242,7 +233,6 @@
 }
 @media (min-width: 430px) and (max-width: 700px) and (min-height: 1050px) {
   .experience-duo { top: 120px; }
-  .experience-book { top: 98px; height: 440px; }
   .experience-iphone { top: 98px; height: 420px; }
   .experience-copy { padding-bottom: 150px; }
 }
@@ -253,7 +243,6 @@
   .experience-actions { margin-top: 22px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .experience-book img { transform: none; transition: opacity 180ms cubic-bezier(.23,1,.32,1); }
   .story-chapter,.story-chapter.is-current { transform: none; transition: opacity 180ms cubic-bezier(.23,1,.32,1), visibility 180ms; }
   .story .stage-ready .duo-display img { transform: none; transition: opacity 180ms cubic-bezier(.23,1,.32,1); }
   .story-stage::after { transition: opacity 180ms cubic-bezier(.23,1,.32,1); }
