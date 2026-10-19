@@ -1,3 +1,6 @@
+@font-face { font-family:"Newsreader"; src:url("assets/fonts/newsreader-normal.woff2") format("woff2"); font-style:normal; font-weight:200 800; font-display:swap; }
+@font-face { font-family:"Newsreader"; src:url("assets/fonts/newsreader-italic.woff2") format("woff2"); font-style:italic; font-weight:200 800; font-display:swap; }
+@font-face { font-family:"Manrope"; src:url("assets/fonts/manrope.woff2") format("woff2"); font-style:normal; font-weight:200 800; font-display:swap; }
 :root {
   --bg: #eee9df;
   --paper: #f8f5ed;
@@ -7,8 +10,8 @@
   --red: #c64a36;
   --green: #1b2c25;
   --cream: #f3efdf;
-  --serif: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 :root[data-theme="eink"] { --bg:#f9f9f5; --paper:#fff; --ink:#171a17; --muted:#61645d; --line:#d6d8d2; }
 :root[data-theme="dark"] { --bg:#1d231f; --paper:#29312b; --ink:#eee9df; --muted:#bbbdb4; --line:#49534c; --red:#e58772; }

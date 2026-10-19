@@ -1,130 +1,63 @@
-/* Librox app visuals remain inside Apple's unmodified static bezels. */
+/* The film is one continuous product story. Static official device artwork stays inside the rendered footage. */
 (function () {
-  "use strict";
-
-  var experience = document.querySelector("[data-experience]");
-  if (!experience) return;
-
-  var devices = {
-    duo: experience.querySelector('[data-experience-device="duo"]'),
-    iphone: experience.querySelector('[data-experience-device="iphone"]'),
-    listening: experience.querySelector('[data-experience-device="listening"]'),
-  };
-  var videos = {
-    duo: experience.querySelector('[data-experience-video="duo"]'),
-  };
-  var tabs = Array.prototype.slice.call(experience.querySelectorAll("[data-experience-select]"));
-  var replay = experience.querySelector("[data-experience-replay]");
-  var toggle = experience.querySelector("[data-experience-toggle]");
-  var caption = experience.querySelector("[data-experience-caption]");
-  var motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
-  var manualChoice = { duo: null };
-  var activeDevice = "duo";
+  'use strict';
+  var section = document.querySelector('[data-experience]');
+  if (!section) return;
+  var video = section.querySelector('[data-film-video]');
+  var poster = section.querySelector('.film-landing-poster');
+  var toggle = section.querySelector('[data-film-toggle]');
+  var sound = section.querySelector('[data-film-sound]');
+  var portrait = matchMedia('(max-width: 700px)');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)');
   var visible = false;
+  var manual = null;
 
-  function updateToggle() {
-    var video = videos[activeDevice];
-    if (!video) return;
-    var paused = video.paused || video.ended;
-    toggle.textContent = paused ? "Play" : "Pause";
-    toggle.setAttribute("aria-label", (paused ? "Play" : "Pause") + " app video");
+  function syncSource() {
+    var next = portrait.matches ? video.dataset.portrait : video.dataset.wide;
+    if (!next || video.getAttribute('src') === next) return;
+    video.pause();
+    video.classList.remove('is-ready');
+    poster.style.visibility = 'visible';
+    poster.setAttribute('aria-hidden', 'false');
+    video.poster = portrait.matches ? 'assets/librox-film-poster-portrait.webp' : 'assets/librox-film-poster.webp';
+    video.src = next;
+    video.load();
+    syncPlayback();
   }
-
+  function syncButton() {
+    toggle.textContent = video.paused ? 'Play film' : 'Pause';
+    toggle.setAttribute('aria-label', video.paused ? 'Play Librox film' : 'Pause Librox film');
+    sound.textContent = video.muted ? 'Sound off' : 'Sound on';
+    sound.setAttribute('aria-label', video.muted ? 'Turn on film sound' : 'Turn off film sound');
+  }
   function syncPlayback() {
-    var activeVideo = videos[activeDevice];
-    Object.keys(videos).forEach(function (name) {
-      if (name !== activeDevice) videos[name].pause();
-    });
-    if (!activeVideo) return;
-    var canPlay = visible && document.visibilityState !== "hidden" && !activeVideo.ended &&
-      (manualChoice[activeDevice] === true ||
-        (manualChoice[activeDevice] === null && !motionPreference.matches));
-    if (canPlay) {
-      if (activeVideo.paused) activeVideo.play().catch(updateToggle);
-    } else {
-      activeVideo.pause();
-    }
-    updateToggle();
+    var shouldPlay = visible && document.visibilityState === 'visible' && (manual === true || (manual === null && !reduce.matches));
+    if (shouldPlay) video.play().catch(syncButton);
+    else video.pause();
+    syncButton();
   }
-
-  function showDevice(name) {
-    if (!devices[name]) return;
-    if (name !== activeDevice) {
-      if (videos[activeDevice]) videos[activeDevice].pause();
-      activeDevice = name;
-    }
-    experience.dataset.scene = name;
-    Object.keys(devices).forEach(function (deviceName) {
-      var active = deviceName === name;
-      devices[deviceName].classList.toggle("is-active", active);
-      devices[deviceName].setAttribute("aria-hidden", String(!active));
-    });
-    tabs.forEach(function (tab) {
-      tab.setAttribute("aria-pressed", String(tab.dataset.experienceSelect === name));
-    });
-    caption.textContent = name === "duo"
-      ? "Native Duo opening study · development build · sequence shortened"
-      : name === "iphone"
-        ? "Native iPhone Reading study · Moby-Dick in Librox · simulator capture"
-        : "Cover-colored listening room · Librox 2.0 design study";
+  toggle.addEventListener('click', function () {
+    manual = video.paused;
     syncPlayback();
-  }
-
-  function replayVideo() {
-    var video = videos[activeDevice];
-    if (!video) return;
-    video.currentTime = 0;
-    manualChoice[activeDevice] = true;
-    syncPlayback();
-  }
-
-  tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      var name = tab.dataset.experienceSelect;
-      if (name === activeDevice && videos[name]) replayVideo();
-      else showDevice(name);
-    });
   });
-  replay.addEventListener("click", replayVideo);
-  toggle.addEventListener("click", function () {
-    var video = videos[activeDevice];
-    if (!video) return;
-    if (video.ended) {
-      replayVideo();
-    } else {
-      manualChoice[activeDevice] = video.paused;
-      syncPlayback();
-    }
+  sound.addEventListener('click', function () {
+    video.muted = !video.muted;
+    if (!video.muted && video.paused) { manual = true; syncPlayback(); }
+    syncButton();
   });
-
-  Object.keys(videos).forEach(function (name) {
-    var video = videos[name];
-    video.addEventListener("playing", function () {
-      video.classList.add("has-frame");
-      updateToggle();
-    });
-    video.addEventListener("pause", updateToggle);
-    video.addEventListener("ended", updateToggle);
-    video.addEventListener("error", function () {
-      video.classList.remove("has-frame");
-      updateToggle();
-    });
+  video.addEventListener('playing', function () {
+    video.classList.add('is-ready');
+    poster.setAttribute('aria-hidden', 'true');
+    poster.style.visibility = 'hidden';
+    syncButton();
   });
-
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) {
-      visible = entries[0].isIntersecting;
-      syncPlayback();
-    }, { threshold: .12 }).observe(experience);
-  } else {
-    visible = true;
-  }
-  document.querySelectorAll('a[href="#app-in-motion"],a[href="#experience"]').forEach(function (link) {
-    link.addEventListener("click", function () {
-      showDevice(link.getAttribute("href") === "#app-in-motion" ? "iphone" : "duo");
-    });
-  });
-  document.addEventListener("visibilitychange", syncPlayback);
-  motionPreference.addEventListener("change", syncPlayback);
-  showDevice(location.hash === "#app-in-motion" ? "iphone" : "duo");
+  video.addEventListener('pause', syncButton);
+  video.addEventListener('error', function () { video.classList.remove('is-ready'); poster.style.visibility = 'visible'; poster.setAttribute('aria-hidden', 'false'); syncButton(); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; syncPlayback(); }, {threshold: .08}).observe(section);
+  } else { visible = true; }
+  portrait.addEventListener('change', syncSource);
+  reduce.addEventListener('change', syncPlayback);
+  document.addEventListener('visibilitychange', syncPlayback);
+  syncSource();
 })();

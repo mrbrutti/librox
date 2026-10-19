@@ -1,6 +1,6 @@
 # Librox website
 
-Static GitHub Pages site for librox.app. The first viewport presents a Librox Duo development capture and iPhone Reading study inside Apple's official static bezels, plus a clearly labeled 2.0 listening design study. Visitors can switch views and control the Duo recording. The next viewport cycles among Librox 2.0 library, page, and listening views in the same official Duo bezel. The remaining page explains reading and discovery, links to dedicated Plus and privacy pages, and links to the App Store.
+Static GitHub Pages site for librox.app. The first viewport is a 20-second Librox product film with separate desktop and phone encodes. It shows a library, the native development book opening, reading, and a labeled listening design preview. Visitors can pause or unmute it; reduced-motion visitors receive a poster. The next viewport is an interactive Duo mode selector. The rest of the page covers reading, discovery, Plus, privacy, terms, and support.
 
 The dedicated `plus.html` page is **a proposal, not a live purchase offer**. It shows the target US $9.99 annual price and proposed offline voice library, listening queue, and per-book listening profiles. Core owned-book reading, existing listening, notes, sync, and arbitrary OPDS catalog access stay free. Reconcile every paid benefit, device requirement, localized price, and renewal statement with the actual StoreKit product and reviewed app build before launch.
 
@@ -14,7 +14,7 @@ The dedicated `plus.html` page is **a proposal, not a live purchase offer**. It 
 
 Before Plus can be sold, implement and verify StoreKit purchase, restore, cancellation/expiry handling, entitlement across supported Apple devices, a clear in-app annual renewal disclosure, and final terms/privacy links. Configure the product and price in App Store Connect. See [Apple's subscription guidance](https://developer.apple.com/app-store/subscriptions/), [privacy metadata](https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy), and [platform version information](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information).
 
-The [site motion direction](docs/site-motion-direction.md) records the reference sites, asset decisions, interaction rules, and review path.
+The [site motion direction](docs/site-motion-direction.md) records the film sequence, asset provenance, Apple device-artwork boundaries, and Figma review. See [film/README.md](film/README.md) for the reproducible Remotion render.
 
 ## Local preview
 
@@ -31,7 +31,7 @@ npm run build
 
 Commit `duo-stage.bundle.js` with its source, since GitHub Pages serves committed static files directly.
 
-The Duo hero clip `assets/librox-duo-native-opening.mp4` comes from `docs/librox-2.0/reviews/book-opening/continuity-study/final-duo-landscape.mp4` in the separate `codex/book-opening` Libros worktree. The source is a 7.6-second Duo simulator recording of the native book-opening study, encoded at 1800 × 1266 and 30 fps for the web. Its poster is a frame from the same video. This is development-study footage, not evidence that the opening is integrated into the current Librox 2.0 release or accepted on physical hardware. The site labels the sequence as shortened.
+The native opening segment within the landing film, sourced from `assets/librox-duo-native-opening.mp4`, comes from `docs/librox-2.0/reviews/book-opening/continuity-study/final-duo-landscape.mp4` in the separate `codex/book-opening` Libros worktree. The source is a 7.6-second Duo simulator recording of the native book-opening study, encoded at 1800 × 1266 and 30 fps for the web. The film posters are first-chapter frames from the rendered composition. This is development-study footage, not evidence that the opening is integrated into the current Librox 2.0 release or accepted on physical hardware. The site labels the sequence as shortened.
 
 The iPhone Reading image `assets/iphone-reading-home.webp` comes from `docs/librox-2.0/reviews/edge-navigation/iphone-reading-compact.png` in Libros. It is a real iPhone 17 Pro simulator capture of the Librox Design Lab with the illustrated Moby-Dick cover in the app's Reading view. The capture uses sample books and is a design study, not a claim that the navigation has shipped.
 

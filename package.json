@@ -6,6 +6,8 @@
     "build": "esbuild duo-stage.js --bundle --minify --format=esm --target=es2022 --outfile=duo-stage.bundle.js"
   },
   "devDependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
     "esbuild": "0.25.12"
   }
 }
