@@ -4,17 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Librox — Privacy Policy</title>
-    <link rel="stylesheet" href="librox.css" />
-    <script>
-      (function () {
-        try {
-          var t = localStorage.getItem("librox-theme");
-          if (t === "eink" || t === "paper" || t === "dark") {
-            document.documentElement.setAttribute("data-theme", t);
-          }
-        } catch (e) {}
-      })();
-    </script>
+    <meta name="description" content="How Librox handles your books, reading data, catalog requests, and website visits." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="librox.css?v=8" />
   </head>
   <body>
     <div class="shell">
@@ -22,9 +14,10 @@
         <a class="wordmark" href="index.html" aria-label="Librox home"
           ><span class="mark" aria-hidden="true">L<span></span></span>LIBROX</a
         >
-        <nav class="site-links">
+        <nav class="site-links" aria-label="Page navigation">
           <a href="index.html">Home</a>
           <a href="index.html#discover">Find books</a>
+          <a href="terms.html">Terms</a>
           <a href="support.html">Support</a>
           <a href="https://apps.apple.com/us/app/librox/id6796746657"
             >Get Librox ↗</a
@@ -35,47 +28,59 @@
       <main class="page prose">
         <div class="eyebrow">Librox</div>
         <h1>Privacy policy</h1>
-        <p class="updated">Last updated: August 17, 2026</p>
+        <p class="updated">Last updated: October 19, 2026</p>
 
         <p>
-          Librox does not collect, store, or transmit any personal data to the
-          developer or to third parties. There are no accounts, no analytics, no
-          advertising, and no tracking of any kind.
+          Librox does not require an account and does not use advertising,
+          behavioral analytics, or cross-app tracking. We do not run a server
+          that receives your books, reading history, or notes. Some features
+          use Apple or the catalog you choose, as described below.
         </p>
 
         <h2>Your books and reading data</h2>
         <p>
           Books you import, your reading positions, bookmarks, notes, shelves,
-          ratings, and settings stay on your device. If you are signed in to
-          iCloud, they sync through your
-          <strong>private iCloud account</strong> (Apple CloudKit). That data is
-          visible only to you; the developer has no access to it.
+          ratings, and settings are stored on your device. If iCloud sync is
+          available and enabled, supported data syncs through your private
+          iCloud account using Apple CloudKit. Section 9 Labs does not have
+          access to the contents of your private iCloud database.
         </p>
 
         <h2>Network requests</h2>
         <p>
-          When you use the Discover tab, your searches and downloads go directly
-          to the catalog you chose — Project Gutenberg, Standard Ebooks,
-          Unglue.it, Open Library, or an OPDS catalog you added yourself. No
-          identifiers are attached beyond what a normal web request carries, and
-          nothing is proxied through servers we run — we don't run any.
-          Credentials you save for a catalog are stored in the device Keychain
-          and sent only to that catalog.
+          When you search, browse, or download from a catalog, Librox contacts
+          that catalog directly. This may include Project Gutenberg, Standard
+          Ebooks, Open Library, Unglue.it, or an OPDS catalog you add. As with
+          any internet request, the destination can receive network information
+          such as your IP address. Catalog credentials you save are stored in
+          the device Keychain and sent only to the relevant catalog. Cover and
+          book metadata lookups may also contact their source directly.
         </p>
 
         <h2>This website</h2>
         <p>
-          librox.app is a static site with no analytics and no cookies. The book
-          search on the home page sends your query directly from your browser to
-          the catalog you are searching (Project Gutenberg's Gutendex API and
-          Standard Ebooks); we never see it. Your theme choice is kept in your
-          browser's local storage and goes nowhere.
+          librox.app is a static site with no advertising cookies or analytics
+          scripts. The book search on the home page sends your query directly
+          from your browser to the selected catalog (Gutendex or Standard
+          Ebooks). The reading-theme preview is a local display choice for your
+          current visit. The web host may process routine request logs as part
+          of delivering the site.
         </p>
 
         <h2>Text-to-speech</h2>
         <p>
-          Read-aloud narration runs entirely on your device. Book text never
-          leaves the device for narration.
+          Read-aloud narration runs on your device; book text is not sent to us
+          for speech generation. If you choose to download an enhanced voice
+          model, the download contacts its model host. It does not upload your
+          book text for narration.
+        </p>
+
+        <h2>App Store purchases</h2>
+        <p>
+          Librox Plus is in development and is not currently sold. If it becomes
+          available, purchases and subscription management will use Apple's
+          App Store. Apple handles payment information under its own privacy
+          practices; Librox will use the purchase status needed to unlock Plus.
         </p>
 
         <h2>Changes</h2>
@@ -95,6 +100,7 @@
         <div class="inner">
           <div>
             <a href="privacy.html">Privacy policy</a>
+            <a href="terms.html">Terms of use</a>
             <a href="support.html">Support</a>
             <a href="mailto:matias@section9labs.com">Contact</a>
           </div>

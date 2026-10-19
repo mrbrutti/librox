@@ -4,17 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Librox — Support</title>
-    <link rel="stylesheet" href="librox.css" />
-    <script>
-      (function () {
-        try {
-          var t = localStorage.getItem("librox-theme");
-          if (t === "eink" || t === "paper" || t === "dark") {
-            document.documentElement.setAttribute("data-theme", t);
-          }
-        } catch (e) {}
-      })();
-    </script>
+    <meta name="description" content="Get help with Librox reading, listening, sync, and catalogs." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="librox.css?v=8" />
   </head>
   <body>
     <div class="shell">
@@ -22,10 +14,11 @@
         <a class="wordmark" href="index.html" aria-label="Librox home"
           ><span class="mark" aria-hidden="true">L<span></span></span>LIBROX</a
         >
-        <nav class="site-links">
+        <nav class="site-links" aria-label="Page navigation">
           <a href="index.html">Home</a>
           <a href="index.html#discover">Find books</a>
           <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
           <a href="https://apps.apple.com/us/app/librox/id6796746657"
             >Get Librox ↗</a
           >
@@ -54,12 +47,19 @@
           If the problem is with a specific public-domain book, a link to the
           book helps a lot.
         </p>
+        <h2>Librox Plus</h2>
+        <p>
+          Plus is in development and cannot be purchased yet. The <a href="index.html#plus">Plus preview</a>
+          shows the proposed features and US annual price. For questions about
+          the plan, email us at the address above.
+        </p>
       </main>
 
       <footer class="site">
         <div class="inner">
           <div>
             <a href="privacy.html">Privacy policy</a>
+            <a href="terms.html">Terms of use</a>
             <a href="support.html">Support</a>
             <a href="mailto:matias@section9labs.com">Contact</a>
           </div>

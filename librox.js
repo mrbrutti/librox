@@ -69,7 +69,7 @@
     !matchMedia("(prefers-reduced-motion: reduce)").matches
   ) {
     var reveals = document.querySelectorAll(
-      ".interlude h2, .interlude-bottom, .personal-copy, .personal-art, .value, .discover-head, .closing-inner",
+      ".interlude h2, .interlude-bottom, .personal-copy, .personal-art, .membership-intro, .membership-plan, .discover-head, .privacy-copy, .privacy-folio, .closing-inner",
     );
     reveals.forEach(function (element) {
       element.classList.add("reveal-target");

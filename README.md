@@ -1,6 +1,17 @@
 # Librox website
 
-Static GitHub Pages site for librox.app. The first viewport presents a Librox Duo development capture and iPhone Reading study inside Apple's official static bezels, plus a clearly labeled 2.0 listening design study. Visitors can switch views and control the Duo recording. The next viewport cycles among Librox 2.0 library, page, and listening views in the same official Duo bezel. The remaining page explains reading and discovery and links to the App Store.
+Static GitHub Pages site for librox.app. The first viewport presents a Librox Duo development capture and iPhone Reading study inside Apple's official static bezels, plus a clearly labeled 2.0 listening design study. Visitors can switch views and control the Duo recording. The next viewport cycles among Librox 2.0 library, page, and listening views in the same official Duo bezel. The remaining page explains reading, planned Plus pricing, discovery, and privacy, and links to the App Store.
+
+The Plus section is **a proposal, not a live purchase offer**. It shows the target US $9.99 annual price and proposed offline voice library, listening queue, and per-book listening profiles. Core owned-book reading, existing listening, notes, sync, and arbitrary OPDS catalog access stay free. Reconcile every paid benefit, device requirement, localized price, and renewal statement with the actual StoreKit product and reviewed app build before launch.
+
+## App Store information pages
+
+- `privacy.html` is the public Privacy Policy URL; its claims must match the App Store Connect privacy questionnaire and the shipped app's network behavior.
+- `support.html` provides direct contact information for the required Support URL.
+- `terms.html` links to Apple's Standard EULA and explains the status of the proposed Plus plan. Apple requires Privacy Policy and Terms links in the app and App Store metadata when subscriptions are offered; the website links alone do not complete that work.
+- The Marketing URL can point to the homepage. A custom domain is useful for Librox's identity but is not itself an App Store requirement.
+
+Before Plus can be sold, implement and verify StoreKit purchase, restore, cancellation/expiry handling, entitlement across supported Apple devices, a clear in-app annual renewal disclosure, and final terms/privacy links. Configure the product and price in App Store Connect. See [Apple's subscription guidance](https://developer.apple.com/app-store/subscriptions/), [privacy metadata](https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy), and [platform version information](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information).
 
 The [site motion direction](docs/site-motion-direction.md) records the reference sites, asset decisions, interaction rules, and review path.
 
