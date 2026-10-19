@@ -1,0 +1,457 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T22:39:39.040008Z",
+  "title": "Design System: Librox",
+  "extensions": {
+    "colorMeta": {
+      "studio": {
+        "role": "primary",
+        "displayName": "Studio forest",
+        "tonalRamp": [
+          "oklch(15% 0.02319 165.09)",
+          "oklch(26% 0.02319 165.09)",
+          "oklch(38% 0.02319 165.09)",
+          "oklch(49% 0.02319 165.09)",
+          "oklch(61% 0.02319 165.09)",
+          "oklch(72% 0.02319 165.09)",
+          "oklch(84% 0.02319 165.09)",
+          "oklch(95% 0.02319 165.09)"
+        ]
+      },
+      "studio-ink": {
+        "role": "neutral",
+        "displayName": "Studio cream",
+        "tonalRamp": [
+          "oklch(15% 0.01934 90.54)",
+          "oklch(26% 0.01934 90.54)",
+          "oklch(38% 0.01934 90.54)",
+          "oklch(49% 0.01934 90.54)",
+          "oklch(61% 0.01934 90.54)",
+          "oklch(72% 0.01934 90.54)",
+          "oklch(84% 0.01934 90.54)",
+          "oklch(95% 0.01934 90.54)"
+        ]
+      },
+      "studio-coral": {
+        "role": "secondary",
+        "displayName": "Studio coral",
+        "tonalRamp": [
+          "oklch(15% 0.07892 48.92)",
+          "oklch(26% 0.07892 48.92)",
+          "oklch(38% 0.07892 48.92)",
+          "oklch(49% 0.07892 48.92)",
+          "oklch(61% 0.07892 48.92)",
+          "oklch(72% 0.07892 48.92)",
+          "oklch(84% 0.07892 48.92)",
+          "oklch(95% 0.07892 48.92)"
+        ]
+      },
+      "studio-focus": {
+        "role": "secondary",
+        "displayName": "Studio focus",
+        "tonalRamp": [
+          "oklch(15% 0.08764 42.86)",
+          "oklch(26% 0.08764 42.86)",
+          "oklch(38% 0.08764 42.86)",
+          "oklch(49% 0.08764 42.86)",
+          "oklch(61% 0.08764 42.86)",
+          "oklch(72% 0.08764 42.86)",
+          "oklch(84% 0.08764 42.86)",
+          "oklch(95% 0.08764 42.86)"
+        ]
+      },
+      "studio-hover": {
+        "role": "secondary",
+        "displayName": "Studio hover",
+        "tonalRamp": [
+          "oklch(15% 0.10099 40.76)",
+          "oklch(26% 0.10099 40.76)",
+          "oklch(38% 0.10099 40.76)",
+          "oklch(49% 0.10099 40.76)",
+          "oklch(61% 0.10099 40.76)",
+          "oklch(72% 0.10099 40.76)",
+          "oklch(84% 0.10099 40.76)",
+          "oklch(95% 0.10099 40.76)"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Warm background",
+        "tonalRamp": [
+          "oklch(15% 0.01441 84.58)",
+          "oklch(26% 0.01441 84.58)",
+          "oklch(38% 0.01441 84.58)",
+          "oklch(49% 0.01441 84.58)",
+          "oklch(61% 0.01441 84.58)",
+          "oklch(72% 0.01441 84.58)",
+          "oklch(84% 0.01441 84.58)",
+          "oklch(95% 0.01441 84.58)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.01107 89.72)",
+          "oklch(26% 0.01107 89.72)",
+          "oklch(38% 0.01107 89.72)",
+          "oklch(49% 0.01107 89.72)",
+          "oklch(61% 0.01107 89.72)",
+          "oklch(72% 0.01107 89.72)",
+          "oklch(84% 0.01107 89.72)",
+          "oklch(95% 0.01107 89.72)"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Reading ink",
+        "tonalRamp": [
+          "oklch(15% 0.01542 141.15)",
+          "oklch(26% 0.01542 141.15)",
+          "oklch(38% 0.01542 141.15)",
+          "oklch(49% 0.01542 141.15)",
+          "oklch(61% 0.01542 141.15)",
+          "oklch(72% 0.01542 141.15)",
+          "oklch(84% 0.01542 141.15)",
+          "oklch(95% 0.01542 141.15)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted ink",
+        "tonalRamp": [
+          "oklch(15% 0.01425 137.81)",
+          "oklch(26% 0.01425 137.81)",
+          "oklch(38% 0.01425 137.81)",
+          "oklch(49% 0.01425 137.81)",
+          "oklch(61% 0.01425 137.81)",
+          "oklch(72% 0.01425 137.81)",
+          "oklch(84% 0.01425 137.81)",
+          "oklch(95% 0.01425 137.81)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Paper rule",
+        "tonalRamp": [
+          "oklch(15% 0.01652 114.43)",
+          "oklch(26% 0.01652 114.43)",
+          "oklch(38% 0.01652 114.43)",
+          "oklch(49% 0.01652 114.43)",
+          "oklch(61% 0.01652 114.43)",
+          "oklch(72% 0.01652 114.43)",
+          "oklch(84% 0.01652 114.43)",
+          "oklch(95% 0.01652 114.43)"
+        ]
+      },
+      "red": {
+        "role": "secondary",
+        "displayName": "Bookmark coral",
+        "tonalRamp": [
+          "oklch(15% 0.16241 31.56)",
+          "oklch(26% 0.16241 31.56)",
+          "oklch(38% 0.16241 31.56)",
+          "oklch(49% 0.16241 31.56)",
+          "oklch(61% 0.16241 31.56)",
+          "oklch(72% 0.16241 31.56)",
+          "oklch(84% 0.16241 31.56)",
+          "oklch(95% 0.16241 31.56)"
+        ]
+      },
+      "catalog-muted": {
+        "role": "neutral",
+        "displayName": "Catalog muted ink",
+        "tonalRamp": [
+          "oklch(15% 0.02461 140.84)",
+          "oklch(26% 0.02461 140.84)",
+          "oklch(38% 0.02461 140.84)",
+          "oklch(49% 0.02461 140.84)",
+          "oklch(61% 0.02461 140.84)",
+          "oklch(72% 0.02461 140.84)",
+          "oklch(84% 0.02461 140.84)",
+          "oklch(95% 0.02461 140.84)"
+        ]
+      },
+      "catalog-red": {
+        "role": "secondary",
+        "displayName": "Catalog coral",
+        "tonalRamp": [
+          "oklch(15% 0.15332 31.47)",
+          "oklch(26% 0.15332 31.47)",
+          "oklch(38% 0.15332 31.47)",
+          "oklch(49% 0.15332 31.47)",
+          "oklch(61% 0.15332 31.47)",
+          "oklch(72% 0.15332 31.47)",
+          "oklch(84% 0.15332 31.47)",
+          "oklch(95% 0.15332 31.47)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Film display",
+        "purpose": "The live HTML homepage title; normal and italic Newsreader."
+      },
+      "headline": {
+        "displayName": "Native showcase headline",
+        "purpose": "The native app demonstration heading, with compact tablet and mobile sizes."
+      },
+      "closing": {
+        "displayName": "Download headline",
+        "purpose": "The final download invitation; its tracking remains local."
+      },
+      "title": {
+        "displayName": "Preview title",
+        "purpose": "Native demonstration names in the desktop selector."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "The shared reading interface base."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Film chapters and catalog source controls."
+      },
+      "control": {
+        "displayName": "Playback control",
+        "purpose": "The film play/pause and sound controls."
+      },
+      "navigation": {
+        "displayName": "Navigation",
+        "purpose": "Page links and the underlined download action."
+      },
+      "search": {
+        "displayName": "Catalog search",
+        "purpose": "The serif search field on the Books page."
+      },
+      "result": {
+        "displayName": "Catalog result",
+        "purpose": "Book titles in search results."
+      }
+    },
+    "shadows": [
+      {
+        "name": "family-edge-blend",
+        "value": "inset 0 0 30px 24px var(--studio)",
+        "purpose": "Join the 4:3 family film to the forest page background; the device depth is rendered in Blender."
+      },
+      {
+        "name": "family-edge-blend-mobile",
+        "value": "inset 0 0 16px 10px var(--studio)",
+        "purpose": "The tighter edge blend around the 9:10 mobile family composition."
+      },
+      {
+        "name": "invitation-inset",
+        "value": "inset 0 1px 0 #e1e7ce0d",
+        "purpose": "A subtle inner top edge on the compact Plus invitation."
+      },
+      {
+        "name": "catalog-cover",
+        "value": "2px 4px 10px #0003",
+        "purpose": "Small object depth on catalog book thumbnails."
+      }
+    ],
+    "motion": [
+      {
+        "name": "film-ready",
+        "value": "opacity 450ms ease",
+        "purpose": "Reveal decoded hero or family video over its corresponding poster."
+      },
+      {
+        "name": "film-title",
+        "value": "opacity 500ms ease, transform 700ms cubic-bezier(.22,1,.36,1)",
+        "purpose": "Fade and settle the live HTML hero typography."
+      },
+      {
+        "name": "wide-listening-subtitle",
+        "value": "opacity 350ms ease",
+        "purpose": "Clear supporting text from the tilted device during wide listening scenes."
+      },
+      {
+        "name": "preview-selection",
+        "value": "color 180ms ease, opacity 180ms ease",
+        "purpose": "Family chapter text and arrow states follow the active film beat."
+      },
+      {
+        "name": "invitation-arrow",
+        "value": "transform 180ms ease-out",
+        "purpose": "Move the Plus link arrow by 3px on hover."
+      },
+      {
+        "name": "explore-arrow",
+        "value": "transform 200ms ease-out",
+        "purpose": "Move the film exploration arrow down by 4px on hover."
+      },
+      {
+        "name": "family-loop",
+        "value": "24s at 30fps",
+        "purpose": "Independent rendered loop: iPad reading 0–5.7s, iPad live listening 5.7–11s, Mac reading 11–17.7s, Mac live listening 17.7–23s, return 23–24s."
+      },
+      {
+        "name": "family-screen-transition",
+        "value": "600ms; ease(t) = t*t*(3-2*t)",
+        "purpose": "Blend reading and live-listening screen footage within the Blender scene at 5.7s and 17.7s."
+      },
+      {
+        "name": "family-device-handoff",
+        "value": "2s; ease(t) = t*t*(3-2*t)",
+        "purpose": "Move opaque rendered devices through the studio during the incoming and return handoffs."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "studio-compact",
+        "value": "1100px"
+      },
+      {
+        "name": "plus-compact",
+        "value": "900px"
+      },
+      {
+        "name": "mobile",
+        "value": "700px"
+      },
+      {
+        "name": "hero-portrait-media-aspect",
+        "value": "6/5"
+      },
+      {
+        "name": "wide-hero-aspect",
+        "value": "2/1"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Studio navigation",
+      "kind": "nav",
+      "refersTo": "navigation-studio",
+      "description": "The live header: a protected wordmark, centered links and an underlined download action. The gradient preserves contrast over the film.",
+      "html": "<div class=\"ds-studio-sample\"><header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"index.html\" aria-label=\"Librox home\"><span class=\"ds-mark\" aria-hidden=\"true\">L<span></span></span>LIBROX</a><nav class=\"ds-navigation\" aria-label=\"Main navigation\"><a href=\"index.html#app-in-motion\">The app</a><a href=\"plus.html\">Plus</a><a href=\"books.html\">Find books</a><a href=\"privacy.html\">Privacy</a></nav><a class=\"ds-download\" href=\"https://apps.apple.com/app/id6796746657\">Get Librox <span><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span></a></header></div>",
+      "css": ".ds-studio-sample{background:var(--studio,#0b1913);color:var(--studio-ink,#f2eddf);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-header{display:flex;align-items:center;gap:30px;min-height:82px;background:linear-gradient(#08120de6,#08120dc2 65%,transparent);color:#f4efdf}.ds-wordmark{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;letter-spacing:.17em;text-decoration:none;color:inherit;white-space:nowrap}.ds-mark{width:25px;height:25px;border:1.5px solid currentColor;border-radius:2px;display:inline-grid;place-items:center;position:relative;font-family:var(--serif,\"Newsreader\",\"Iowan Old Style\",Georgia,serif);font-size:17px;font-weight:700;line-height:1;letter-spacing:0}.ds-mark span{position:absolute;right:-3px;top:-3px;width:5px;height:12px;background:var(--red,#c64a36)}.ds-navigation{display:flex;align-items:center;gap:30px;margin:auto}.ds-navigation a,.ds-download{font-size:13px;line-height:1.55;text-decoration:none;color:#cad2c7}.ds-download{color:#f4efdf;border-bottom:1px solid currentColor;padding-bottom:4px;white-space:nowrap}.ds-download span{margin-left:20px}.ds-download svg{width:16px;height:16px;vertical-align:middle}.ds-header a:hover{color:#e79a7e}.ds-header a:focus-visible{outline:2px solid #efac91;outline-offset:6px;}@media(max-width:700px){.ds-header{min-height:72px;gap:20px}.ds-wordmark{font-size:12px}.ds-navigation{display:none}.ds-download{margin-left:auto;font-size:11px}}"
+    },
+    {
+      "name": "Film chapter button",
+      "kind": "button",
+      "refersTo": "button-chapter",
+      "description": "Three numbered chapters use a fine progress rule and a brighter pressed state.",
+      "html": "<div class=\"ds-studio-sample\"><div class=\"ds-chapters\" role=\"group\" aria-label=\"Film chapters\"><button class=\"ds-chapter\" type=\"button\" aria-pressed=\"true\" style=\"--progress:.42\"><span>01</span> Unfold<i></i></button><button class=\"ds-chapter\" type=\"button\" aria-pressed=\"false\"><span>02</span> Read<i></i></button><button class=\"ds-chapter\" type=\"button\" aria-pressed=\"false\"><span>03</span> Listen<i></i></button></div></div>",
+      "css": ".ds-studio-sample{background:var(--studio,#0b1913);color:var(--studio-ink,#f2eddf);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-chapters{display:flex;gap:18px;max-width:300px}.ds-chapter{position:relative;flex:1;text-align:left;min-height:44px;padding:12px 0;border:0;background:none;color:#b3c0af;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);font-size:12px;line-height:1.55;cursor:pointer}.ds-chapter span{font-size:11px;color:#a9b4a6;margin-right:7px}.ds-chapter::after,.ds-chapter i{content:\"\";position:absolute;inset:auto 0 0;height:1px;background:#a5b79d50}.ds-chapter i{z-index:1;background:#e5ac8e;transform:scaleX(var(--progress,0));transform-origin:left}.ds-chapter[aria-pressed=\"true\"]{color:#fff9e9}.ds-chapter:focus-visible{outline:2px solid #efac91;outline-offset:6px;}@media(max-width:700px){.ds-chapters{gap:24px;max-width:none}}"
+    },
+    {
+      "name": "Film playback button",
+      "kind": "button",
+      "refersTo": "button-playback",
+      "description": "A labeled pause control with a circular SVG icon and the macro contrast gradient. On the site, ArrowLeft and ArrowRight seek five seconds while this button is focused; sound remains a separate opt-in control.",
+      "html": "<div class=\"ds-studio-sample ds-film-control-context ds-macro\"><button class=\"ds-playback\" type=\"button\" aria-label=\"Pause Librox film\" aria-keyshortcuts=\"ArrowLeft ArrowRight\" title=\"Play or pause. Use the arrow keys to seek five seconds.\"><span class=\"ds-play-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 16 16\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M4 3h3v10H4zm5 0h3v10H9z\"/></svg></span><span>Pause film</span></button></div>",
+      "css": ".ds-studio-sample{background:var(--studio,#0b1913);color:var(--studio-ink,#f2eddf);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-playback{background:none;border:0;padding:12px 0;min-height:44px;color:#dce3d5;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);font-size:11px;font-weight:650;line-height:1.55;letter-spacing:.035em;cursor:pointer}.ds-play-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:7px;border:1px solid #c4d3bc70;border-radius:50%;vertical-align:middle}.ds-play-icon svg{width:12px;height:12px}.ds-playback:hover{color:#fff}.ds-playback:focus-visible{outline:2px solid #efac91;outline-offset:6px;}@media(max-width:700px){.ds-playback{padding:5px 0}}.ds-film-control-context{position:relative;isolation:isolate}.ds-film-control-context::after{content:\"\";position:absolute;inset:auto 0 0;height:28%;z-index:1;pointer-events:none;background:linear-gradient(transparent,#0b1913)}.ds-film-control-context.ds-macro::after{height:30%;background:linear-gradient(transparent,#07110dee 55%,#07110d)}.ds-film-control-context .ds-playback{position:relative;z-index:3}"
+    },
+    {
+      "name": "Family film chapter controls",
+      "kind": "custom",
+      "refersTo": "button-preview",
+      "description": "Three chapters seek within one 24-second native iPad/Mac film at 0s, 6.2s and 12.2s. Progress follows five independent beats. Its own pause button supports five-second arrow seeking and retry after errors. The accompanying film uses 4:3 wide and 9:10 mobile compositions with captions in normal flow.",
+      "html": "<div class=\"ds-studio-sample\"><div class=\"ds-preview-list\" role=\"group\" aria-label=\"App demonstrations\"><button class=\"ds-preview\" type=\"button\" aria-pressed=\"true\" data-family-seek=\"0\" style=\"--progress:.38\"><span class=\"ds-mode-number\">01</span><span><strong>A page you can feel.</strong><small>Paper, light, and the quiet pleasure of turning a page.</small></span><span class=\"ds-mode-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span><i></i></button><button class=\"ds-preview\" type=\"button\" aria-pressed=\"false\" data-family-seek=\"6.2\"><span class=\"ds-mode-number\">02</span><span><strong>Let the story follow you.</strong><small>A listening room colored by the book you’re in.</small></span><span class=\"ds-mode-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span><i></i></button><button class=\"ds-preview\" type=\"button\" aria-pressed=\"false\" data-family-seek=\"12.2\"><span class=\"ds-mode-number\">03</span><span><strong>A little more room.</strong><small>The same thoughtful reading space, on your Mac.</small></span><span class=\"ds-mode-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span><i></i></button></div><button class=\"ds-family-pause\" type=\"button\" aria-label=\"Pause app demonstrations\" aria-keyshortcuts=\"ArrowLeft ArrowRight\" title=\"Play or pause. Use the arrow keys to seek five seconds.\">Pause previews <svg viewBox=\"0 0 16 16\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M4 3h3v10H4zm5 0h3v10H9z\"/></svg></button></div>",
+      "css": ".ds-studio-sample{background:var(--studio,#0b1913);color:var(--studio-ink,#f2eddf);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-preview-list{border-top:1px solid #a2b39a30}.ds-preview{font:inherit;position:relative;display:flex;align-items:baseline;gap:16px;width:100%;padding:22px 0;color:#a5b39f;background:none;border:0;border-bottom:1px solid #a2b39a30;text-align:left;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);transition:color 180ms ease;cursor:pointer}.ds-preview[aria-pressed=\"true\"]{color:#f4ecda}.ds-preview strong{display:block;font-size:16px;font-weight:550;line-height:1.4}.ds-preview small{display:block;max-width:330px;margin-top:8px;color:#b0bda9;font-size:12px;line-height:1.65}.ds-preview:not([aria-pressed=\"true\"]) small{display:none}.ds-mode-number{font-size:11px;font-variant-numeric:tabular-nums}.ds-mode-arrow{margin-left:auto;opacity:0;transition:opacity 180ms ease}.ds-mode-arrow svg{width:16px;height:16px}.ds-preview[aria-pressed=\"true\"] .ds-mode-arrow{opacity:1}.ds-preview i{position:absolute;bottom:-1px;left:0;right:0;height:1px;background:#d9a181;transform:scaleX(var(--progress,0));transform-origin:left}.ds-preview:focus-visible{outline:2px solid #efac91;outline-offset:6px;}@media(hover:hover){.ds-preview:hover{color:#f2ead8}}@media(max-width:700px){.ds-preview{display:block;padding:14px 0;border-bottom:0}.ds-preview strong{font-size:11px;line-height:1.5;margin-top:7px}.ds-preview small,.ds-mode-arrow{display:none}.ds-preview i{top:0;bottom:auto}}@media(prefers-reduced-motion:reduce){.ds-preview,.ds-mode-arrow{transition:none}}.ds-family-pause{display:flex;align-items:center;gap:12px;min-height:44px;margin-top:10px;padding:8px 0;color:#a5b59d;font:inherit;font-size:11px;background:none;border:0;cursor:pointer}.ds-family-pause svg{width:12px;height:12px}.ds-family-pause:focus-visible{outline:2px solid #efac91;outline-offset:6px}@media(hover:hover){.ds-family-pause:hover{color:#f2ead8}}@media(max-width:700px){.ds-preview-list{display:flex;gap:14px;border:0}.ds-preview{flex:1;width:0;border-top:1px solid #a2b39a30}.ds-family-pause{margin-top:0}}"
+    },
+    {
+      "name": "Planned Plus invitation",
+      "kind": "card",
+      "refersTo": "card-plus",
+      "description": "The compact homepage link to the proposed membership; it is distinct from the older full Plus card.",
+      "html": "<div class=\"ds-studio-sample\"><a class=\"ds-plus\" href=\"plus.html\"><span class=\"ds-plus-name\">Librox <em>Plus</em></span><span class=\"ds-plus-price\">$9.99<span> USD / year</span></span><span class=\"ds-plus-description\">Offline voices. Listening queues.<br>A voice and pace for every book.</span><span class=\"ds-plus-link\">Explore the planned membership <span aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></span></span></a></div>",
+      "css": ".ds-studio-sample{background:var(--studio,#0b1913);color:var(--studio-ink,#f2eddf);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-plus{display:flex;flex-direction:column;align-items:start;padding:30px 34px;color:#f1e8d8;border:1px solid #b5b69b3b;background:linear-gradient(120deg,#27412b55,#12251a50);box-shadow:inset 0 1px 0 #e1e7ce0d;text-decoration:none}.ds-plus-name{font-family:var(--serif,\"Newsreader\",\"Iowan Old Style\",Georgia,serif);font-size:30px;line-height:1.1;letter-spacing:-.035em}.ds-plus-name em{color:#e4ac8a}.ds-plus-price{margin:24px 0 14px;font-family:var(--serif,\"Newsreader\",\"Iowan Old Style\",Georgia,serif);font-size:44px;line-height:1;letter-spacing:-.045em}.ds-plus-price>span{font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);font-size:12px;letter-spacing:0;color:#aab69f}.ds-plus-description{font-size:14px;line-height:1.7;color:#c3cdb8}.ds-plus-link{margin-top:28px;font-size:11px;color:#e6c5ab}.ds-plus-link>span{margin-left:16px;display:inline-block;transition:transform 180ms ease-out}.ds-plus-link svg{width:16px;height:16px;vertical-align:middle}.ds-plus:hover{color:#e79a7e}.ds-plus:hover .ds-plus-link>span{transform:translate(3px,-3px)}.ds-plus:focus-visible{outline:2px solid #efac91;outline-offset:6px;}@media(max-width:700px){.ds-plus{padding:26px;display:grid;grid-template-columns:1fr auto;gap:18px}.ds-plus-name{font-size:29px}.ds-plus-price{font-size:32px;margin:0}.ds-plus-price>span{font-size:11px}.ds-plus-description,.ds-plus-link{grid-column:1/-1}.ds-plus-link{margin:0}}@media(prefers-reduced-motion:reduce){.ds-plus-link>span{transition:none}}"
+    },
+    {
+      "name": "Catalog search field",
+      "kind": "input",
+      "refersTo": "input-catalog",
+      "description": "The actual Books field with its corrected inset keyboard outline; the existing glyph-based submit ornament is excluded from this primitive.",
+      "html": "<div class=\"ds-paper-sample\"><div class=\"ds-search-bar\"><input class=\"ds-search\" type=\"search\" aria-label=\"Search a title or author\" placeholder=\"A title, an author, a feeling…\" autocomplete=\"off\" spellcheck=\"false\"></div></div>",
+      "css": ".ds-paper-sample{--muted:#566154;--red:#b13e2c;background:var(--bg,#eee9df);color:var(--ink,#212720);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-search-bar{border-bottom:1px solid var(--ink,#212720);display:flex;align-items:center;gap:20px;max-width:850px}.ds-search{flex:1;min-width:0;background:none;border:0;color:var(--ink,#212720);padding:18px 0;font-family:var(--serif,\"Newsreader\",\"Iowan Old Style\",Georgia,serif);font-size:clamp(21px,2.8vw,32px);font-weight:400;line-height:normal}.ds-search::placeholder{color:#566154;opacity:1}.ds-search:focus{outline:none}.ds-search:focus-visible{outline:2px solid #b84c32;outline-offset:-4px}"
+    },
+    {
+      "name": "Catalog source chip",
+      "kind": "chip",
+      "refersTo": "chip-source",
+      "description": "Flat radio choices invert ink and paper when selected and keep a coral hover outline.",
+      "html": "<div class=\"ds-paper-sample\"><div class=\"ds-chip-row\" role=\"radiogroup\" aria-label=\"Catalog\"><button class=\"ds-chip\" type=\"button\" role=\"radio\" aria-checked=\"true\">All sources</button><button class=\"ds-chip\" type=\"button\" role=\"radio\" aria-checked=\"false\">Project Gutenberg</button><button class=\"ds-chip\" type=\"button\" role=\"radio\" aria-checked=\"false\">Standard Ebooks</button></div></div>",
+      "css": ".ds-paper-sample{--muted:#566154;--red:#b13e2c;background:var(--bg,#eee9df);color:var(--ink,#212720);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-chip-row{display:flex;gap:9px;flex-wrap:wrap}.ds-chip{border:1px solid var(--line,#caccc0);color:var(--ink,#212720);background:transparent;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);font-size:12px;font-weight:400;line-height:1.55;padding:9px 14px;cursor:pointer}.ds-chip:hover{border-color:#b13e2c}.ds-chip[aria-checked=\"true\"]{background:var(--ink,#212720);color:var(--bg,#eee9df);border-color:var(--ink,#212720)}.ds-chip:focus-visible{outline:2px solid var(--red,#b13e2c);outline-offset:4px;}"
+    },
+    {
+      "name": "Add to Librox action",
+      "kind": "button",
+      "refersTo": "button-add",
+      "description": "The catalog result primary link uses a small solid ink rectangle.",
+      "html": "<div class=\"ds-paper-sample\"><a class=\"ds-add\" href=\"#catalog-result\">Add to Librox</a></div>",
+      "css": ".ds-paper-sample{--muted:#566154;--red:#b13e2c;background:var(--bg,#eee9df);color:var(--ink,#212720);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-add{display:inline-block;padding:10px 13px;background:var(--ink,#212720);color:var(--bg,#eee9df);font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);font-size:12px;line-height:1.55;text-decoration:none;white-space:nowrap}.ds-add:focus-visible{outline:2px solid var(--red,#b13e2c);outline-offset:4px;}"
+    },
+    {
+      "name": "EPUB action",
+      "kind": "button",
+      "refersTo": "button-epub",
+      "description": "The companion catalog link uses a fine lower rule with the reading ink color.",
+      "html": "<div class=\"ds-paper-sample\"><a class=\"ds-epub\" href=\"#catalog-result\">EPUB</a></div>",
+      "css": ".ds-paper-sample{--muted:#566154;--red:#b13e2c;background:var(--bg,#eee9df);color:var(--ink,#212720);padding:24px;font-size:16px;font-weight:400;line-height:1.55;font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);}.ds-epub{color:var(--ink,#212720);border-bottom:1px solid var(--line,#caccc0);font-family:var(--sans,\"Manrope\",-apple-system,BlinkMacSystemFont,sans-serif);font-size:12px;line-height:1.55;text-decoration:none;white-space:nowrap}.ds-epub:focus-visible{outline:2px solid var(--red,#b13e2c);outline-offset:4px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Forest Reading Studio",
+    "overview": "Librox places cream literary typography and the app's books inside a dark forest studio. Newsreader supplies the book-like headings; Manrope keeps navigation and controls quiet. Coral appears in italic phrases, fine progress marks and the small bookmark in the wordmark. The result is spacious around the media and compact around the controls.\n\nDepth comes from paper, light, device glass and reflective metal. The homepage expresses this world through the original Duo hero film and a continuous iPad/Mac family film, both carrying native app imagery. Books and Plus retain the warm paper context for search and explanation. These are distinct surface expressions of the same reading identity.",
+    "keyCharacteristics": [
+      "Forest studio surfaces, cream type and restrained coral emphasis.",
+      "Newsreader headings paired with small, clear Manrope controls.",
+      "Real app imagery contained in its screen, with capture provenance in source documentation.",
+      "Soft material depth around media; flat controls and fine dividing rules.",
+      "Compact responsive stages with direct playback controls."
+    ],
+    "rules": [
+      {
+        "name": "The Screen Rule",
+        "body": "Keep book artwork inside the Librox screen when it is presented as part of the app.",
+        "section": "overview"
+      },
+      {
+        "name": "The Context Rule",
+        "body": "Use the forest palette for the studio and the paper palette for reading and catalog tasks; do not promote a leftover stylesheet value into a new global theme.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Use Newsreader for display and reading-led headings, and Manrope for navigation, controls and supporting information.",
+        "section": "typography"
+      },
+      {
+        "name": "The Caption Clearance Rule",
+        "body": "Keep capture captions outside the media bounds in their own document flow.",
+        "section": "layout"
+      },
+      {
+        "name": "The Quiet Frame Rule",
+        "body": "Let app imagery carry the physical depth; keep surrounding controls flat.",
+        "section": "elevation & depth"
+      },
+      {
+        "name": "The Playback Choice Rule",
+        "body": "Preserve pause, keyboard seeking, opt-in sound, visible-state playback and explicit play under reduced motion.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do keep app artwork in its screen and record capture provenance in the source documentation.",
+      "Do pair Newsreader headings with Manrope controls and supporting information.",
+      "Do use the studio and paper contexts deliberately instead of mixing their defaults.",
+      "Do reserve space below native footage for captions at every supported width.",
+      "Do retain direct playback controls, five-second keyboard seeking, opt-in sound and a visible keyboard focus state.",
+      "Do use inline SVG for new interface arrows and playback icons, following the current homepage."
+    ],
+    "donts": [
+      "Don't turn unused earlier homepage styles into reusable system tokens.",
+      "Don't use decorative eyebrows, text-glyph interface icons or hard offset card shadows as new house rules.",
+      "Don't let headline overlays or captions obscure the app's paper detail.",
+      "Don't present a rendered device study or labeled design preview as a capture of shipping hardware or verified production UI.",
+      "Don't inherit a long pinned or scroll-locked sequence when extending the compact studio surface.",
+      "Don't replace the family film's rendered devices with CSS mock-device frames."
+    ]
+  }
+}

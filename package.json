@@ -1,0 +1,14 @@
+{
+  "name": "librox-site",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "esbuild experience.js --bundle --minify --target=es2022 --outfile=experience.bundle.js && node scripts/cache-assets.mjs"
+  },
+  "devDependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "esbuild": "0.25.12"
+  }
+}

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-itunes-app" content="app-id=6796746657" />
+    <meta name="theme-color" content="#0d201c" />
+    <meta name="description" content="A little closer to the story. Meet Librox: a tactile place to read, listen, and keep the books you love." />
+    <meta property="og:title" content="Librox — stories feel closer here" />
+    <meta property="og:description" content="A tactile place to read, listen, and keep the books you love." />
+    <meta property="og:image" content="https://librox.app/assets/librox-studio-poster.webp" />
+    <title>Find your next book — Librox</title>
+    <link rel="icon" href="favicon.svg?v=79c85681f6" type="image/svg+xml" />
+    <link rel="preload" as="image" href="assets/librox-studio-poster.webp?v=d28c137d44" media="(min-aspect-ratio: 6/5) and (min-width: 701px)" />
+    <link rel="preload" as="image" href="assets/librox-studio-poster-portrait.webp?v=ec83603363" media="(max-aspect-ratio: 6/5), (max-width: 700px)" />
+    <link rel="stylesheet" href="librox.css?v=700b70de77" />
+
+  </head>
+  <body class="books-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wide nav-inner">
+        <a class="wordmark" href="index.html" aria-label="Librox home"><span class="mark" aria-hidden="true">L<span></span></span>LIBROX</a>
+        <nav class="site-links" aria-label="Main navigation">
+          <a href="index.html#app-in-motion">The app</a><a href="plus.html">Plus</a><a href="books.html">Find books</a><a href="privacy.html">Privacy</a>
+        </nav>
+        <a class="nav-download" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <main id="main">
+      <section
+        class="discover wide"
+        id="discover"
+        aria-labelledby="discover-title"
+      >
+        <div class="section-index">THE COMMONS</div>
+        <div class="discover-head">
+          <h1 id="discover-title">Find your <em>next book.</em></h1>
+          <p>
+            Search free, DRM-free books from Project Gutenberg and Standard
+            Ebooks. Open an EPUB in Librox, or download it directly.
+          </p>
+        </div>
+        <form id="book-search" role="search" aria-label="Search free books">
+          <div class="search-bar">
+            <input
+              id="book-query"
+              type="search"
+              placeholder="A title, an author, a feeling…"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Search a title or author"
+            /><button class="go" type="submit">
+              Search <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <div class="chip-row" role="radiogroup" aria-label="Catalog">
+            <button
+              type="button"
+              class="chip source-chip"
+              data-source="all"
+              role="radio"
+              aria-checked="true"
+            >
+              All sources</button
+            ><button
+              type="button"
+              class="chip source-chip"
+              data-source="gutenberg"
+              role="radio"
+              aria-checked="false"
+            >
+              Project Gutenberg</button
+            ><button
+              type="button"
+              class="chip source-chip"
+              data-source="standardebooks"
+              role="radio"
+              aria-checked="false"
+            >
+              Standard Ebooks
+            </button>
+          </div>
+        </form>
+        <div
+          id="search-status"
+          class="search-status"
+          role="status"
+          aria-live="polite"
+        ></div>
+        <ul id="search-results" class="results"></ul>
+        <div class="catalog-fallback" data-catalog-fallback hidden>
+          <p>You can also search the catalogs directly.</p>
+          <a data-catalog-gutenberg href="https://www.gutenberg.org/ebooks/" target="_blank" rel="noopener noreferrer">Open Project Gutenberg ↗</a>
+          <a data-catalog-standard href="https://standardebooks.org/ebooks" target="_blank" rel="noopener noreferrer">Open Standard Ebooks ↗</a>
+        </div>
+        <p class="discover-foot">
+          Searches go directly from your browser to the catalogs. “Add to
+          Librox” opens the app; if nothing happens, install Librox or use the
+          EPUB link.
+        </p>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wide footer-inner">
+        <div>
+          <a class="wordmark" href="index.html"
+            ><span class="mark" aria-hidden="true">L<span></span></span
+            >LIBROX</a
+          >
+          <p>A place to get lost in a book.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <a href="books.html">Find books</a>
+          <a href="plus.html">Librox Plus</a
+          ><a href="privacy.html">Privacy policy</a
+          ><a href="terms.html">Terms of use</a
+          ><a href="support.html">Support</a
+          ><a href="mailto:matias@section9labs.com">Contact</a>
+        </nav>
+        <div class="footer-legal"><span>© 2026 Section 9 Labs</span><small>iPhone, iPad, Mac, App Store, and the Apple Logo are trademarks of Apple Inc., registered in the U.S. and other countries.</small></div>
+      </div>
+    </footer>
+    <script src="librox.js?v=6dc0e5e4d1"></script>
+  </body>
+</html>

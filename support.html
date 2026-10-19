@@ -1,61 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Librox — Support</title>
-<link rel="stylesheet" href="librox.css">
-<script>
-(function () {
-  try {
-    var t = localStorage.getItem("librox-theme");
-    if (t === "eink" || t === "paper" || t === "dark") {
-      document.documentElement.setAttribute("data-theme", t);
-    }
-  } catch (e) {}
-})();
-</script>
-</head>
-<body>
-<div class="shell">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Librox — Support</title>
+    <meta name="description" content="Get help with Librox reading, listening, sync, and catalogs." />
+    <link rel="icon" href="favicon.svg?v=79c85681f6" type="image/svg+xml" />
+    <link rel="stylesheet" href="librox.css?v=700b70de77" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site">
+        <a class="wordmark" href="index.html" aria-label="Librox home"
+          ><span class="mark" aria-hidden="true">L<span></span></span>LIBROX</a
+        >
+        <nav class="site-links" aria-label="Page navigation">
+          <a href="index.html">Home</a>
+          <a href="books.html">Find books</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="https://apps.apple.com/us/app/librox/id6796746657"
+            >Get Librox ↗</a
+          >
+        </nav>
+      </header>
 
-<header class="site">
-  <a class="wordmark" href="index.html">Librox</a>
-  <nav class="site-links">
-    <a href="index.html#discover">Find books</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="support.html">Support</a>
-  </nav>
-</header>
+      <main class="page prose">
+        <div class="eyebrow">Librox</div>
+        <h1>Support</h1>
 
-<main class="page prose">
-  <div class="eyebrow">Librox</div>
-  <h1>Support</h1>
+        <p>
+          Something not working, or a book not rendering the way it should? We'd
+          like to hear about it.
+        </p>
+        <p>
+          Email
+          <a href="mailto:matias@section9labs.com">matias@section9labs.com</a>
+          and include:
+        </p>
+        <ul>
+          <li>your device and iOS version (e.g. iPhone 15 Pro, iOS 26)</li>
+          <li>the Librox version shown in Settings (e.g. 1.1 (7))</li>
+          <li>what you did, what you expected, and what happened instead</li>
+        </ul>
+        <p>
+          If the problem is with a specific public-domain book, a link to the
+          book helps a lot.
+        </p>
+        <h2>Librox Plus</h2>
+        <p>
+          <a href="plus.html">Librox Plus</a> is coming soon, with more ways to listen
+          for $9.99 USD per year. Subscriptions are not yet available. For
+          membership questions, email us at the address above.
+        </p>
+      </main>
 
-  <p>Something not working, or a book not rendering the way it should?
-     We'd like to hear about it.</p>
-  <p>Email <a href="mailto:matias@section9labs.com">matias@section9labs.com</a> and include:</p>
-  <ul>
-    <li>your device and iOS version (e.g. iPhone 15 Pro, iOS 26)</li>
-    <li>the Librox version shown in Settings (e.g. 1.1 (7))</li>
-    <li>what you did, what you expected, and what happened instead</li>
-  </ul>
-  <p>If the problem is with a specific public-domain book, a link to the book
-     helps a lot.</p>
-</main>
-
-<footer class="site">
-  <div class="inner">
-    <div>
-      <a href="privacy.html">Privacy policy</a>
-      <a href="support.html">Support</a>
-      <a href="mailto:matias@section9labs.com">Contact</a>
+      <footer class="site">
+        <div class="inner">
+          <div>
+            <a href="plus.html">Librox Plus</a>
+            <a href="privacy.html">Privacy policy</a>
+            <a href="terms.html">Terms of use</a>
+            <a href="support.html">Support</a>
+            <a href="mailto:matias@section9labs.com">Contact</a>
+          </div>
+          <div class="copy">© 2026 Section 9 Labs</div>
+        </div>
+      </footer>
     </div>
-    <div class="copy">© 2026 Section 9 Labs</div>
-  </div>
-</footer>
-
-</div>
-<script src="librox.js"></script>
-</body>
+    <script src="librox.js?v=6dc0e5e4d1"></script>
+  </body>
 </html>
