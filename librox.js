@@ -27,7 +27,7 @@
   }
   var storeAvailability = document.querySelector("[data-store-availability]");
   if (isMac && storeAvailability) {
-    storeAvailability.textContent = "The current iPhone and iPad app can run on compatible Apple silicon Macs; its Mac experience is not yet verified.";
+    storeAvailability.textContent = "See supported devices and system requirements on the App Store.";
     storeAvailability.hidden = false;
   }
 
@@ -122,6 +122,7 @@
     document.querySelectorAll(".source-chip"),
   );
   var activeSource = "all";
+  var fallback = document.querySelector("[data-catalog-fallback]");
   var controller = null;
   var debounceTimer = null;
   var PER_SOURCE = 10;
@@ -172,6 +173,11 @@
       timedOut = true;
       requestController.abort();
     }, 12000);
+    if (fallback) {
+      fallback.hidden = true;
+      fallback.querySelector('[data-catalog-gutenberg]').href = 'https://www.gutenberg.org/ebooks/search/?query=' + encodeURIComponent(query);
+      fallback.querySelector('[data-catalog-standard]').href = 'https://standardebooks.org/ebooks?query=' + encodeURIComponent(query);
+    }
     setStatus("Searching the commons…");
     clear(list);
 
@@ -191,6 +197,7 @@
         else failures++;
       });
       render(books);
+      if (fallback) fallback.hidden = failures === 0;
       if (books.length === 0) {
         setStatus(
           failures === jobs.length && jobs.length > 0

@@ -210,6 +210,10 @@ h1 em,h2 em { font-weight:400; }
 .search-bar input:focus {
   outline: none;
 }
+.search-bar input:focus-visible {
+  outline: 2px solid #b84c32;
+  outline-offset: -4px;
+}
 .search-bar .go {
   color: var(--red);
   background: none;
@@ -518,3 +522,15 @@ footer.site .copy {
   html { scroll-behavior:auto; }
   *,*:before,*:after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
 }
+/* The catalog now has a dedicated page; the same search and reading palette remain. */
+.books-page .discover { min-height:70svh; padding-top:70px; }
+.books-page .discover-head h1 { font-size:clamp(48px,5.3vw,82px); line-height:1; }
+@media (max-width:700px) { .books-page .discover { padding-top:48px; } }
+.catalog-fallback { max-width:850px; padding:22px 0; border-top:1px solid var(--line); }
+.catalog-fallback p { color:var(--muted); font-size:13px; margin-bottom:10px; }
+.catalog-fallback a { display:inline-block; margin:8px 24px 8px 0; font-size:13px; text-underline-offset:4px; }
+.footer-inner nav { flex-wrap:wrap; row-gap:12px; }
+.footer-inner nav a { display:inline-flex; align-items:center; min-height:44px; }
+.books-page .discover-head h1 em { color:var(--red); }
+.books-page { --muted:#566154; --red:#b13e2c; }
+.books-page .section-index { font-size:11px; }

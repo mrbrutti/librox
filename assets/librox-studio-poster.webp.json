@@ -1,0 +1,6 @@
+{
+  "prompt": "Origin: original Blender 5.2.1 Cycles Metal render, film/blender/studio.py; command blender -b --python film/blender/studio.py -- --frame 1. Corrected from Apple front, rear, hinge and connector reference views: outer cover display on the moving left leaf, rear cameras on the fixed right leaf, when facing the inner display. Native Librox app textures, original geometry and studio lighting. No Apple-supplied 3D geometry.",
+  "createdAt": "2026-10-19T21:33:54.367517+00:00",
+  "reference": "https://www.apple.com/iphone-duo/",
+  "sourceSha256": "3d99fc4117fb6f8a0430796b3d97bdb4d9c77d05f0eb36cad425626b0a9b9951"
+}
