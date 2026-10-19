@@ -1,4 +1,4 @@
-/* Actual Librox recordings play inside Apple's unmodified, static bezels. */
+/* The Duo recording stays inside Apple's static bezel; featured book art stands alone. */
 (function () {
   "use strict";
 
@@ -7,19 +7,18 @@
 
   var devices = {
     duo: experience.querySelector('[data-experience-device="duo"]'),
-    iphone: experience.querySelector('[data-experience-device="iphone"]'),
+    book: experience.querySelector('[data-experience-device="book"]'),
     listening: experience.querySelector('[data-experience-device="listening"]'),
   };
   var videos = {
     duo: experience.querySelector('[data-experience-video="duo"]'),
-    iphone: experience.querySelector('[data-experience-video="iphone"]'),
   };
   var tabs = Array.prototype.slice.call(experience.querySelectorAll("[data-experience-select]"));
   var replay = experience.querySelector("[data-experience-replay]");
   var toggle = experience.querySelector("[data-experience-toggle]");
   var caption = experience.querySelector("[data-experience-caption]");
   var motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
-  var manualChoice = { duo: null, iphone: null };
+  var manualChoice = { duo: null };
   var activeDevice = "duo";
   var visible = false;
 
@@ -65,8 +64,8 @@
     });
     caption.textContent = name === "duo"
       ? "Native Duo opening study · development build · sequence shortened"
-      : name === "iphone"
-        ? "Real iPhone app capture · development build · continuous recording"
+      : name === "book"
+        ? "Moby-Dick · Herman Melville · illustrated book artwork"
         : "Cover-colored listening room · Librox 2.0 design study";
     syncPlayback();
   }
@@ -122,10 +121,10 @@
   }
   document.querySelectorAll('a[href="#app-in-motion"],a[href="#experience"]').forEach(function (link) {
     link.addEventListener("click", function () {
-      showDevice(link.getAttribute("href") === "#app-in-motion" ? "iphone" : "duo");
+      showDevice(link.getAttribute("href") === "#app-in-motion" ? "book" : "duo");
     });
   });
   document.addEventListener("visibilitychange", syncPlayback);
   motionPreference.addEventListener("change", syncPlayback);
-  showDevice(location.hash === "#app-in-motion" ? "iphone" : "duo");
+  showDevice(location.hash === "#app-in-motion" ? "book" : "duo");
 })();
