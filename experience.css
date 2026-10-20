@@ -75,9 +75,7 @@
 .plus-invitation { display:flex; flex-direction:column; align-items:start; padding:30px 34px; color:#f1e8d8; border:1px solid #b5b69b3b; background:linear-gradient(120deg,#27412b55,#12251a50); box-shadow:inset 0 1px 0 #e1e7ce0d; text-decoration:none; }
 .plus-name { font:30px/1.1 var(--serif); letter-spacing:-.035em; }
 .plus-name em { color:#e4ac8a; }
-.plus-price { margin:24px 0 14px; font:44px/1 var(--serif); letter-spacing:-.045em; }
-.plus-price>span { font:12px var(--sans); letter-spacing:0; color:#aab69f; }
-.plus-description { font-size:14px; line-height:1.7; color:#c3cdb8; }
+.plus-description { margin-top:24px; font-size:14px; line-height:1.7; color:#c3cdb8; }
 .plus-link { margin-top:28px; font-size:11px; color:#e6c5ab; }
 .plus-link>span { margin-left:16px; display:inline-block; transition:transform 180ms ease-out; }
 .plus-invitation:hover .plus-link>span { transform:translate(3px,-3px); }
@@ -135,12 +133,10 @@
   .download-chapter h2 { font-size:44px; margin:20px 0; }
   .download-line { gap:20px; }
   .download-line>span { font-size:11px; }
-  .plus-invitation { padding:26px; display:grid; grid-template-columns:1fr auto; gap:18px; }
+  .plus-invitation { padding:26px; gap:18px; }
   .plus-name { font-size:29px; }
-  .plus-price { font-size:32px; margin:0; }
-  .plus-price>span { font-size:11px; }
-  .plus-description { grid-column:1/-1; font-size:14px; }
-  .plus-link { grid-column:1/-1; margin:0; }
+  .plus-description { margin:0; font-size:14px; }
+  .plus-link { margin:0; }
   .site-note { flex-direction:column; align-items:start; gap:18px; font-size:11px; }
   .studio-home .footer-inner { gap:28px; padding-block:32px; }
 }

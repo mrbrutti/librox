@@ -13,11 +13,11 @@ remain separate pages. The user authorized publication of these original
 studio studies on October 19, 2026. Capture and model provenance is recorded in the film documentation. Public
 pages use customer-facing copy, as requested for publication.
 
-The dedicated `plus.html` page is **a proposal, not a live purchase offer**. It shows the target US $9.99 annual price and proposed offline voice library, listening queue, and per-book listening profiles. Core owned-book reading, existing listening, notes, sync, and arbitrary OPDS catalog access stay free. Reconcile every paid benefit, device requirement, localized price, and renewal statement with the actual StoreKit product and reviewed app build before launch.
+The dedicated `plus.html` page introduces the upcoming offline voice library, listening queue, and per-book listening profiles. It does not display a price or offer a live purchase; options and pricing belong in the app before subscribing. Core owned-book reading, existing listening, notes, sync, and arbitrary OPDS catalog access stay free. Reconcile every paid benefit, device requirement, localized price, and renewal statement with the actual StoreKit product and reviewed app build before launch.
 
 ## App Store information pages
 
-- `plus.html` presents the proposed annual membership, its target US price, and which features remain free.
+- `plus.html` introduces upcoming Plus features and explains which features remain free. Public pages omit price amounts; the app will present purchase details.
 - `privacy.html` is the public Privacy Policy URL; its claims must match the App Store Connect privacy questionnaire and the shipped app's network behavior.
 - `support.html` provides direct contact information for the required Support URL.
 - `terms.html` links to Apple's Standard EULA and explains the status of the proposed Plus plan. Apple requires Privacy Policy and Terms links in the app and App Store metadata when subscriptions are offered; the website links alone do not complete that work.
