@@ -26,7 +26,7 @@ book artwork. Keep the page compact; avoid long scroll-locked sequences.
 
 ## Constraints
 
-- Plus is proposed at US $9.99 per year. No live purchase is implemented.
+- Public Plus copy focuses on features and directs readers to the app for options and pricing at launch. No live purchase is implemented.
 - Use full real books with reference covers, never the excerpt fixture as hero.
 - No physical Duo is available. Captures come from development simulators.
 - The user authorized shipping the original 3D studio films on October 19,

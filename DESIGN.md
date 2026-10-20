@@ -223,7 +223,7 @@ The homepage moves through the full-height Duo film, one continuous iPad/Mac fam
 
 The family showcase uses two columns: a narrower text column and a wider media column, with a gap of `clamp(50px, 7vw, 110px)`. Its desktop vertical padding is (110px) above and (90px) below. At (1100px) the gap is (45px). The film determines the stage height through its (4:3) ratio. On mobile the stage follows the copy, the selectors become three horizontal choices, the film uses a separate (9:10) composition, and section padding contracts to (68px) above and (58px) below. The family source changes at (700px), independently of the hero's aspect-ratio source selection.
 
-The download/Plus row uses a (1.3fr / .7fr) split, becoming one column on mobile. The invitation itself changes from a vertical stack to a compact two-column title/price row. Books uses a ruled search field and result list; mobile result actions move beneath their metadata. Full Plus details use the existing paper surface and collapse to a single column at the mobile breakpoint.
+The download/Plus row uses a (1.3fr / .7fr) split, becoming one column on mobile. The invitation keeps a vertical stack of name, features and link, with tighter spacing on mobile. Books uses a ruled search field and result list; mobile result actions move beneath their metadata. Full Plus details use the existing paper surface and collapse to a single column at the mobile breakpoint.
 
 **The Caption Clearance Rule.** Keep capture captions outside the media bounds in their own document flow.
 
@@ -267,9 +267,9 @@ The desktop selector is a ruled vertical list of three chapters. Only the active
 
 ### Cards / Containers
 
-The homepage Plus invitation is a single linked rectangle with the frontmatter padding, a subtle green gradient and a fine translucent border. Newsreader carries its name and annual price; Manrope carries the description and planned-membership link. On mobile padding becomes (26px), the price becomes (32px), and the content forms a compact grid. Its arrow shifts slightly on hover; the whole card receives the shared keyboard focus ring.
+The homepage Plus invitation is a single linked rectangle with the frontmatter padding, a subtle green gradient and a fine translucent border. Newsreader carries its name; Manrope carries the feature description and Coming soon link. On mobile padding becomes (26px), with (18px) gaps in the vertical stack. Public pages omit price amounts and direct readers to the app for purchase details. Its arrow shifts slightly on hover; the whole card receives the shared keyboard focus ring.
 
-The full Plus page is an existing book-like explanation surface. Its proposed status, price note and benefits remain readable content, but its legacy decoration is not the homepage container pattern.
+The full Plus page is an existing book-like explanation surface. Its Coming soon status, feature headline and benefits remain readable content, with a short note explaining that options and pricing will appear in the app. Its legacy decoration is not the homepage container pattern.
 
 ### Inputs / Fields
 
