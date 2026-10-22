@@ -3,7 +3,8 @@
 Static site for librox.app. The homepage opens with a 22-second
 Blender Cycles product film: a folding-device study opens, shows Librox's native
 Metal book opening and iPad page turns, moves into the listening preview, then
-closes. Wide and portrait camera compositions adapt to screen shape. Playback
+closes. A persistent headline and download action sit beside the film. Wide
+and portrait camera compositions adapt to the media stage. Playback
 starts muted, has pause and sound controls, and respects reduced motion.
 
 The next section automatically plays a 24-second 3D iPad/Mac film with native
@@ -26,6 +27,15 @@ The dedicated `plus.html` page introduces the upcoming offline voice library, li
 Before Plus can be sold, implement and verify StoreKit purchase, restore, cancellation/expiry handling, entitlement across supported Apple devices, a clear in-app annual renewal disclosure, and final terms/privacy links. Configure the product and price in App Store Connect. See [Apple's subscription guidance](https://developer.apple.com/app-store/subscriptions/), [privacy metadata](https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy), and [platform version information](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information).
 
 The [site motion direction](docs/site-motion-direction.md) records the film sequence, asset provenance, Apple device-artwork boundaries, and Figma review. See [film/README.md](film/README.md) for the active Blender render and the retained earlier Remotion study.
+
+## Visual system
+
+The October 22 taste pass uses the native app's neutral paper/dark surfaces,
+vermilion accents, and self-hosted Newsreader/Manrope typography. Green stays
+inside the book-driven films. Responsive controls, shared subpage layouts,
+and the decorative privacy material asset are documented in
+[site motion direction](docs/site-motion-direction.md). The original approved
+3D films and real app captures are retained byte-for-byte.
 
 ## Local preview
 

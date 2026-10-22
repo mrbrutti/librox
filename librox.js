@@ -31,64 +31,48 @@
     storeAvailability.hidden = false;
   }
 
-  /* ---------- Themes ---------- */
-  var THEMES = ["eink", "paper", "dark"];
-  function applyTheme(name) {
-    if (THEMES.indexOf(name) === -1) return;
-    document.documentElement.setAttribute("data-theme", name);
-    document.querySelectorAll(".theme-chip").forEach(function (chip) {
-      chip.setAttribute(
-        "aria-pressed",
-        chip.dataset.theme === name ? "true" : "false",
-      );
-    });
+  /* Compact navigation is enhanced only after its controls are connected. */
+  var menu = document.querySelector('[data-menu-toggle]');
+  var header = document.querySelector('.site-header');
+  function setMenu(open) {
+    header.classList.toggle('menu-open', open);
+    menu.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    menu.querySelector('.icon').className = 'icon i-' + (open ? 'x' : 'list');
   }
-  document.querySelectorAll(".theme-chip").forEach(function (chip) {
-    chip.addEventListener("click", function () {
-      applyTheme(chip.dataset.theme);
+  if (menu && header) {
+    menu.hidden = false;
+    document.documentElement.classList.add('js');
+    menu.addEventListener('click', function () { setMenu(menu.getAttribute('aria-expanded') !== 'true'); });
+    header.querySelectorAll('.site-links a').forEach(function (link) { link.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { setMenu(false); menu.focus(); }
     });
-  });
-  // Keep the theme preview local to this visit so the landing page opens in paper.
-  var current = document.documentElement.getAttribute("data-theme");
-  if (current) {
-    document.querySelectorAll(".theme-chip").forEach(function (chip) {
-      chip.setAttribute(
-        "aria-pressed",
-        chip.dataset.theme === current ? "true" : "false",
-      );
-    });
-  }
-  if (!current) {
-    var paperChip = document.querySelector('.theme-chip[data-theme="paper"]');
-    if (paperChip) paperChip.setAttribute("aria-pressed", "true");
+    document.addEventListener('click', function (event) { if (!header.contains(event.target)) setMenu(false); });
+    matchMedia('(min-width:761px)').addEventListener('change', function () { setMenu(false); });
   }
 
-  /* Editorial sections arrive as the reader reaches them. */
-  if (
-    "IntersectionObserver" in window &&
-    !matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
-    var reveals = document.querySelectorAll(
-      ".interlude h2, .interlude-bottom, .personal-copy, .personal-art, .membership-intro, .membership-plan, .discover-head, .privacy-copy, .privacy-folio, .closing-inner",
-    );
-    reveals.forEach(function (element) {
-      element.classList.add("reveal-target");
-    });
-    document.documentElement.classList.add("motion-ready");
-    var revealObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-revealed");
-          revealObserver.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.1 },
-    );
-    reveals.forEach(function (element) {
-      revealObserver.observe(element);
-    });
+  /* Follow system appearance until a visitor chooses a theme for this page. */
+  var THEMES = ['eink', 'paper', 'dark'];
+  var systemDark = matchMedia('(prefers-color-scheme: dark)');
+  function syncThemeControls(name) {
+    document.querySelectorAll('.theme-chip').forEach(function (chip) { chip.setAttribute('aria-pressed', String(chip.dataset.theme === name)); });
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = name === 'dark' ? '#191a19' : name === 'eink' ? '#f7f8f8' : '#f6f4ef';
   }
+  document.querySelectorAll('.theme-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      if (THEMES.indexOf(chip.dataset.theme) === -1) return;
+      document.documentElement.setAttribute('data-theme', chip.dataset.theme);
+      syncThemeControls(chip.dataset.theme);
+    });
+  });
+  function followSystem() {
+    var selected = document.documentElement.getAttribute('data-theme');
+    syncThemeControls(selected || (systemDark.matches ? 'dark' : 'paper'));
+  }
+  followSystem();
+  systemDark.addEventListener('change', followSystem);
 
   /* ---------- Cover tints — the app's palette and its exact hash ----------
      LibrosStyle.coverTint: djb2 over UTF-8, wrapping at 64 bits, mod 6.
@@ -123,6 +107,7 @@
   );
   var activeSource = "all";
   var fallback = document.querySelector("[data-catalog-fallback]");
+  var start = document.querySelector("[data-search-start]");
   var controller = null;
   var debounceTimer = null;
   var PER_SOURCE = 10;
@@ -132,15 +117,33 @@
       activeSource = chip.dataset.source;
       sourceChips.forEach(function (c) {
         c.setAttribute("aria-checked", c === chip ? "true" : "false");
+        c.tabIndex = c === chip ? 0 : -1;
       });
       if (input.value.trim().length >= 2) runSearch(input.value.trim());
     });
+  });
+
+  sourceChips.forEach(function (chip, index) {
+    chip.tabIndex = chip.getAttribute('aria-checked') === 'true' ? 0 : -1;
+    chip.addEventListener('keydown', function (event) {
+      var next;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % sourceChips.length;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index + sourceChips.length - 1) % sourceChips.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = sourceChips.length - 1;
+      if (next === undefined) return;
+      event.preventDefault(); sourceChips[next].focus(); sourceChips[next].click();
+    });
+  });
+  document.querySelectorAll('[data-search-query]').forEach(function (button) {
+    button.addEventListener('click', function () { input.value = button.dataset.searchQuery; input.focus(); runSearch(input.value); });
   });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var q = input.value.trim();
     if (q.length >= 2) runSearch(q);
+    else { setStatus("Enter at least two characters to search."); input.focus(); }
   });
   input.addEventListener("input", function () {
     clearTimeout(debounceTimer);
@@ -148,6 +151,10 @@
     if (q.length < 2) {
       if (controller) controller.abort();
       setStatus("");
+      status.classList.remove("is-loading");
+      list.removeAttribute("aria-busy");
+      if (start) start.hidden = false;
+      if (fallback) fallback.hidden = true;
       clear(list);
       return;
     }
@@ -164,6 +171,7 @@
   }
 
   function runSearch(query) {
+    clearTimeout(debounceTimer);
     if (controller) controller.abort();
     var requestController = new AbortController();
     controller = requestController;
@@ -178,7 +186,10 @@
       fallback.querySelector('[data-catalog-gutenberg]').href = 'https://www.gutenberg.org/ebooks/search/?query=' + encodeURIComponent(query);
       fallback.querySelector('[data-catalog-standard]').href = 'https://standardebooks.org/ebooks?query=' + encodeURIComponent(query);
     }
-    setStatus("Searching the commons…");
+    if (start) start.hidden = true;
+    status.classList.add("is-loading");
+    list.setAttribute("aria-busy", "true");
+    setStatus("Searching the catalogs…");
     clear(list);
 
     var jobs = [];
@@ -187,22 +198,37 @@
     if (activeSource === "all" || activeSource === "standardebooks")
       jobs.push(searchStandardEbooks(query, signal));
 
+    // A slow catalog must not hold back books already returned by another.
+    var foundCount = 0;
+    jobs = jobs.map(function (job) {
+      return job.then(function (books) {
+        if (!signal.aborted && controller === requestController) {
+          render(books, true);
+          foundCount += books.length;
+          if (foundCount && jobs.length > 1)
+            setStatus(foundCount + (foundCount === 1 ? " book" : " books") + " · checking the other catalog…");
+        }
+        return books;
+      });
+    });
+
     Promise.allSettled(jobs).then(function (settled) {
       clearTimeout(timeout);
       if (signal.aborted && !timedOut) return;
+      status.classList.remove("is-loading");
+      list.removeAttribute("aria-busy");
       var books = [];
       var failures = 0;
       settled.forEach(function (s) {
         if (s.status === "fulfilled") books = books.concat(s.value);
         else failures++;
       });
-      render(books);
       if (fallback) fallback.hidden = failures === 0;
       if (books.length === 0) {
         setStatus(
           failures === jobs.length && jobs.length > 0
-            ? "The catalogs didn’t answer — try again in a moment."
-            : "Nothing in the commons for “" +
+            ? "The catalogs couldn’t be reached. Try again, or open a catalog below."
+            : "No books found for “" +
                 query +
                 "”. Try an author or a shorter title.",
         );
@@ -312,8 +338,8 @@
   }
 
   /* ---------- Rendering — DOM building only, API text never hits innerHTML. */
-  function render(books) {
-    clear(list);
+  function render(books, append) {
+    if (!append) clear(list);
     books.forEach(function (book) {
       // The app's ImportLink only unpacks http(s) targets; mirror that here.
       if (!/^https:\/\//i.test(book.epub)) return;
@@ -321,6 +347,7 @@
 
       var li = el("li", "result");
       var cover = el("div", "cover");
+      cover.setAttribute("aria-hidden", "true");
       cover.style.setProperty("--cover-tint", coverTint(book.title));
       var initial = el("div", "initial");
       initial.textContent = (book.title.trim().charAt(0) || "·").toUpperCase();

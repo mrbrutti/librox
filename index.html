@@ -4,104 +4,77 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="apple-itunes-app" content="app-id=6796746657" />
-    <meta name="theme-color" content="#0d201c" />
+    <meta name="theme-color" content="#f6f4ef" />
     <meta name="description" content="A little closer to the story. Meet Librox: a tactile place to read, listen, and keep the books you love." />
     <meta property="og:title" content="Librox — stories feel closer here" />
     <meta property="og:description" content="A tactile place to read, listen, and keep the books you love." />
     <meta property="og:image" content="https://librox.app/assets/librox-studio-poster.webp" />
     <title>Librox — stories feel closer here</title>
     <link rel="icon" href="favicon.svg?v=79c85681f6" type="image/svg+xml" />
-    <link rel="preload" as="image" href="assets/librox-studio-poster.webp?v=d28c137d44" media="(min-aspect-ratio: 6/5) and (min-width: 701px)" />
-    <link rel="preload" as="image" href="assets/librox-studio-poster-portrait.webp?v=ec83603363" media="(max-aspect-ratio: 6/5), (max-width: 700px)" />
-    <link rel="stylesheet" href="librox.css?v=700b70de77" />
-    <link rel="stylesheet" href="experience.css?v=6c3fc142b5" />
+    <link rel="preload" as="image" href="assets/librox-studio-poster-portrait.webp?v=ec83603363" />
+    <link rel="stylesheet" href="librox.css?v=f8d59f3d4c" />
+    <link rel="stylesheet" href="experience.css?v=8552104c2c" />
   </head>
   <body class="home studio-home">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="wide nav-inner">
-        <a class="wordmark" href="index.html" aria-label="Librox home"><span class="mark" aria-hidden="true">L<span></span></span>LIBROX</a>
-        <nav class="site-links" aria-label="Main navigation">
+    <header class="site-header"><div class="wide nav-inner"><a class="wordmark" href="index.html" aria-label="Librox home"><span class="mark" aria-hidden="true">L<span></span></span>LIBROX</a><nav class="site-links" id="site-navigation" aria-label="Main navigation">
           <a href="#app-in-motion">The app</a><a href="plus.html">Plus</a><a href="books.html">Find books</a><a href="privacy.html">Privacy</a>
-        </nav>
-        <a class="nav-download" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a>
-      </div>
-    </header>
+        </nav><a class="nav-download" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox <span class="icon i-arrow-up-right" aria-hidden="true"></span></a><button type="button" class="menu-toggle" data-menu-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation" hidden><span class="icon i-list" aria-hidden="true"></span></button></div></header>
     <main id="main">
-      <section id="experience" class="studio-hero" data-experience data-chapter="library" aria-labelledby="experience-title">
-        <video class="studio-film" data-film-video data-wide="assets/librox-studio-wide.mp4?v=ab6ec14ff5" data-portrait="assets/librox-studio-portrait.mp4?v=38d1faacb8" poster="assets/librox-studio-poster.webp?v=d28c137d44" muted loop playsinline preload="metadata" aria-label="Librox: unfold your reading space, open a book, and listen"></video>
-        <picture class="studio-poster"><source media="(max-aspect-ratio: 6/5), (max-width: 700px)" srcset="assets/librox-studio-poster-portrait.webp?v=ec83603363" /><img src="assets/librox-studio-poster.webp?v=d28c137d44" width="1600" height="900" alt="Librox on a closed folding display, suspended in a softly lit green studio" fetchpriority="high" /></picture>
-        <div class="studio-title">
-          <h1 id="experience-title">Stories feel <em>closer</em> here.</h1>
-          <p class="studio-subtitle">Read. Listen. Lose yourself in a book.</p>
-        </div>
-        <p class="studio-detail-title" aria-hidden="true">The feeling of a book.</p>
-        <div class="studio-bottom wide">
-          <div class="film-story">
-            <div class="film-chapters" role="group" aria-label="Film chapters">
-              <button type="button" data-film-chapter="library" data-seek="0" aria-pressed="true"><span>01</span> Unfold<i></i></button>
-              <button type="button" data-film-chapter="reading" data-seek="4.2" aria-pressed="false"><span>02</span> Read<i></i></button>
-              <button type="button" data-film-chapter="listening" data-seek="12.2" aria-pressed="false"><span>03</span> Listen<i></i></button>
-            </div>
-            <p class="film-caption">Librox. A world within reach.</p>
-          </div>
-          <a class="studio-explore" href="#app-in-motion">Meet your next reading habit <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3v14m-6-6 6 6 6-6"/></svg></span></a>
-          <div class="film-controls">
-            <button type="button" data-film-toggle aria-label="Pause Librox film" aria-keyshortcuts="ArrowLeft ArrowRight" title="Play or pause. Use the arrow keys to seek five seconds."><span data-play-icon aria-hidden="true"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 3h3v10H4zm5 0h3v10H9z"/></svg></span><span data-play-label>Pause film</span></button>
-            <button type="button" data-film-sound aria-label="Turn on film sound">Sound off</button>
-          </div>
-        </div>
-      </section>
-      <section id="app-in-motion" class="native-story wide" data-native-story data-active="reading" aria-labelledby="native-title">
-        <span id="duo-story" class="anchor-point" aria-hidden="true"></span>
-        <div class="native-copy">
-          <h2 id="native-title">Made for getting<br /><em>lost in it.</em></h2>
-          <div class="native-modes" role="group" aria-label="App demonstrations">
-            <button type="button" data-native-mode="reading" data-family-seek="0" aria-pressed="true"><span class="mode-number">01</span><span><strong>A page you can feel.</strong><small>Paper, light, and the quiet pleasure of turning a page.</small></span><span class="mode-arrow" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span><i></i></button>
-            <button type="button" data-native-mode="listening" data-family-seek="6.2" aria-pressed="false"><span class="mode-number">02</span><span><strong>Let the story follow you.</strong><small>A listening room colored by the book you’re in.</small></span><span class="mode-arrow" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span><i></i></button>
-            <button type="button" data-native-mode="mac" data-family-seek="12.2" aria-pressed="false"><span class="mode-number">03</span><span><strong>A little more room.</strong><small>The same thoughtful reading space, on your Mac.</small></span><span class="mode-arrow" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span><i></i></button>
-          </div>
-          <button class="native-pause" type="button" data-native-toggle aria-label="Pause app demonstrations" aria-keyshortcuts="ArrowLeft ArrowRight" title="Play or pause. Use the arrow keys to seek five seconds.">Pause film <span aria-hidden="true"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 3h3v10H4zm5 0h3v10H9z"/></svg></span></button>
-        </div>
-        <figure class="native-stage family-stage">
-          <div class="family-media">
-            <video class="family-film" data-family-video data-wide="assets/librox-family-wide.mp4?v=5f5cd48a6b" data-portrait="assets/librox-family-portrait.mp4?v=6e4643e34e" poster="assets/librox-family-poster.webp?v=fa6c293047" muted loop playsinline preload="none" aria-label="Librox on iPad and Mac: reading, page turns, and listening"></video>
-            <picture class="family-poster"><source media="(max-width:700px)" srcset="assets/librox-family-poster-portrait.webp?v=b0496b1bad" /><img src="assets/librox-family-poster.webp?v=fa6c293047" width="1600" height="1200" loading="lazy" alt="A Librox reading spread on iPad" /></picture>
-          </div>
-          <figcaption><span data-family-caption>THE PAGE · iPAD</span></figcaption>
-        </figure>
-      </section>
-      <section class="next-chapter wide" aria-label="Get Librox and explore Plus">
-        <div class="download-chapter">
-          <h2>Bring your books.<br /><em>Make yourself at home.</em></h2>
-          <div class="download-line"><a class="store-badge" data-store-link href="https://apps.apple.com/app/id6796746657" aria-label="Download Librox on the App Store"><img src="assets/app-store-badge.svg?v=a26fc5b383" width="150" height="50" alt="Download on the App Store" /></a><span data-store-label>Available on iPhone and iPad</span></div>
-          <p class="store-availability" data-store-availability hidden></p>
-        </div>
-        <a class="plus-invitation" href="plus.html"><span class="plus-name">Librox <em>Plus</em></span><span class="plus-description">Offline voices. Listening queues.<br />A voice and pace for every book.</span><span class="plus-link">Coming soon · Explore Plus <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></span></a>
-      </section>
-      <div class="site-note wide"><a href="privacy.html">Your books. Your privacy. <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a></div>
-    </main>
-    <footer class="site-footer">
-      <div class="wide footer-inner">
-        <div>
-          <a class="wordmark" href="index.html"
-            ><span class="mark" aria-hidden="true">L<span></span></span
-            >LIBROX</a
-          >
-          <p>A place to get lost in a book.</p>
-        </div>
-        <nav aria-label="Footer navigation">
-          <a href="books.html">Find books</a>
-          <a href="plus.html">Librox Plus</a
-          ><a href="privacy.html">Privacy policy</a
-          ><a href="terms.html">Terms of use</a
-          ><a href="support.html">Support</a
-          ><a href="mailto:contactus@section9labs.com">Contact</a>
-        </nav>
-        <div class="footer-legal"><span>© 2026 Section 9 Labs</span><small>iPhone, iPad, Mac, App Store, and the Apple Logo are trademarks of Apple Inc., registered in the U.S. and other countries.</small></div>
+<section id="experience" class="studio-hero wide" data-experience data-chapter="library" aria-labelledby="experience-title">
+  <div class="studio-title">
+    <p class="product-label">Your books, beautifully at home.</p>
+    <h1 id="experience-title">Stories feel closer here.</h1>
+    <p class="studio-subtitle">A place to read, listen, and get lost in the books you love. Made to feel like a book, wherever you open it.</p>
+    <div class="hero-download"><a class="store-badge" data-store-link href="https://apps.apple.com/app/id6796746657" aria-label="Download Librox on the App Store"><img src="assets/app-store-badge.svg?v=a26fc5b383" width="150" height="50" alt="Download on the App Store" /></a><span>Free to make it yours.</span></div>
+    <a class="hero-privacy text-link" href="privacy.html"><span class="icon i-shield-check" aria-hidden="true"></span>Your library stays yours</a>
+  </div>
+  <div class="studio-presentation">
+    <div class="studio-screen">
+      <video class="studio-film" data-film-video data-wide-poster="assets/librox-studio-poster.webp?v=d28c137d44" data-portrait-poster="assets/librox-studio-poster-portrait.webp?v=ec83603363" data-wide="assets/librox-studio-wide.mp4?v=ab6ec14ff5" data-portrait="assets/librox-studio-portrait.mp4?v=38d1faacb8" poster="assets/librox-studio-poster-portrait.webp?v=ec83603363" muted loop playsinline preload="metadata" aria-label="Librox: unfold your reading space, open a book, and listen"></video>
+      <picture class="studio-poster"><img src="assets/librox-studio-poster-portrait.webp?v=ec83603363" width="900" height="1200" alt="Librox on a folding display, suspended in a softly lit studio" fetchpriority="high" /></picture>
+    </div>
+    <div class="studio-toolbar">
+      <div class="film-chapters" role="group" aria-label="Film chapters">
+        <button type="button" data-film-chapter="library" data-seek="0" aria-pressed="true">Unfold<i aria-hidden="true"></i></button>
+        <button type="button" data-film-chapter="reading" data-seek="4.2" aria-pressed="false">Read<i aria-hidden="true"></i></button>
+        <button type="button" data-film-chapter="listening" data-seek="12.2" aria-pressed="false">Listen<i aria-hidden="true"></i></button>
       </div>
-    </footer>
-    <script src="librox.js?v=6dc0e5e4d1"></script>
-    <script src="experience.bundle.js?v=11c73963a0"></script>
+      <div class="film-controls">
+        <button type="button" data-film-toggle aria-label="Pause Librox film" aria-keyshortcuts="ArrowLeft ArrowRight" title="Play or pause. Use the arrow keys to seek five seconds."><span data-play-icon aria-hidden="true"><span class="icon i-pause" aria-hidden="true"></span></span><span data-play-label class="sr-only">Pause film</span></button>
+        <button type="button" data-film-sound aria-label="Turn on film sound"><span class="icon i-speaker-slash" aria-hidden="true"></span></button>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="app-in-motion" class="native-story wide" data-native-story data-active="reading" aria-labelledby="native-title">
+  <span id="duo-story" class="anchor-point" aria-hidden="true"></span>
+  <div class="native-heading"><h2 id="native-title">Made for getting lost in it.</h2><p>The turn of a page. A voice that carries you. The same thoughtful space on iPad and Mac.</p></div>
+  <figure class="native-stage family-stage">
+    <div class="family-media">
+      <video class="family-film" data-family-video data-wide="assets/librox-family-wide.mp4?v=5f5cd48a6b" data-portrait="assets/librox-family-portrait.mp4?v=6e4643e34e" poster="assets/librox-family-poster.webp?v=fa6c293047" muted loop playsinline preload="none" aria-label="Librox on iPad and Mac: reading, page turns, and listening"></video>
+      <picture class="family-poster"><source media="(max-width:700px)" srcset="assets/librox-family-poster-portrait.webp?v=b0496b1bad" /><img src="assets/librox-family-poster.webp?v=fa6c293047" width="1600" height="1200" loading="lazy" alt="A Librox reading spread on iPad" /></picture>
+    </div>
+    <figcaption class="family-toolbar"><span data-family-caption>Reading on iPad</span><button class="native-pause" type="button" data-native-toggle aria-label="Pause app demonstrations" aria-keyshortcuts="ArrowLeft ArrowRight" title="Play or pause. Use the arrow keys to seek five seconds."><span class="icon i-pause" aria-hidden="true"></span><span>Pause film</span></button></figcaption>
+  </figure>
+  <div class="native-modes" role="group" aria-label="App demonstrations">
+    <button type="button" data-native-mode="reading" data-family-seek="0" aria-pressed="true"><span class="icon i-book-open" aria-hidden="true"></span><span><strong>A page you can feel.</strong><small>Paper, light, and a natural turn.</small></span><i aria-hidden="true"></i></button>
+    <button type="button" data-native-mode="listening" data-family-seek="6.2" aria-pressed="false"><span class="icon i-headphones" aria-hidden="true"></span><span><strong>Let the story follow you.</strong><small>A listening room colored by your book.</small></span><i aria-hidden="true"></i></button>
+    <button type="button" data-native-mode="mac" data-family-seek="12.2" aria-pressed="false"><span class="icon i-desktop" aria-hidden="true"></span><span><strong>A little more room.</strong><small>Your reading space, on your Mac.</small></span><i aria-hidden="true"></i></button>
+  </div>
+</section>
+<section class="next-chapter wide" aria-label="Get Librox and explore Plus">
+  <div class="download-chapter"><h2>Bring your books. Make yourself at home.</h2><div class="download-line"><a class="button-primary" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox free <span class="icon i-arrow-up-right" aria-hidden="true"></span></a><span data-store-label>Available on iPhone and iPad</span></div><p class="store-availability" data-store-availability hidden></p></div>
+  <a class="plus-invitation" href="plus.html"><div class="plus-heading"><span class="plus-name">Librox <span>Plus</span></span><span class="coming-soon">Coming soon</span></div><p>More voices. A listening queue.<br />A voice and pace for every book.</p><span class="text-link">Explore Plus <span class="icon i-arrow-up-right" aria-hidden="true"></span></span></a>
+</section>
+</main>
+    <footer class="site-footer"><div class="wide footer-inner">
+<div class="footer-brand"><a class="wordmark" href="index.html" aria-label="Librox home"><span class="mark" aria-hidden="true">L<span></span></span>LIBROX</a><p>A place to get lost in a book.</p></div>
+<nav class="footer-links" aria-label="Footer navigation"><a href="books.html">Find books</a><a href="plus.html">Librox Plus</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of use</a><a href="support.html">Support</a><a href="mailto:contactus@section9labs.com">Contact</a></nav>
+<div class="footer-bottom"><div class="footer-legal"><span>© 2026 Section 9 Labs</span><small>iPhone, iPad, Mac, App Store, and the Apple Logo are trademarks of Apple Inc., registered in the U.S. and other countries.</small></div>
+<div class="theme-controls" role="group" aria-label="Website appearance">
+<button class="theme-chip" type="button" data-theme="eink" aria-pressed="false"><span class="icon i-circle-half" aria-hidden="true"></span>E-ink</button><button class="theme-chip" type="button" data-theme="paper" aria-pressed="false"><span class="icon i-sun" aria-hidden="true"></span>Paper</button><button class="theme-chip" type="button" data-theme="dark" aria-pressed="false"><span class="icon i-moon" aria-hidden="true"></span>Dark</button></div></div></div></footer>
+    <script src="librox.js?v=6547336954"></script>
+    <script src="experience.bundle.js?v=feb307a7d9"></script>
   </body>
 </html>
