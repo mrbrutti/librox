@@ -15,7 +15,6 @@ import { bindSceneDepth } from './scene-depth.js';
   var manual = null;
   var pendingTime = 0;
   var filmFrame = 0;
-  bindSceneDepth(section, video, screen, 'studio');
   function playbackIcon(paused) {
     return '<span class="icon i-' + (paused ? 'play' : 'pause') + '" aria-hidden="true"></span>';
   }
@@ -107,6 +106,9 @@ import { bindSceneDepth } from './scene-depth.js';
       new IntersectionObserver(function (entries) { callback(entries[0].isIntersecting && entries[0].intersectionRatio >= threshold); }, { threshold:[0, threshold] }).observe(element);
     } else callback(true);
   };
+  // Register depth listeners after the player reveals the decoded frame.
+  // A paused seek or responsive source change must not retain poster geometry.
+  bindSceneDepth(section, video, screen, 'studio');
   observe(screen, function (value) { visible = value; syncPlayback(); });
   if ('ResizeObserver' in window) new ResizeObserver(syncSource).observe(screen);
   else window.addEventListener('resize', syncSource);
@@ -127,7 +129,6 @@ import { bindSceneDepth } from './scene-depth.js';
   var nativeFrame = 0;
   var familyPendingTime = 0;
   var familyLoaded = false;
-  bindSceneDepth(native, family, native.querySelector('.family-media'), 'family');
   // Independent timeline: the approved Duo hero keeps its own choreography.
   var beats = [
     {start:0, end:5.7, mode:'reading', caption:'Reading on iPad'},
@@ -209,6 +210,7 @@ import { bindSceneDepth } from './scene-depth.js';
     event.preventDefault();
     family.currentTime = Math.max(0, Math.min(family.duration - .05, family.currentTime + (event.key === 'ArrowRight' ? 5 : -5)));
   });
+  bindSceneDepth(native, family, native.querySelector('.family-media'), 'family');
   observe(native.querySelector('.native-stage'), function (value) {
     nativeVisible = value;
     if (value) { familyLoaded = true; familySource(); }
