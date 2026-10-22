@@ -12,10 +12,13 @@ const smooth = x => { const t = Math.max(0, Math.min(1, x)); return t * t * (3 -
 const point = new Vector3();
 const paper = new Color(0xf5f0db), ink = new Color(0x123323);
 const paperEdge = new Color(0x858f79), inkEdge = new Color(0x091e14);
+const yieldToBrowser = () => globalThis.scheduler?.yield
+  ? scheduler.yield() : new Promise(resolve => setTimeout(resolve, 0));
 
 // The approved film supplies the pixels. These colorless solids supply its
 // exact depth, so real extruded letters can pass both behind and in front.
-export function createSpatialType(section, kind) {
+export async function createSpatialType(section, kind) {
+  await yieldToBrowser();
   const renderer = new WebGLRenderer({alpha:true, antialias:true, powerPreference:'low-power'});
   renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
@@ -60,7 +63,11 @@ export function createSpatialType(section, kind) {
     {beat:'mac', text:'Stay', slot:'upper'},
     {beat:'mac', text:'a while.', slot:'lower'},
   ];
-  const words = specs.map(spec => {
+  const words = [];
+  for (const spec of specs) {
+    // Triangulate one word per task so controls and the film remain responsive
+    // while the decorative enhancement is prepared on slower phones.
+    await yieldToBrowser();
     const geometry = new TextGeometry(spec.text, {font, size:1, depth:.045,
       curveSegments:8, bevelEnabled:true, bevelThickness:.008, bevelSize:.004,
       bevelSegments:2, steps:1});
@@ -74,17 +81,23 @@ export function createSpatialType(section, kind) {
     mesh.renderOrder = 1;
     mesh.castShadow = true;
     scene.add(mesh);
-    return {...spec, mesh, width:wordWidth, height:wordHeight};
-  });
+    words.push({...spec, mesh, width:wordWidth, height:wordHeight});
+  }
   let data;
   let solids = [];
   let receivers = [];
   let size = {width:1, height:1, mediaX:0, mediaY:0, mediaWidth:1, mediaHeight:1};
   let lost = false;
+  let prepared = false;
+  let warming = null;
+  let latestFrame = null;
   renderer.domElement.addEventListener('webglcontextlost', event => {
     event.preventDefault(); lost = true; section.classList.remove('has-spatial-type');
   });
-  renderer.domElement.addEventListener('webglcontextrestored', () => { lost = false; });
+  renderer.domElement.addEventListener('webglcontextrestored', () => {
+    lost = false; prepared = false; warming = null;
+    if (latestFrame) render(...latestFrame);
+  });
   section.append(renderer.domElement);
 
   function setGeometry(next) {
@@ -117,6 +130,8 @@ export function createSpatialType(section, kind) {
   }
   function render(frame, time, weights, reduced) {
     if (!data || lost) return;
+    latestFrame = [frame, time, weights, reduced];
+    if (warming && !prepared) return;
     const pose = data.spatial.poses[frame];
     camera.matrix.fromArray(pose.camera);
     camera.matrixWorld.copy(camera.matrix);
@@ -186,6 +201,15 @@ export function createSpatialType(section, kind) {
         ? smooth((time-4.2)/.7) * (1-smooth((time-11.5)/.8)) : macro;
       word.mesh.material[0].color.copy(paper).lerp(ink, inkMix);
       word.mesh.material[1].color.copy(paperEdge).lerp(inkEdge, inkMix);
+    }
+    if (!prepared) {
+      // Compile in parallel when the GPU supports it. Rendering immediately
+      // after construction used to synchronously stall the entire page.
+      warming = renderer.compileAsync(scene, camera).then(() => {
+        prepared = true;
+        if (latestFrame) render(...latestFrame);
+      }).catch(() => { section.classList.remove('has-spatial-type'); });
+      return;
     }
     renderer.render(scene, camera);
     section.classList.add('has-spatial-type');

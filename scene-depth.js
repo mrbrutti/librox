@@ -101,8 +101,8 @@ export function bindSceneDepth(section, video, media, kind) {
       fit();
       if (!spatial && !loadingSpatial && data.spatial) {
         loadingSpatial = true;
-        loadSpatialModule().then(({createSpatialType}) => {
-          spatial = createSpatialType(section, kind);
+        loadSpatialModule().then(async ({createSpatialType}) => {
+          spatial = await createSpatialType(section, kind);
           if (geometry) spatial.setGeometry(geometry);
           if (spatialSize) spatial.resize(spatialSize);
           paint();
