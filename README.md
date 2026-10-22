@@ -62,6 +62,8 @@ npm run build
 Commit `experience.bundle.js` and `scene-type.bundle.js` with their sources,
 since GitHub Pages serves committed static files directly. The build hashes
 the deferred 3D module and local assets to prevent mixed deployment versions.
+The build also synchronizes the homepage's inline styles from `librox.css`
+and `experience.css`; edit those sources, not the generated style block.
 
 See [the Blender film README](film/blender/README.md) for exact media provenance,
 render settings, camera timing and capture limitations. Native footage comes

@@ -1,5 +1,5 @@
 import {build} from 'esbuild';
-import {readFile, mkdir, copyFile} from 'node:fs/promises';
+import {readFile, writeFile, mkdir, copyFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 
 // Keep WebGL out of the critical path. Its content hash travels with the
@@ -13,4 +13,10 @@ const hash = createHash('sha256').update(await readFile('scene-type.bundle.js'))
 await build({entryPoints:['experience.js'], bundle:true, minify:true,
   target:'es2022', outfile:'experience.bundle.js',
   define:{__SPATIAL_TYPE_URL__:JSON.stringify(`./scene-type.bundle.js?v=${hash}`)}});
+// Keep the small homepage stylesheet on the HTML response's first trip.
+// Subpages retain the shared, cacheable CSS file.
+const css = (await Promise.all(['librox.css','experience.css'].map(file => readFile(file,'utf8')))).join('\n');
+const html = await readFile('index.html','utf8');
+await writeFile('index.html', html.replace(/<!-- studio-styles:start -->[\s\S]*?<!-- studio-styles:end -->/,
+  `<!-- studio-styles:start -->\n    <style>\n${css}\n    </style>\n    <!-- studio-styles:end -->`));
 await import('./cache-assets.mjs');

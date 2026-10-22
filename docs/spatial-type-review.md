@@ -56,3 +56,17 @@ silently presented as a clean result. No unrelated design-system rewrite was mad
 
 Local review captures are under `.local/review/spatial-type/`. A published
 performance report is a separate acceptance boundary from these local checks.
+
+## Startup performance follow-up
+
+The first live mobile Lighthouse run on `ac34655` scored 68 performance and
+100 for accessibility, best practices and SEO. It recorded 4.1s LCP, 660ms TBT
+and zero CLS; the largest script task was 756ms during scene initialization.
+Report: https://pagespeed.web.dev/analysis/https-librox-app-index-html/xf88irqihm?form_factor=mobile
+
+The follow-up splits word triangulation into separate tasks and uses Three.js
+asynchronous shader compilation before displaying the canvas. The film, HTML
+fallback and controls remain usable during preparation. The homepage's 27 KB
+of source CSS is included in its initial HTML response, and the 25 KB control
+font is preloaded. Shared subpage styles remain external. This removes two
+render-blocking requests without altering the scene's appearance or footage.
