@@ -11,32 +11,53 @@ the screen. It is an original device study, not official Apple geometry.
 
 ## Current page
 
-1. A persistent product headline and App Store action beside a 22-second product film. Unfold → native Metal book opening →
-   native page turn → listening colors → close. No scroll locking.
-2. One compact, automatic 24-second family film: modeled iPad and Mac, native
-   reading/page curls and live listening footage. Device handoffs use opaque
-   lateral movement and the Mac's physical hinge; app screens dissolve softly.
-3. A download and proposed Plus membership, then privacy/support/terms links.
-   Catalog search has its own page, `books.html`.
+The newest direction follows [Poly](https://poly.app/),
+[25 Residences](https://25residences.com/), and
+[Unseen's Organimo project](https://unseen.co/projects/organimo/): imagery,
+camera movement, and typography occupy one composition. The user rejected
+films presented as separate rounded cards.
 
-The film has separate wide and portrait cameras. Source selection considers
-the actual media-stage aspect ratio for the hero and viewport width for the
-family film, keeping each composition appropriate to its available space. All motion can be paused, stops offscreen and in background tabs, and
-is off by default for reduced-motion visitors. Audio is always opt-in.
+1. A full-screen, 22-second scene: unfold → native Metal book opening →
+   native page turn → listening colors → close. Oversized Librox / One more
+   page / Listen typography follows the footage and passes behind the device.
+2. A second full-screen, automatic 24-second iPad/Mac scene. The devices remain
+   fully framed; the studio edges blend into the surrounding background.
+   Get lost / Drift away / Stay a while changes with reading and listening.
+3. A compact download and feature-only Plus invitation, plus links to catalog
+   search, privacy, support, and terms. No new public prices.
 
-## Visual system
+Both scenes have separate wide/portrait cameras. The hero uses its actual
+stage aspect ratio; the family uses viewport width. Playback is muted by
+default, pauses offscreen and in background tabs, and is off by default for
+reduced-motion visitors. Visitors can pause, seek chapters, or enable audio.
+There is no scroll locking, scroll-duration padding, or intro loader.
 
-Neutral paper and neutral dark surfaces follow the native Librox 2.0 design
-contract. Green stays within the cover-driven studio films. Newsreader gives
-the headings a book-like character; Manrope keeps controls clear. Vermilion
-marks selection and playback progress. Headlines remain visible throughout
-the films. All playback and navigation controls have at least 44px targets.
+## Typography shares the scene
 
-The site follows system appearance until the visitor selects Paper, E-ink,
-or Dark. The choice stays in page memory only. Header, footer, reading measure,
-and surface treatment are shared across all six pages. There is no scroll
-locking, hidden-on-scroll copy, decorative chapter numbering, or artificial
-CSS book spine. The original film media bytes remain unchanged in this pass.
+`film/blender/export_silhouettes.py` projects the original device geometry
+through the original animated cameras. It does not change or rerender the
+approved movies. Separate contours preserve the folding leaves, Mac base,
+and moving lid. A subpixel simplification keeps the JSON compact.
+
+`scene-depth.js` loads only the needed camera geometry (family assets load
+when that film starts loading). An inline SVG mask cuts live HTML lettering
+around each silhouette, synchronized to decoded frames with
+`requestVideoFrameCallback`, with a requestAnimationFrame fallback. Geometry
+is reprojected for the browser's actual crop and placement. Typography fades
+and counter-moves on the video clock, so pausing also pauses its choreography.
+If the geometry fails, the heading, film, poster, links and controls remain.
+
+First-frame WebP posters match the fallback geometry. Existing MP4 film bytes
+remain unchanged. Controls and navigation use 44px targets. Newsreader makes
+the large lettering book-like; Manrope keeps the controls clear. Opening
+copy yields to the close reading sequence so it does not collide with large
+type or the paper. All decorative duplicate type is hidden from assistive
+technology. Meaningful headings and media descriptions remain in the document.
+
+The closing section and subpages use the native app's neutral paper/dark
+surfaces and vermilion accents. Website appearance follows the system unless
+the visitor chooses Paper, E-ink, or Dark; the preference stays in page memory.
+The scene's photographic colors stay consistent across those appearances.
 
 ## Sources and reproducibility
 
@@ -79,7 +100,7 @@ Interface glyphs are Phosphor Icons 2.1.1 regular SVGs, vendored under
 `assets/icons/` with their MIT license. The Librox wordmark and Apple App Store
 badge remain separate brand assets.
 
-## October 22 validation
+## Earlier October 22 validation (before integrated-motion revision)
 
 The production build and JavaScript syntax checks pass. A static audit checked
 all six pages, HTML nesting, unique IDs, 139 local references, fragment targets,
@@ -95,3 +116,16 @@ waiting for the slower source, preserving already visible result links.
 These are local browser checks, not physical-device acceptance or a
 Lighthouse score. Reduced-motion handling is retained in the source; the
 available browser interface does not expose media-preference emulation.
+
+## Integrated-motion revision validation
+
+The production build, JavaScript syntax, and whitespace checks pass. Static
+validation covers six pages and 125 local asset/fragment references, the contact
+address, absence of public prices, and all 2,760 projected frames. No existing
+MP4 changed. Browser review covers the 1440×900 desktop scene, 390×844 phone,
+and an actual 320×568 viewport, including automatic playback, pause/seek,
+mobile menu, poster loading, matching masks, and no horizontal overflow.
+The geometry masks also protect the opaque device while feathering only its
+surrounding studio background, avoiding a rectangular film edge on mobile.
+Available browser logs contain no errors or warnings. Reduced-motion behavior
+is source-verified; physical-device and preference-emulation checks were not run.

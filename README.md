@@ -3,13 +3,14 @@
 Static site for librox.app. The homepage opens with a 22-second
 Blender Cycles product film: a folding-device study opens, shows Librox's native
 Metal book opening and iPad page turns, moves into the listening preview, then
-closes. A persistent headline and download action sit beside the film. Wide
+closes. Oversized live typography moves behind the device in a full-screen scene. Wide
 and portrait camera compositions adapt to the media stage. Playback
 starts muted, has pause and sound controls, and respects reduced motion.
 
-The next section automatically plays a 24-second 3D iPad/Mac film with native
-page turns, reading and live narration captures. A compact download and Plus
-section follows. Book search is on `books.html`; Privacy, Terms and Support
+A second full-screen scene automatically plays the 24-second 3D iPad/Mac film
+with native page turns, reading and live narration captures. Typography changes
+with the film and passes behind the actual device silhouettes. A compact
+download and Plus section follows. Book search is on `books.html`; Privacy, Terms and Support
 remain separate pages. The user authorized publication of these original
 studio studies on October 19, 2026. Capture and model provenance is recorded in the film documentation. Public
 pages use customer-facing copy, as requested for publication.
@@ -30,12 +31,15 @@ The [site motion direction](docs/site-motion-direction.md) records the film sequ
 
 ## Visual system
 
-The October 22 taste pass uses the native app's neutral paper/dark surfaces,
-vermilion accents, and self-hosted Newsreader/Manrope typography. Green stays
-inside the book-driven films. Responsive controls, shared subpage layouts,
+The October 22 integrated-motion pass uses self-hosted Newsreader/Manrope
+typography across full-screen, book-driven studio scenes. The closing download
+section and subpages retain the app's neutral paper/dark surfaces and vermilion
+accents. Responsive controls, shared subpage layouts,
 and the decorative privacy material asset are documented in
 [site motion direction](docs/site-motion-direction.md). The original approved
-3D films and real app captures are retained byte-for-byte.
+3D films and real app captures are retained byte-for-byte. Frame-exact projected
+geometry in `assets/motion/` masks live type, synchronized to decoded video frames
+by `scene-depth.js`. There is no scroll locking or mandatory intro loader.
 
 ## Local preview
 

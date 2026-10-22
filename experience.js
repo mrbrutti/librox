@@ -1,3 +1,4 @@
+import { bindSceneDepth } from './scene-depth.js';
 /* Real rendered motion, explicit playback, and a quiet reduced-motion state. */
 (function () {
   'use strict';
@@ -14,6 +15,7 @@
   var manual = null;
   var pendingTime = 0;
   var filmFrame = 0;
+  bindSceneDepth(section, video, screen, 'studio');
   function playbackIcon(paused) {
     return '<span class="icon i-' + (paused ? 'play' : 'pause') + '" aria-hidden="true"></span>';
   }
@@ -125,6 +127,7 @@
   var nativeFrame = 0;
   var familyPendingTime = 0;
   var familyLoaded = false;
+  bindSceneDepth(native, family, native.querySelector('.family-media'), 'family');
   // Independent timeline: the approved Duo hero keeps its own choreography.
   var beats = [
     {start:0, end:5.7, mode:'reading', caption:'Reading on iPad'},
@@ -150,7 +153,7 @@
   }
   function familyButton() {
     var paused = family.paused;
-    nativeToggle.innerHTML = playbackIcon(paused) + '<span>' + (family.error ? 'Retry film' : paused ? 'Play film' : 'Pause film') + '</span>';
+    nativeToggle.innerHTML = playbackIcon(paused) + '<span class="sr-only">' + (family.error ? 'Retry film' : paused ? 'Play film' : 'Pause film') + '</span>';
     nativeToggle.setAttribute('aria-label', family.error ? 'Retry app demonstrations' : paused ? 'Play app demonstrations' : 'Pause app demonstrations');
   }
   function syncNative() {
