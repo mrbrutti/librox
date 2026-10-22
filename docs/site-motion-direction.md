@@ -19,7 +19,7 @@ films presented as separate rounded cards.
 
 1. A full-screen, 22-second scene: unfold → native Metal book opening →
    native page turn → listening colors → close. Oversized Librox / One more
-   page / Listen typography follows the footage and passes behind the device.
+   page / Listen typography follows the footage and crosses its physical depth.
 2. A second full-screen, automatic 24-second iPad/Mac scene. The devices remain
    fully framed; the studio edges blend into the surrounding background.
    Get lost / Drift away / Stay a while changes with reading and listening.
@@ -39,19 +39,30 @@ through the original animated cameras. It does not change or rerender the
 approved movies. Separate contours preserve the folding leaves, Mac base,
 and moving lid. A subpixel simplification keeps the JSON compact.
 
+`film/blender/export_spatial.py` adds the animated camera matrices and device
+meshes to those manifests. `scene-type.js` renders extruded Newsreader geometry
+against colorless device solids using the original camera. This permits real
+front/back intersections rather than concealing the whole word behind the film.
+Beveled edges, directional light and restrained green-tinted contact shadows
+give the type physical depth. Reading close-ups shift the lettering toward
+deep green ink so it remains legible over paper.
+
 `scene-depth.js` loads only the needed camera geometry (family assets load
-when that film starts loading). An inline SVG mask cuts live HTML lettering
-around each silhouette, synchronized to decoded frames with
+when that film starts loading). It synchronizes to decoded frames using
 `requestVideoFrameCallback`, with a requestAnimationFrame fallback. Geometry
 is reprojected for the browser's actual crop and placement. Typography fades
 and counter-moves on the video clock, so pausing also pauses its choreography.
-If the geometry fails, the heading, film, poster, links and controls remain.
+The player reveals a decoded frame before its depth listeners run, including
+paused seeking and wide/portrait source changes. The SVG silhouette still
+protects device opacity when feathering the family film's studio background.
+If WebGL or geometry fails, readable HTML type, headings, film, posters, links
+and controls remain. The 3D module is deferred, pixel ratio is capped at 1.5,
+and there is no independent idle animation loop.
 
 First-frame WebP posters match the fallback geometry. Existing MP4 film bytes
 remain unchanged. Controls and navigation use 44px targets. Newsreader makes
 the large lettering book-like; Manrope keeps the controls clear. Opening
-copy yields to the close reading sequence so it does not collide with large
-type or the paper. All decorative duplicate type is hidden from assistive
+copy sits clear of the giant lettering and controls. All decorative duplicate type is hidden from assistive
 technology. Meaningful headings and media descriptions remain in the document.
 
 The closing section and subpages use the native app's neutral paper/dark

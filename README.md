@@ -3,13 +3,13 @@
 Static site for librox.app. The homepage opens with a 22-second
 Blender Cycles product film: a folding-device study opens, shows Librox's native
 Metal book opening and iPad page turns, moves into the listening preview, then
-closes. Oversized live typography moves behind the device in a full-screen scene. Wide
+closes. Oversized 3D typography crosses behind and in front of the device in a full-screen scene. Wide
 and portrait camera compositions adapt to the media stage. Playback
 starts muted, has pause and sound controls, and respects reduced motion.
 
 A second full-screen scene automatically plays the 24-second 3D iPad/Mac film
 with native page turns, reading and live narration captures. Typography changes
-with the film and passes behind the actual device silhouettes. A compact
+with the film and shares the devices' depth, lighting and perspective. A compact
 download and Plus section follows. Book search is on `books.html`; Privacy, Terms and Support
 remain separate pages. The user authorized publication of these original
 studio studies on October 19, 2026. Capture and model provenance is recorded in the film documentation. Public
@@ -38,8 +38,10 @@ accents. Responsive controls, shared subpage layouts,
 and the decorative privacy material asset are documented in
 [site motion direction](docs/site-motion-direction.md). The original approved
 3D films and real app captures are retained byte-for-byte. Frame-exact projected
-geometry in `assets/motion/` masks live type, synchronized to decoded video frames
-by `scene-depth.js`. There is no scroll locking or mandatory intro loader.
+geometry in `assets/motion/` supplies camera poses and colorless device meshes for
+the lazy-loaded Three.js lettering in `scene-type.js`. `scene-depth.js` synchronizes
+it to decoded video frames. HTML lettering remains available if WebGL cannot load.
+There is no scroll locking or mandatory intro loader.
 
 ## Local preview
 
@@ -57,7 +59,9 @@ npm ci
 npm run build
 ```
 
-Commit `experience.bundle.js` with `experience.js`, since GitHub Pages serves committed static files directly.
+Commit `experience.bundle.js` and `scene-type.bundle.js` with their sources,
+since GitHub Pages serves committed static files directly. The build hashes
+the deferred 3D module and local assets to prevent mixed deployment versions.
 
 See [the Blender film README](film/blender/README.md) for exact media provenance,
 render settings, camera timing and capture limitations. Native footage comes

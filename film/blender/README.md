@@ -118,20 +118,33 @@ Website motion pauses when offscreen, in a background tab, or after the user
 pauses it. Reduced-motion visitors get the poster and explicit playback.
 The responsive source follows the viewport aspect ratio, not only its width.
 
-## Web typography silhouettes
+## Web typography depth
 
-The full-screen website uses live type that passes behind the rendered hardware.
-Export the four exact camera/geometry timelines without rendering new footage:
+The full-screen website uses real extruded type with depth-tested intersections
+against the rendered hardware. Export contours first, then append the original
+camera matrices and device meshes without rendering new footage:
 
 ```sh
 blender -b --python film/blender/export_silhouettes.py -- --scene studio
 blender -b --python film/blender/export_silhouettes.py -- --scene studio --portrait
 blender -b --python film/blender/export_silhouettes.py -- --scene family
 blender -b --python film/blender/export_silhouettes.py -- --scene family --portrait
+blender -b --python film/blender/export_spatial.py -- --scene studio
+blender -b --python film/blender/export_spatial.py -- --scene studio --portrait
+blender -b --python film/blender/export_spatial.py -- --scene family
+blender -b --python film/blender/export_spatial.py -- --scene family --portrait
 npm run build
 ```
 
 These write `assets/motion/*.json`; preserve the approved scene poses and movie
 frame rate. The exporter stops before each scene's rendering command. The web
-player maps normalized contours to its actual media crop. New entry posters
+player maps the camera projection to its actual media crop. If contours are
+regenerated, run the spatial exporter afterward to restore the 3D data.
+`scene-type.js` uses those meshes only for depth and shadow reception; the
+approved films still supply the visible hardware and app pixels. Entry posters
 are the first decoded frame of each existing movie, encoded as WebP quality 85.
+
+`scripts/scene-font.py` subsets the site's OFL-licensed Newsreader font into
+Three.js outline data for the ten display phrases. It needs Python
+`fonttools[woff]`; run `python scripts/scene-font.py` after changing the phrase
+set, then `npm run build`. The source WOFF2 and license remain in `assets/fonts/`.
