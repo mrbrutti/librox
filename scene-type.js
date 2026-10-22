@@ -17,18 +17,16 @@ const yieldToBrowser = () => globalThis.scheduler?.yield
 
 // The approved film supplies the pixels. These colorless solids supply its
 // exact depth, so real extruded letters can pass both behind and in front.
-export async function createSpatialType(section, kind) {
+export async function createSpatialRenderer({canvas, kind, pixelRatio, onReady, onLost}) {
   await yieldToBrowser();
-  const renderer = new WebGLRenderer({alpha:true, antialias:true, powerPreference:'low-power'});
+  const renderer = new WebGLRenderer({canvas, alpha:true, antialias:true, powerPreference:'low-power'});
   renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  renderer.setPixelRatio(Math.min(pixelRatio, 1.5));
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = PCFShadowMap;
-  renderer.domElement.className = 'scene-type-canvas';
-  renderer.domElement.setAttribute('aria-hidden', 'true');
   const scene = new Scene();
   const camera = new PerspectiveCamera();
   camera.matrixAutoUpdate = false;
@@ -91,18 +89,19 @@ export async function createSpatialType(section, kind) {
   let prepared = false;
   let warming = null;
   let latestFrame = null;
+  let announced = false;
   renderer.domElement.addEventListener('webglcontextlost', event => {
-    event.preventDefault(); lost = true; section.classList.remove('has-spatial-type');
+    event.preventDefault(); lost = true; announced = false; onLost();
   });
   renderer.domElement.addEventListener('webglcontextrestored', () => {
     lost = false; prepared = false; warming = null;
     if (latestFrame) render(...latestFrame);
   });
-  section.append(renderer.domElement);
 
   function setGeometry(next) {
     if (data === next) return;
     data = next;
+    announced = false;
     for (const mesh of solids) { scene.remove(mesh); mesh.geometry.dispose(); }
     receivers.forEach(mesh => scene.remove(mesh));
     receivers = [];
@@ -208,11 +207,11 @@ export async function createSpatialType(section, kind) {
       warming = renderer.compileAsync(scene, camera).then(() => {
         prepared = true;
         if (latestFrame) render(...latestFrame);
-      }).catch(() => { section.classList.remove('has-spatial-type'); });
+      }).catch(onLost);
       return;
     }
     renderer.render(scene, camera);
-    section.classList.add('has-spatial-type');
+    if (!announced) { announced = true; onReady(); }
   }
   return {setGeometry, resize, render};
 }

@@ -70,3 +70,11 @@ fallback and controls remain usable during preparation. The homepage's 27 KB
 of source CSS is included in its initial HTML response, and the 25 KB control
 font is preloaded. Shared subpage styles remain external. This removes two
 render-blocking requests without altering the scene's appearance or footage.
+
+The second run (`a1819a9`) improved first paint from 2.0s to 1.5s and LCP from
+4.1s to 3.3s, but mobile TBT remained 770ms. That was not sufficient. The final
+startup architecture puts Three.js initialization, geometry and rendering in
+an OffscreenCanvas worker. A tiny client sends frame timestamps and coalesces
+pending updates so slow hardware cannot accumulate a stale render queue. The
+rendered design is unchanged. Both above-the-fold font families are preloaded.
+Unsupported worker WebGL retains the HTML and movie fallback.

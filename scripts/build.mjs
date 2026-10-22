@@ -6,9 +6,13 @@ import {createHash} from 'node:crypto';
 // lightweight film controller, so a new deployment cannot reuse an old scene.
 await mkdir('assets/licenses', {recursive:true});
 await copyFile('node_modules/three/LICENSE', 'assets/licenses/three-MIT.txt');
-await build({entryPoints:['scene-type.js'], bundle:true, minify:true, format:'esm',
-  target:'es2022', outfile:'scene-type.bundle.js',
+await build({entryPoints:['scene-type-worker.js'], bundle:true, minify:true, format:'esm',
+  target:'es2022', outfile:'scene-type-worker.bundle.js',
   banner:{js:'/* Three.js MIT license: assets/licenses/three-MIT.txt */'}});
+const workerHash = createHash('sha256').update(await readFile('scene-type-worker.bundle.js')).digest('hex').slice(0,10);
+await build({entryPoints:['scene-type-client.js'], bundle:true, minify:true, format:'esm',
+  target:'es2022', outfile:'scene-type.bundle.js',
+  define:{__SPATIAL_WORKER_URL__:JSON.stringify(`./scene-type-worker.bundle.js?v=${workerHash}`)}});
 const hash = createHash('sha256').update(await readFile('scene-type.bundle.js')).digest('hex').slice(0,10);
 await build({entryPoints:['experience.js'], bundle:true, minify:true,
   target:'es2022', outfile:'experience.bundle.js',

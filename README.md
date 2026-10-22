@@ -59,9 +59,12 @@ npm ci
 npm run build
 ```
 
-Commit `experience.bundle.js` and `scene-type.bundle.js` with their sources,
+Commit `experience.bundle.js`, `scene-type.bundle.js` and `scene-type-worker.bundle.js` with their sources,
 since GitHub Pages serves committed static files directly. The build hashes
 the deferred 3D module and local assets to prevent mixed deployment versions.
+The tiny scene client transfers its canvas to a worker, keeping Three.js setup,
+triangulation and rendering off the page's main thread. Browsers without worker
+WebGL retain readable HTML lettering and the native app films.
 The build also synchronizes the homepage's inline styles from `librox.css`
 and `experience.css`; edit those sources, not the generated style block.
 
