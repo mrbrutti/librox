@@ -117,3 +117,21 @@ static bezel assets retain their separate licensing and usage restrictions.
 Website motion pauses when offscreen, in a background tab, or after the user
 pauses it. Reduced-motion visitors get the poster and explicit playback.
 The responsive source follows the viewport aspect ratio, not only its width.
+
+## Web typography silhouettes
+
+The full-screen website uses live type that passes behind the rendered hardware.
+Export the four exact camera/geometry timelines without rendering new footage:
+
+```sh
+blender -b --python film/blender/export_silhouettes.py -- --scene studio
+blender -b --python film/blender/export_silhouettes.py -- --scene studio --portrait
+blender -b --python film/blender/export_silhouettes.py -- --scene family
+blender -b --python film/blender/export_silhouettes.py -- --scene family --portrait
+npm run build
+```
+
+These write `assets/motion/*.json`; preserve the approved scene poses and movie
+frame rate. The exporter stops before each scene's rendering command. The web
+player maps normalized contours to its actual media crop. New entry posters
+are the first decoded frame of each existing movie, encoded as WebP quality 85.
