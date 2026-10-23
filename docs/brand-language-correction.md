@@ -74,3 +74,12 @@ They do not claim physical iPhone/iPad acceptance, exhaustive Safari rendering,
 a native import run, or a new app release. A live publication check follows
 merging. Public prices, Plus's coming-soon status and established contact details
 are unchanged.
+
+## Final contrast check
+
+The paper accent is one RGB step darker than the rounded native token, to
+keep small accent labels above 4.5:1 on the web paper surface.
+
+- Paper: body 13.78:1, secondary 5.05:1, accent 4.54:1.
+- Night: body 13.58:1, secondary 8.61:1, accent 6.55:1.
+- Studio: body 15.4:1, secondary 10.64:1, accent 7.43:1.
