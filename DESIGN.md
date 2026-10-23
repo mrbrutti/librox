@@ -7,7 +7,7 @@ colors:
   ink: "#252825"
   muted: "#666b63"
   line: "#dcded6"
-  red: "#c74533"
+  red: "#c64433"
   night: "#222222"
   ivory: "#eeeede"
   night-accent: "#f28a70"
@@ -85,7 +85,8 @@ Fonts are self-hosted. Source Serif 4's OFL is in `assets/fonts`.
 
 ## Color and surfaces
 
-Paper, ink, ivory and vermilion come from the native tokens. The app's neutral
+Paper, ink, ivory and vermilion come from the native tokens. Small vermilion
+labels use #c64433, one RGB step darker for 4.54:1 contrast on paper. The app's neutral
 night surface is the dark subpage background. E-ink, Paper and Dark remain
 available on catalog and information pages.
 
