@@ -14,7 +14,7 @@
 .membership-plan-top > .icon { color:var(--red); width:26px; height:26px; }
 .membership-plan-status { font-size:12px; color:var(--muted); }
 .membership-plan-name { font-size:13px; font-weight:650; color:var(--red); margin-bottom:12px; }
-.membership-feature-title { font:450 44px/1.07 var(--serif); letter-spacing:-.04em; }
+.membership-feature-title { font:var(--display-weight) 44px/1.07 var(--serif); letter-spacing:var(--display-tracking); }
 .membership-benefits { padding:0; margin:28px 0 0; list-style:none; }
 .membership-benefits li { display:flex; gap:16px; align-items:flex-start; font-size:14px; color:var(--muted); line-height:1.65; padding:20px 0; border-top:1px solid var(--line); }
 .membership-benefits li > .icon { margin-top:2px; color:var(--ink); }
@@ -23,7 +23,7 @@
 .subpage-next { display:grid; grid-template-columns:1fr 1fr; gap:40px; border-top:1px solid var(--line); padding-top:24px; }
 .subpage-next a { display:grid; grid-template-columns:1fr auto; gap:8px 20px; text-decoration:none; padding:12px 0; }
 .subpage-next a > span:not(.icon) { color:var(--muted); font-size:12px; }
-.subpage-next a strong { grid-column:1; font:450 28px/1.3 var(--serif); letter-spacing:-.02em; }
+.subpage-next a strong { grid-column:1; font:var(--display-weight) 28px/1.3 var(--serif); letter-spacing:var(--display-tracking); }
 .subpage-next a > .icon { grid-row:1/3; grid-column:2; align-self:center; }
 .subpage-next a > .icon { transition:transform 200ms var(--ease); }
 @media(hover:hover) and (pointer:fine) { .subpage-next a:hover > .icon { transform:translate(2px,-2px); } }

@@ -47,13 +47,12 @@ export function bindSceneDepth(section, video, media, kind) {
     const weights = kind === 'studio'
       ? {library: envelope(t, 18.8, 4, duration), reading: envelope(t, 4, 12.3, duration), listening: envelope(t, 12.3, 18.8, duration)}
       : {reading: envelope(t, 23, 6, duration), listening: Math.max(envelope(t, 6, 11.2, duration), envelope(t, 18.1, 23, duration)), mac: envelope(t, 11.2, 18.1, duration)};
-    beats.forEach((beat, index) => {
+    beats.forEach(beat => {
       const weight = weights[beat.dataset.typeBeat] || 0;
       beat.style.opacity = weight.toFixed(3);
-      // The slow counter-movement follows the camera; there is no idle timer.
-      const travel = reduced.matches ? 0 : Math.sin(t / duration * Math.PI * 2 + index * .6) * width * .015;
-      const lift = reduced.matches ? 0 : (1 - weight) * height * .035;
-      beat.style.transform = `translate3d(${travel.toFixed(2)}px,${lift.toFixed(2)}px,0)`;
+      // Match the spatial renderer's steady baseline in the CSS fallback.
+      const lift = reduced.matches ? 0 : (1 - weight) * height * .012;
+      beat.style.transform = `translate3d(0,${lift.toFixed(2)}px,0)`;
     });
     spatial?.render(frame, t, weights, reduced.matches);
     layer.classList.add('has-depth');

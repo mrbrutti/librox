@@ -64,7 +64,7 @@
   function syncThemeControls(name) {
     document.querySelectorAll('.theme-chip').forEach(function (chip) { chip.setAttribute('aria-pressed', String(chip.dataset.theme === name)); });
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = name === 'dark' ? '#191a19' : name === 'eink' ? '#f7f8f8' : '#f6f4ef';
+    if (meta) meta.content = getComputedStyle(document.body).getPropertyValue('--bg').trim();
   }
   document.querySelectorAll('.theme-chip').forEach(function (chip) {
     chip.addEventListener('click', function () {

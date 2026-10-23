@@ -23,6 +23,20 @@ import {coverMarkup, safeHTTPS} from "./book-cover.mjs";
   document.addEventListener('keydown', function () { keyboardSearch = true; }, {passive:true});
   document.addEventListener('pointerdown', function () { keyboardSearch = false; }, {passive:true});
 
+  // The curated shelf and live results share the same loading/error behavior.
+  function prepareJackets(root) {
+    root.querySelectorAll('.book-jacket').forEach(function (jacket) {
+      function reveal() {
+        if (jacket.naturalWidth) jacket.classList.add('is-loaded');
+        else jacket.remove();
+      }
+      jacket.addEventListener('load', reveal, {once:true});
+      jacket.addEventListener('error', function () { jacket.remove(); }, {once:true});
+      if (jacket.complete) reveal();
+    });
+  }
+  prepareJackets(document);
+
   sourceChips.forEach(function (chip) {
     chip.addEventListener("click", function () {
       activeSource = chip.dataset.source;
@@ -230,7 +244,8 @@ import {coverMarkup, safeHTTPS} from "./book-cover.mjs";
                 !epub
               )
                 epub = abs;
-              if (rel === "http://opds-spec.org/image/thumbnail" && !cover)
+              if (rel === "http://opds-spec.org/image" ||
+                  (rel === "http://opds-spec.org/image/thumbnail" && !cover))
                 cover = abs;
             }
             var subjects = Array.prototype.slice.call(entry.getElementsByTagName('category')).map(function (category) {
@@ -269,16 +284,7 @@ import {coverMarkup, safeHTTPS} from "./book-cover.mjs";
       cover.href = installURL;
       cover.setAttribute('aria-label', 'Open ' + book.title + ' in Librox');
       cover.innerHTML = coverMarkup(book);
-      var jacket = cover.querySelector('.book-jacket');
-      if (jacket) {
-        function revealJacket() {
-          if (jacket.naturalWidth) jacket.classList.add('is-loaded');
-          else jacket.remove();
-        }
-        jacket.addEventListener('load', revealJacket, {once:true});
-        jacket.addEventListener('error', function () { jacket.remove(); }, {once:true});
-        if (jacket.complete) revealJacket();
-      }
+      prepareJackets(cover);
 
       var meta = el("div", "meta");
       var source = el("div", "source");

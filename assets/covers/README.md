@@ -1,17 +1,17 @@
-# Native Librox cover artwork
+# Original catalog jackets
 
-These are delivery-size WebP copies of the artwork already used by the app:
+The arrival shelf uses unchanged JPEG bytes from the Standard Ebooks OPDS
+image links, retrieved October 22, 2026:
 
-- `ocean.webp`: `Libros/Resources/CoverArtwork.xcassets/CoverOcean.imageset/cover-ocean.png`
-- `botanical.webp`: `Libros/Resources/CoverArtwork.xcassets/CoverBotanical.imageset/cover-botanical.png`
+- `pride-and-prejudice.jpg`: https://standardebooks.org/ebooks/jane-austen/pride-and-prejudice/downloads/cover.jpg
+- `moby-dick.jpg`: https://standardebooks.org/ebooks/herman-melville/moby-dick/downloads/cover.jpg
+- `walden.jpg`: https://standardebooks.org/ebooks/henry-david-thoreau/walden/downloads/cover.jpg
 
-Source repository: `/Users/matt/Code/swift/Libros`. Converted with cwebp,
-600 × 900, quality 88, alpha quality 100. The plates retain their transparency.
-No new artwork was generated for the website.
+The supplied artwork and title typography are preserved. The HTML/CSS wraps
+these jackets in the app's physical book language: board, binding, paper edges,
+lighting and shadow. Live searches retain their own returned catalog covers.
+There is no illustration substitution. A missing cover uses a plain title board.
 
-`book-cover.mjs` ports the current `LibroxCoverPalette` title hash, subject-word
-classification and cloth colors. `books.css` translates the app's 2:3 boards,
-binding crease, inset paper block, restrained shoulder highlight and separate
-contact/cast shadows. Suggested titles demonstrate the native engraved
-covers. Live catalog results retain the complete supplied jacket; the same
-engraved treatment remains behind it if that jacket is absent or fails.
+`ocean.webp` and `botanical.webp` were copied from the native app in an earlier
+pass and are retained as historical assets only. The current renderer does not
+use them. See the correction in `docs/brand-language-correction.md`.
