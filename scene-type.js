@@ -5,13 +5,13 @@ import {
 } from 'three';
 import {FontLoader} from 'three/addons/loaders/FontLoader.js';
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
-import fontData from './assets/fonts/newsreader-scene.json';
+import fontData from './assets/fonts/source-serif-4-scene.json';
 
 const font = new FontLoader().parse(fontData);
 const smooth = x => { const t = Math.max(0, Math.min(1, x)); return t * t * (3 - 2 * t); };
 const point = new Vector3();
-const paper = new Color(0xf5f0db), ink = new Color(0x123323);
-const paperEdge = new Color(0x858f79), inkEdge = new Color(0x091e14);
+const paper = new Color(0xeeeede), ink = new Color(0x252825);
+const paperEdge = new Color(0xc4c5b6), inkEdge = new Color(0x141a14);
 const yieldToBrowser = () => globalThis.scheduler?.yield
   ? scheduler.yield() : new Promise(resolve => setTimeout(resolve, 0));
 
@@ -32,8 +32,10 @@ export async function createSpatialRenderer({canvas, kind, pixelRatio, onReady, 
   camera.matrixAutoUpdate = false;
   const occlusion = new MeshBasicMaterial({colorWrite:false, depthWrite:true, side:DoubleSide});
   const contactShadow = new ShadowMaterial({color:0x102219, opacity:.11, depthWrite:false});
-  const face = new MeshStandardMaterial({color:0xf5f0db, roughness:.42, metalness:.08, transparent:true});
-  const edge = new MeshStandardMaterial({color:0x858f79, roughness:.38, metalness:.22, transparent:true});
+  // Letterforms share the site's 600-weight serif. Matte paper and shallow
+  // edges belong to the book, without metallic highlights or floating wobble.
+  const face = new MeshStandardMaterial({color:0xeeeede, roughness:.9, metalness:0, transparent:true});
+  const edge = new MeshStandardMaterial({color:0xc4c5b6, roughness:1, metalness:0, transparent:true});
   scene.add(new HemisphereLight(0xf9fff0, 0x182d22, 2));
   const key = new DirectionalLight(0xe9fff3, 3.2);
   key.position.set(-7,-6,12);
@@ -66,14 +68,14 @@ export async function createSpatialRenderer({canvas, kind, pixelRatio, onReady, 
     // Triangulate one word per task so controls and the film remain responsive
     // while the decorative enhancement is prepared on slower phones.
     await yieldToBrowser();
-    const geometry = new TextGeometry(spec.text, {font, size:1, depth:.045,
-      curveSegments:8, bevelEnabled:true, bevelThickness:.008, bevelSize:.004,
+    const geometry = new TextGeometry(spec.text, {font, size:1, depth:.016,
+      curveSegments:8, bevelEnabled:true, bevelThickness:.003, bevelSize:.002,
       bevelSegments:2, steps:1});
     geometry.computeBoundingBox();
     const bounds = geometry.boundingBox;
     const wordWidth = bounds.max.x - bounds.min.x;
     const wordHeight = bounds.max.y - bounds.min.y;
-    geometry.translate(-(bounds.min.x + bounds.max.x)/2, -(bounds.min.y + bounds.max.y)/2, -.0225);
+    geometry.translate(-(bounds.min.x + bounds.max.x)/2, -(bounds.min.y + bounds.max.y)/2, -.008);
     const materials = [face.clone(), edge.clone()];
     const mesh = new Mesh(geometry, materials);
     mesh.renderOrder = 1;
@@ -149,7 +151,6 @@ export async function createSpatialRenderer({canvas, kind, pixelRatio, onReady, 
     contactShadow.opacity = Math.max(...Object.values(weights)) * .11;
     const mobile = size.width <= 760;
     const portrait = size.width / size.height < 1.1;
-    const phase = time * Math.PI * 2 / (kind === 'studio' ? 22 : 24);
     const macro = kind === 'studio' ? smooth((time-7)/2)*(1-smooth((time-11)/2)) : 0;
     for (const word of words) {
       const weight = weights[word.beat] || 0;
@@ -164,33 +165,32 @@ export async function createSpatialRenderer({canvas, kind, pixelRatio, onReady, 
         y = lower ? (compact ? .63 : .73) : brand ? .31 : .24;
         if (word.beat === 'library' && time < 4) y -= .06*smooth(time/4);
         if (word.beat === 'listening') y = mobile ? .31 : .26;
-        width = lower ? (compact ? .54 : .38 + .09*macro) : compact ? .84 : (brand ? .88 : .91);
+        width = lower ? (compact ? .48 : .32 + .07*macro) : compact ? .76 : (brand ? .69 : .73);
         // The top line crosses the body depth. During the reading close-up it
         // advances with the camera, keeping the full phrase recoverable.
         const brandDepth = word.beat === 'listening' ? 1 + .012*Math.sin((time-12.3)*Math.PI/6.5)
           : time < 4 ? .94 + .055*smooth(time/4) : .94;
         depth = pose.depth * (lower ? .72 : brand ? brandDepth : 1.005 - .225*macro);
-        angle = lower ? -.16 : -.24;
+        angle = lower ? -.045 : -.07;
       } else {
         x = lower ? (word.beat === 'mac' ? .64 : .70) : .29;
         y = lower ? (mobile ? .64 : .73) : (mobile ? .25 : .19);
-        width = lower ? (word.beat === 'mac' ? .57 : .43) : .43;
+        width = lower ? (word.beat === 'mac' ? .48 : .37) : .37;
         depth = pose.depth * (lower ? .75 : .965);
-        angle = lower ? -.19 : -.22;
+        angle = lower ? -.045 : -.07;
       }
       // Preserve the tall letters on wide, short screens without clipping the
       // header or controls. Narrow screens are constrained by the word width.
-      const heightLimit = lower ? .26 : brand ? .28 : .22;
+      const heightLimit = lower ? .22 : brand ? .24 : .19;
       width = Math.min(width, size.height/size.width * heightLimit * word.width/word.height);
-      const drift = reduced ? 0 : Math.sin(phase + (lower ? .7 : 0));
-      x += drift * (lower ? -.012 : .012);
-      y += (1-weight) * (lower ? .025 : -.025);
+      // The film camera supplies the movement and occlusion. Keep the type's
+      // baseline stable instead of adding an independent sinusoidal drift.
+      y += reduced ? 0 : (1-weight) * (lower ? .012 : -.012);
       point.set(((x*2-1)+p[8])*depth/p[0], ((1-y*2)+p[9])*depth/p[5], -depth);
       word.mesh.position.copy(point.applyMatrix4(camera.matrixWorld));
       word.mesh.quaternion.copy(camera.quaternion);
-      word.mesh.rotateY(angle + drift*.065);
-      word.mesh.rotateX(lower ? -.06 : .035);
-      word.mesh.rotateZ((lower ? .025 : -.018) + drift*.008);
+      word.mesh.rotateY(angle);
+      word.mesh.rotateX(lower ? -.015 : .015);
       const scale = (width * 2 * depth / p[0]) / word.width;
       word.mesh.scale.setScalar(scale);
       word.mesh.material.forEach(material => { material.opacity = weight; });

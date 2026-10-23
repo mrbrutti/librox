@@ -1,5 +1,8 @@
 # Catalog and shared craft pass — October 22, 2026
 
+**Superseded cover direction:** the user clarified that this meant the 3D design,
+not substitute artwork. See [the correction](brand-language-correction.md).
+
 ## Direction and source
 
 The Books page now uses the same cover language as the native app. Its visual

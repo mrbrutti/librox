@@ -6,7 +6,7 @@ const hashes = new Map();
 for (const name of await readdir('.')) {
   if (!name.endsWith('.html')) continue;
   const source = await readFile(name, 'utf8');
-  const pattern = /((?:href|src|poster|srcset|data-wide|data-portrait|data-wide-poster|data-portrait-poster|data-wide-mask|data-portrait-mask)=")([^"?\s#]+\.(?:css|js|mp4|webp|png|svg|json))(?:\?v=[^"\s]*)?(")/g;
+  const pattern = /((?:href|src|poster|srcset|data-wide|data-portrait|data-wide-poster|data-portrait-poster|data-wide-mask|data-portrait-mask)=")([^"?\s#]+\.(?:css|js|mp4|webp|jpg|png|svg|json))(?:\?v=[^"\s]*)?(")/g;
   let output = source;
   for (const match of source.matchAll(pattern)) {
     const asset = match[2];
