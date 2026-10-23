@@ -11,7 +11,10 @@
     <meta property="og:image" content="https://librox.app/assets/librox-studio-poster.webp" />
     <title>Find your next book — Librox</title>
     <link rel="icon" href="favicon.svg?v=79c85681f6" type="image/svg+xml" />
-    <link rel="stylesheet" href="librox.css?v=f8d59f3d4c" />
+    <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="librox.css?v=081045571d" />
+    <link rel="stylesheet" href="books.css?v=c51619d75c" />
 
   </head>
   <body class="books-page">
@@ -26,7 +29,7 @@
         aria-labelledby="discover-title"
       >
         <div class="discover-head">
-          <h1 id="discover-title">Find your next book.</h1>
+          <h1 id="discover-title">Find your<br /><em>next book.</em></h1>
           <p>
             Search free, DRM-free books from Project Gutenberg and Standard
             Ebooks. Open an EPUB in Librox, or download it directly.
@@ -79,17 +82,64 @@
           role="status"
           aria-live="polite"
         ></div>
-        <div class="search-start" data-search-start><p><strong>A new book is a good place to begin.</strong>Find a favorite author, or start with a classic.</p><div class="search-suggestions" aria-label="Suggested searches"><button type="button" data-search-query="Pride and Prejudice">Pride and Prejudice</button><button type="button" data-search-query="Walden">Walden</button></div></div><ul id="search-results" class="results"></ul>
+        <section class="search-start" data-search-start aria-labelledby="shelf-title">
+          <div class="shelf-heading"><h2 id="shelf-title">A new book is a good place to begin.</h2><p>Find a favorite author, or start with a classic.</p></div>
+          <ul class="suggested-shelf" aria-label="Suggested searches">
+            <!-- suggested-books:start -->
+<li><button class="suggested-book" type="button" data-search-query="Pride and Prejudice" aria-label="Search for Pride and Prejudice">
+    <span class="bound-book botanical is-medium" style="--book-cloth:#364937;--book-tint:#8a4b2f;--book-title-size:9.11cqw" aria-hidden="true">
+    <span class="book-light"></span><span class="book-volume">
+      <span class="book-pages"></span><span class="book-board">
+        <span class="book-fallback"><img class="book-engraving" src="assets/covers/botanical.webp?v=553f6065e3" width="600" height="900" alt="" loading="eager" decoding="async" />
+          <span class="book-lettering"><span class="book-cover-title">Pride and Prejudice</span><span class="book-cover-author">Jane Austen</span></span>
+        </span>
+        <span class="book-binding"></span><span class="book-crease"></span><span class="book-sheen"></span>
+      </span>
+    </span>
+  </span>
+    <span class="suggested-meta"><strong>Pride and Prejudice</strong><span>Jane Austen</span><span class="suggested-action">Find this book <span class="icon i-arrow-right" aria-hidden="true"></span></span></span>
+  </button></li>
+<li><button class="suggested-book" type="button" data-search-query="Moby-Dick" aria-label="Search for Moby-Dick">
+    <span class="bound-book ocean" style="--book-cloth:#2e414c;--book-tint:#6b4a5c;--book-title-size:14.50cqw" aria-hidden="true">
+    <span class="book-light"></span><span class="book-volume">
+      <span class="book-pages"></span><span class="book-board">
+        <span class="book-fallback"><img class="book-engraving" src="assets/covers/ocean.webp?v=e7fa4440db" width="600" height="900" alt="" loading="eager" decoding="async" />
+          <span class="book-lettering"><span class="book-cover-title">Moby-Dick</span><span class="book-cover-author">Herman Melville</span></span>
+        </span>
+        <span class="book-binding"></span><span class="book-crease"></span><span class="book-sheen"></span>
+      </span>
+    </span>
+  </span>
+    <span class="suggested-meta"><strong>Moby-Dick</strong><span>Herman Melville</span><span class="suggested-action">Find this book <span class="icon i-arrow-right" aria-hidden="true"></span></span></span>
+  </button></li>
+<li><button class="suggested-book" type="button" data-search-query="Walden" aria-label="Search for Walden">
+    <span class="bound-book botanical" style="--book-cloth:#4d3952;--book-tint:#6b4a5c;--book-title-size:13.67cqw" aria-hidden="true">
+    <span class="book-light"></span><span class="book-volume">
+      <span class="book-pages"></span><span class="book-board">
+        <span class="book-fallback"><img class="book-engraving" src="assets/covers/botanical.webp?v=553f6065e3" width="600" height="900" alt="" loading="eager" decoding="async" />
+          <span class="book-lettering"><span class="book-cover-title">Walden</span><span class="book-cover-author">Henry David Thoreau</span></span>
+        </span>
+        <span class="book-binding"></span><span class="book-crease"></span><span class="book-sheen"></span>
+      </span>
+    </span>
+  </span>
+    <span class="suggested-meta"><strong>Walden</strong><span>Henry David Thoreau</span><span class="suggested-action">Find this book <span class="icon i-arrow-right" aria-hidden="true"></span></span></span>
+  </button></li>
+            <!-- suggested-books:end -->
+          </ul>
+        </section>
+        <ul id="search-results" class="results" aria-label="Books found"></ul>
+        <noscript><p class="catalog-noscript">Enable JavaScript to search here, or browse <a href="https://www.gutenberg.org/ebooks/">Project Gutenberg</a> and <a href="https://standardebooks.org/ebooks">Standard Ebooks</a> directly.</p></noscript>
         <div class="catalog-fallback" data-catalog-fallback hidden>
           <p>You can also search the catalogs directly.</p>
-          <a data-catalog-gutenberg href="https://www.gutenberg.org/ebooks/" target="_blank" rel="noopener noreferrer">Open Project Gutenberg ↗</a>
-          <a data-catalog-standard href="https://standardebooks.org/ebooks" target="_blank" rel="noopener noreferrer">Open Standard Ebooks ↗</a>
+          <a data-catalog-gutenberg href="https://www.gutenberg.org/ebooks/" target="_blank" rel="noopener noreferrer">Open Project Gutenberg <span class="icon i-arrow-up-right" aria-hidden="true"></span></a>
+          <a data-catalog-standard href="https://standardebooks.org/ebooks" target="_blank" rel="noopener noreferrer">Open Standard Ebooks <span class="icon i-arrow-up-right" aria-hidden="true"></span></a>
         </div>
-        <p class="discover-foot">
+        <div class="discover-foot"><p>
           Searches go directly from your browser to the catalogs. “Add to
           Librox” opens the app; if nothing happens, install Librox or use the
           EPUB link.
-        </p>
+        </p></div>
       </section>
     </main>
     <footer class="site-footer"><div class="wide footer-inner">
@@ -98,6 +148,7 @@
 <div class="footer-bottom"><div class="footer-legal"><span>© 2026 Section 9 Labs</span><small>iPhone, iPad, Mac, App Store, and the Apple Logo are trademarks of Apple Inc., registered in the U.S. and other countries.</small></div>
 <div class="theme-controls" role="group" aria-label="Website appearance">
 <button class="theme-chip" type="button" data-theme="eink" aria-pressed="false"><span class="icon i-circle-half" aria-hidden="true"></span>E-ink</button><button class="theme-chip" type="button" data-theme="paper" aria-pressed="false"><span class="icon i-sun" aria-hidden="true"></span>Paper</button><button class="theme-chip" type="button" data-theme="dark" aria-pressed="false"><span class="icon i-moon" aria-hidden="true"></span>Dark</button></div></div></div></footer>
-    <script src="librox.js?v=6547336954"></script>
+    <script src="librox.js?v=bb37251487" defer></script>
+    <script src="books.bundle.js?v=1e066a0edf" defer></script>
   </body>
 </html>

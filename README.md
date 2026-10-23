@@ -68,6 +68,15 @@ WebGL retain readable HTML lettering and the native app films.
 The build also synchronizes the homepage's inline styles from `librox.css`
 and `experience.css`; edit those sources, not the generated style block.
 
+The Books page loads `books.css` and `books.bundle.js` separately. Commit the
+bundle with `books.js` and `book-cover.mjs`. The same build fills the marked
+suggested-books block in `books.html` from `suggestedMarkup()`; edit its source
+in `book-cover.mjs`, not the generated cover markup. The native artwork and
+material provenance are recorded in `assets/covers/README.md`. See
+[the catalog craft review](docs/catalog-craft-review.md) for this Emil and
+Impeccable pass. `node scripts/check-covers.mjs` verifies the untrusted-metadata
+escaping and URL boundaries used by the cover renderer.
+
 See [the Blender film README](film/blender/README.md) for exact media provenance,
 render settings, camera timing and capture limitations. Native footage comes
 from development simulators and a Catalyst build, not physical-device acceptance.
