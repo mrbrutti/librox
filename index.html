@@ -316,7 +316,7 @@ html:not(.js) .studio-toolbar,html:not(.js) .family-controls { visibility:hidden
     <main id="main">
 <section id="experience" class="studio-hero cinematic-scene" data-experience data-chapter="library" aria-labelledby="experience-title">
   <div class="studio-screen scene-media">
-    <video class="studio-film" data-film-video data-wide-mask="assets/motion/studio-wide.json?v=cacbbc0283" data-portrait-mask="assets/motion/studio-portrait.json?v=b64d0fa373" data-wide-poster="assets/librox-studio-entry-wide.webp?v=c8d4c7b0fa" data-portrait-poster="assets/librox-studio-entry-portrait.webp?v=c9bd503e4a" data-wide="assets/librox-studio-wide.mp4?v=ab6ec14ff5" data-portrait="assets/librox-studio-portrait.mp4?v=38d1faacb8" poster="assets/librox-studio-entry-wide.webp?v=c8d4c7b0fa" muted loop playsinline preload="metadata" aria-label="Librox: unfold your reading space, open a book, and listen"></video>
+    <video class="studio-film" data-film-video data-wide-mask="assets/motion/studio-wide.json?v=cacbbc0283" data-portrait-mask="assets/motion/studio-portrait.json?v=b64d0fa373" data-wide-poster="assets/librox-studio-entry-wide.webp?v=c8d4c7b0fa" data-portrait-poster="assets/librox-studio-entry-portrait.webp?v=c9bd503e4a" data-wide="assets/librox-studio-wide.mp4?v=ec2a836c0a" data-portrait="assets/librox-studio-portrait.mp4?v=4db96596ea" poster="assets/librox-studio-entry-wide.webp?v=c8d4c7b0fa" muted loop playsinline preload="metadata" aria-label="Librox: unfold your reading space, open a book, and listen"></video>
     <picture class="studio-poster"><source media="(max-aspect-ratio: 29/20)" srcset="assets/librox-studio-entry-portrait.webp?v=c9bd503e4a" /><img src="assets/librox-studio-entry-wide.webp?v=c8d4c7b0fa" width="1600" height="900" alt="Librox on a folding display in a softly lit studio" fetchpriority="high" /></picture>
   </div>
   <div class="scene-shade" aria-hidden="true"></div>
@@ -345,7 +345,7 @@ html:not(.js) .studio-toolbar,html:not(.js) .family-controls { visibility:hidden
       </div>
       <div class="film-controls">
         <button type="button" data-film-toggle aria-label="Pause Librox film" aria-keyshortcuts="ArrowLeft ArrowRight" title="Play or pause. Arrow keys seek five seconds."><span data-play-icon aria-hidden="true"><span class="icon i-pause"></span></span><span data-play-label class="sr-only">Pause film</span></button>
-        <button type="button" data-film-sound aria-label="Turn on film sound" aria-pressed="false"><span class="icon i-speaker-slash" aria-hidden="true"></span></button>
+        <button type="button" data-film-sound aria-label="Turn on ambient sound" aria-pressed="false" title="Soft ambience and paper sounds"><span class="icon i-speaker-slash" aria-hidden="true"></span></button>
       </div>
     </div>
     <a class="scene-download" data-store-link href="https://apps.apple.com/app/id6796746657">Get Librox free<span class="icon i-arrow-up-right" aria-hidden="true"></span></a>
@@ -355,7 +355,7 @@ html:not(.js) .studio-toolbar,html:not(.js) .family-controls { visibility:hidden
   <span id="duo-story" class="anchor-point" aria-hidden="true"></span>
   <figure class="native-stage family-stage">
     <div class="family-media scene-media">
-      <video class="family-film" data-family-video data-wide-mask="assets/motion/family-wide.json?v=560f044e63" data-portrait-mask="assets/motion/family-portrait.json?v=c6012481db" data-wide="assets/librox-family-wide.mp4?v=5f5cd48a6b" data-portrait="assets/librox-family-portrait.mp4?v=6e4643e34e" poster="assets/librox-family-entry-wide.webp?v=4e28e780a7" muted loop playsinline preload="none" aria-label="Librox on iPad and Mac: reading, page turns, and listening"></video>
+      <video class="family-film" data-family-video data-wide-mask="assets/motion/family-wide.json?v=560f044e63" data-portrait-mask="assets/motion/family-portrait.json?v=c6012481db" data-wide="assets/librox-family-wide.mp4?v=426622de1b" data-portrait="assets/librox-family-portrait.mp4?v=957d5076ea" poster="assets/librox-family-entry-wide.webp?v=4e28e780a7" muted loop playsinline preload="none" aria-label="Librox on iPad and Mac: reading, page turns, and listening"></video>
       <picture class="family-poster"><source media="(max-width:700px)" srcset="assets/librox-family-entry-portrait.webp?v=eb48b9799f" /><img src="assets/librox-family-entry-wide.webp?v=4e28e780a7" width="1600" height="1200" loading="lazy" alt="A Librox reading spread on iPad" /></picture>
     </div>
     <figcaption class="sr-only">Native Librox reading and listening on iPad and Mac.</figcaption>
@@ -381,7 +381,10 @@ html:not(.js) .studio-toolbar,html:not(.js) .family-controls { visibility:hidden
         <button type="button" data-native-mode="listening" data-family-seek="6.2" aria-pressed="false">Listen<i aria-hidden="true"></i></button>
         <button type="button" data-native-mode="mac" data-family-seek="12.2" aria-pressed="false">On Mac<i aria-hidden="true"></i></button>
       </div>
-      <button class="native-pause" type="button" data-native-toggle aria-label="Pause app demonstrations" aria-keyshortcuts="ArrowLeft ArrowRight" title="Play or pause. Arrow keys seek five seconds."><span class="icon i-pause" aria-hidden="true"></span><span class="sr-only">Pause film</span></button>
+      <div class="film-controls">
+        <button class="native-pause" type="button" data-native-toggle aria-label="Pause app demonstrations" aria-keyshortcuts="ArrowLeft ArrowRight" title="Play or pause. Arrow keys seek five seconds."><span class="icon i-pause" aria-hidden="true"></span><span class="sr-only">Pause film</span></button>
+        <button type="button" data-film-sound aria-label="Turn on ambient sound" aria-pressed="false" title="Soft ambience and paper sounds"><span class="icon i-speaker-slash" aria-hidden="true"></span></button>
+      </div>
     </div>
     <a class="scene-next" href="plus.html">Explore Plus<span class="icon i-arrow-up-right" aria-hidden="true"></span></a>
   </div>
@@ -400,6 +403,6 @@ html:not(.js) .studio-toolbar,html:not(.js) .family-controls { visibility:hidden
 <div class="theme-controls" role="group" aria-label="Website appearance">
 <button class="theme-chip" type="button" data-theme="eink" aria-pressed="false"><span class="icon i-circle-half" aria-hidden="true"></span>E-ink</button><button class="theme-chip" type="button" data-theme="paper" aria-pressed="false"><span class="icon i-sun" aria-hidden="true"></span>Paper</button><button class="theme-chip" type="button" data-theme="dark" aria-pressed="false"><span class="icon i-moon" aria-hidden="true"></span>Dark</button></div></div></div></footer>
     <script src="librox.js?v=aa568085d2"></script>
-    <script src="experience.bundle.js?v=3ec86dbf9d"></script>
+    <script src="experience.bundle.js?v=127157406f"></script>
   </body>
 </html>

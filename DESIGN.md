@@ -132,7 +132,10 @@ remain intact. All information remains outside decorative, aria-hidden art.
 ## Product truth
 
 Routes, store destination, policy wording and contact address are preserved.
-Plus has feature-only messaging and a coming-soon status, without public prices.
+Plus has a Free/Plus comparison, three USD launch prices, and a coming-soon status.
+The pricing ledger distinguishes monthly/yearly renewal from a one-time Lifetime
+purchase. Its paper surface, serif numerals, quiet rules and bookmark accent share
+the reader's hierarchy. Prices are informative until purchases are publicly available.
 No additional device footage, app release or native import acceptance is implied.
 
 See `docs/brand-language-correction.md` for review and verification evidence.

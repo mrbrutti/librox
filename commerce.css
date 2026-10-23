@@ -1,25 +1,55 @@
 .product-label { font-size:14px; font-weight:650; color:var(--red); margin-bottom:24px; }
-.membership { padding-block:64px 50px; }
-.membership-shell { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.85fr); gap:9%; align-items:start; }
-.membership-shell.wide { width:100%; }
-.membership h1 { font-size:clamp(44px,5.1vw,68px); max-width:10.5ch; }
-.membership-lede { max-width:430px; font-size:17px; line-height:1.7; color:var(--muted); margin-top:24px; }
-.membership-free { max-width:440px; margin-top:32px; padding-top:24px; border-top:1px solid var(--line); }
-.membership-label { font-size:14px; font-weight:650; }
-.membership-free p { color:var(--muted); font-size:14px; line-height:1.8; margin-top:10px; }
-.membership-download { margin-top:26px; }
-.membership-plan { position:relative; padding:36px; border-radius:8px 14px 14px 8px; background:var(--paper); box-shadow:0 2px 3px #24231f0c,4px 14px 32px -16px #24231f28; }
-.membership-plan::before { content:""; position:absolute; pointer-events:none; left:8px; top:12px; bottom:12px; width:1px; background:var(--line); opacity:.65; }
-.membership-plan-top { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:30px; }
-.membership-plan-top > .icon { color:var(--red); width:26px; height:26px; }
+/* Plus uses the app's paper, serif headings and bookmark accent. */
+.membership { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:8%; align-items:center; padding-block:64px 72px; }
+.membership h1 { font-size:clamp(44px,5.1vw,68px); max-width:12ch; }
+.plus-period { color:var(--red); }
+.membership-lede { max-width:440px; font-size:17px; line-height:1.65; color:var(--muted); margin-top:24px; }
+.membership-highlights { list-style:none; padding:0; margin:26px 0; display:grid; gap:12px; }
+.membership-highlights li { display:flex; align-items:center; gap:12px; font-size:14px; }
+.membership-highlights .icon { color:var(--red); }
+.membership-actions { display:flex; flex-wrap:wrap; gap:10px 24px; align-items:center; }
+.membership-start { max-width:370px; margin-top:18px; font-size:12px; line-height:1.7; color:var(--muted); }
+.membership-plan { position:relative; padding:32px; border-radius:16px; background:var(--paper); box-shadow:0 2px 3px #24231f0c,4px 14px 32px -16px #24231f28; }
+.membership-plan-top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 16px; }
+.membership-plan-top h2 { font-size:28px; line-height:1.2; }
 .membership-plan-status { font-size:12px; color:var(--muted); }
-.membership-plan-name { font-size:13px; font-weight:650; color:var(--red); margin-bottom:12px; }
-.membership-feature-title { font:var(--display-weight) 44px/1.07 var(--serif); letter-spacing:var(--display-tracking); }
-.membership-benefits { padding:0; margin:28px 0 0; list-style:none; }
-.membership-benefits li { display:flex; gap:16px; align-items:flex-start; font-size:14px; color:var(--muted); line-height:1.65; padding:20px 0; border-top:1px solid var(--line); }
-.membership-benefits li > .icon { margin-top:2px; color:var(--ink); }
-.membership-benefits strong { display:block; color:var(--ink); font-size:15px; font-weight:600; margin-bottom:5px; }
-.membership-fineprint { color:var(--muted); font-size:12px; line-height:1.75; border-top:1px solid var(--line); padding-top:20px; }
+.plan-intro { margin-top:12px; color:var(--muted); font-size:14px; }
+.plan-options { margin:24px 0 0; }
+.plan-option { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:16px; padding:20px 0; border-top:1px solid var(--line); }
+.plan-option dt { font-weight:600; font-size:16px; }
+.plan-option dt span { display:block; font-size:12px; font-weight:400; line-height:1.5; color:var(--muted); margin-top:4px; max-width:23ch; }
+.plan-option dd { text-align:right; margin:0; font-variant-numeric:lining-nums tabular-nums; }
+.plan-option dd strong { display:block; font:600 38px/1.12 var(--serif); letter-spacing:var(--display-tracking); }
+.plan-option dd > span { display:block; font-size:12px; color:var(--muted); margin-top:3px; }
+.plan-annual dt,.plan-annual dd strong { color:var(--red); }
+.membership-fineprint { margin-top:4px; color:var(--muted); font-size:12px; line-height:1.7; border-top:1px solid var(--line); padding-top:20px; }
+.plan-renewal { color:var(--muted); font-size:12px; line-height:1.7; margin-top:10px; }
+.plus-comparison { border-top:1px solid var(--line); padding-top:44px; }
+.comparison-heading { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:32px; }
+.comparison-heading h2,.plus-questions h2 { font-size:clamp(30px,3.2vw,42px); line-height:1.12; }
+.comparison-heading p { color:var(--muted); font-size:14px; max-width:26ch; }
+.comparison-table { width:100%; border-collapse:collapse; font-size:14px; table-layout:fixed; }
+.comparison-table .feature-column { width:50%; }
+.comparison-table th,.comparison-table td { padding:18px 20px; border-bottom:1px solid var(--line); text-align:center; vertical-align:middle; }
+.comparison-table th:first-child { padding-left:0; text-align:left; }
+.comparison-table thead th { padding-top:16px; padding-bottom:20px; font-size:20px; font-family:var(--serif); font-weight:600; }
+.comparison-table thead th:first-child { font:600 13px/1.5 var(--sans); color:var(--muted); }
+.comparison-table tbody th { font-weight:600; }
+.comparison-table th > span,.comparison-table td > span:not(.sr-only):not([aria-hidden]) { display:block; font:400 12px/1.6 var(--sans); color:var(--muted); margin-top:4px; }
+.comparison-table th:last-child,.comparison-table td:last-child { background:var(--paper); }
+.comparison-table thead th:last-child { border-radius:12px 12px 0 0; color:var(--red); }
+.comparison-table tbody tr:last-child td:last-child { border-radius:0 0 12px 12px; }
+.comparison-note { color:var(--muted); font-size:12px; line-height:1.75; max-width:85ch; margin-top:18px; }
+.plus-questions { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.45fr); gap:8%; padding-block:64px; align-items:start; }
+.plus-questions h2 { max-width:10ch; }
+.plus-answers details { border-bottom:1px solid var(--line); }
+.plus-answers details:first-child { border-top:1px solid var(--line); }
+.plus-answers summary { display:flex; align-items:center; justify-content:space-between; gap:20px; cursor:pointer; list-style:none; padding-block:19px; font-size:15px; font-weight:600; min-height:60px; }
+.plus-answers summary::-webkit-details-marker { display:none; }
+.plus-answers summary .icon { width:18px; height:18px; transition:transform 180ms var(--ease); }
+.plus-answers details[open] summary .icon { transform:rotate(90deg); }
+.plus-answers details p { color:var(--muted); font-size:14px; line-height:1.75; padding-bottom:22px; max-width:65ch; }
+@media(hover:hover) and (pointer:fine) { .plus-answers summary:hover { color:var(--red); } }
 .subpage-next { display:grid; grid-template-columns:1fr 1fr; gap:40px; border-top:1px solid var(--line); padding-top:24px; }
 .subpage-next a { display:grid; grid-template-columns:1fr auto; gap:8px 20px; text-decoration:none; padding:12px 0; }
 .subpage-next a > span:not(.icon) { color:var(--muted); font-size:12px; }
@@ -37,17 +67,29 @@
 .privacy-material { border-radius:16px; overflow:hidden; align-self:stretch; min-height:400px; background:#f4f1e9; }
 .privacy-material img { width:100%; height:100%; object-fit:cover; }
 .privacy-page .prose { padding-top:68px; }
-@media(max-width:1000px) { .membership-shell { gap:5%; } .membership-plan { padding:28px; } .membership h1 { font-size:54px; } }
+@media(max-width:1000px) { .membership { gap:5%; } .membership-plan { padding:26px; } .membership h1 { font-size:54px; } }
 @media(max-width:760px) {
-  .membership { padding-block:38px; }
-  .membership-shell { grid-template-columns:1fr; gap:34px; }
+  .membership { grid-template-columns:1fr; gap:32px; padding-block:38px 42px; }
   .product-label { font-size:12px; margin-bottom:18px; }
   .membership h1 { font-size:48px; max-width:12ch; }
   .membership-lede { font-size:16px; margin-top:20px; }
-  .membership-free { margin-top:26px; }
-  .membership-plan { border-radius:16px; padding:26px; }
-  .membership-plan-top { margin-bottom:26px; }
-  .membership-feature-title { font-size:40px; }
+  .membership-highlights { margin-block:22px; }
+  .membership-actions { gap:10px 14px; }
+  .membership-actions .text-link { font-size:12px; gap:8px; }
+  .membership-plan { padding:24px; }
+  .membership-plan-top h2 { font-size:26px; }
+  .plan-option dd strong { font-size:34px; }
+  .plus-comparison { padding-top:32px; }
+  .comparison-heading { display:block; margin-bottom:24px; }
+  .comparison-heading h2 { max-width:15ch; }
+  .comparison-heading p { max-width:none; margin-top:12px; }
+  .comparison-table .feature-column { width:47%; }
+  .comparison-table th,.comparison-table td { padding:15px 7px; font-size:12px; }
+  .comparison-table th > span,.comparison-table td > span:not(.sr-only):not([aria-hidden]) { font-size:12px; line-height:1.5; }
+  .comparison-table thead th { font-size:21px; }
+  .comparison-table thead th:first-child { font-size:12px; }
+  .plus-questions { grid-template-columns:1fr; gap:24px; padding-block:42px; }
+  .plus-questions h2 { max-width:none; }
   .subpage-next { grid-template-columns:1fr; gap:14px; }
   .subpage-next a + a { border-top:1px solid var(--line); padding-top:24px; }
   .subpage-next a strong { font-size:26px; }

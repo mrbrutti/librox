@@ -10,8 +10,9 @@ for layout in "$@"; do
     printf -v frame '%04d' "$number"
     test -s "$frames/$frame.png" || { echo "Missing frame: $frames/$frame.png" >&2; exit 1; }
   done
-  ffmpeg -y -framerate 30 -start_number 1 -i "$frames/%04d.png" -t 24 \
-    -an -c:v libx264 -preset slow -crf 20 -g 60 -pix_fmt yuv420p \
+  ffmpeg -y -framerate 30 -start_number 1 -i "$frames/%04d.png" \
+    -i film/audio/family-soundscape.wav -t 24 -map 0:v:0 -map 1:a:0 \
+    -c:a aac -b:a 128k -c:v libx264 -preset slow -crf 20 -g 60 -pix_fmt yuv420p \
     -color_primaries bt709 -color_trc bt709 -colorspace bt709 \
     -movflags +faststart ".local/render/librox-family-$layout.mp4" -loglevel error
   mv ".local/render/librox-family-$layout.mp4" "assets/librox-family-$layout.mp4"

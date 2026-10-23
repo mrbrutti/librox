@@ -5,7 +5,9 @@ Blender Cycles product film: a folding-device study opens, shows Librox's native
 Metal book opening and iPad page turns, moves into the listening preview, then
 closes. Oversized 3D typography crosses behind and in front of the device in a full-screen scene. Wide
 and portrait camera compositions adapt to the media stage. Playback
-starts muted, has pause and sound controls, and respects reduced motion.
+starts muted, has pause and sound controls, and respects reduced motion. Opt-in
+sound is an original, very quiet ambient bed with paper and movement effects
+timed to the films. See [sound design and reproduction](film/audio/README.md).
 
 A second full-screen scene automatically plays the 24-second 3D iPad/Mac film
 with native page turns, reading and live narration captures. Typography changes
@@ -15,29 +17,33 @@ remain separate pages. The user authorized publication of these original
 studio studies on October 19, 2026. Capture and model provenance is recorded in the film documentation. Public
 pages use customer-facing copy, as requested for publication.
 
-The dedicated `plus.html` page introduces the upcoming offline voice library, listening queue, and per-book listening profiles. It does not display a price or offer a live purchase; options and pricing belong in the app before subscribing. Core owned-book reading, existing listening, notes, sync, and arbitrary OPDS catalog access stay free. Reconcile every paid benefit, device requirement, localized price, and renewal statement with the actual StoreKit product and reviewed app build before launch.
+The dedicated `plus.html` page compares the current Free and planned Plus feature
+boundaries and presents the owner-approved launch prices. Purchases remain in the
+app; the site does not offer checkout. Reconcile availability, device requirements,
+localized prices and renewal statements with the reviewed app before launch.
 
 ## App Store information pages
 
-- `plus.html` introduces upcoming Plus features and explains which features remain free. Public pages omit price amounts; the app will present purchase details.
+- `plus.html` compares Free and Plus using the October 22 app implementation. It shows owner-approved USD launch prices: $0.99 monthly, $9.99 yearly, and $49.99 Lifetime (one-time purchase). Plus remains coming soon; the App Store will present localized purchase details.
 - `privacy.html` is the public Privacy Policy URL; its claims must match the App Store Connect privacy questionnaire and the shipped app's network behavior.
 - `support.html` provides direct contact information for the required Support URL.
 - `terms.html` links to Apple's Standard EULA and explains the status of the proposed Plus plan. Apple requires Privacy Policy and Terms links in the app and App Store metadata when subscriptions are offered; the website links alone do not complete that work.
 - The Marketing URL can point to the homepage. A custom domain is useful for Librox's identity but is not itself an App Store requirement.
 
-Before Plus can be sold, implement and verify StoreKit purchase, restore, cancellation/expiry handling, entitlement across supported Apple devices, a clear in-app annual renewal disclosure, and final terms/privacy links. Configure the product and price in App Store Connect. See [Apple's subscription guidance](https://developer.apple.com/app-store/subscriptions/), [privacy metadata](https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy), and [platform version information](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information).
+The native app has an annual StoreKit implementation and an unsubmitted annual product. Monthly and Lifetime need their own app and App Store Connect support before sale; Lifetime maps to a non-consumable purchase. Website publication does not configure or release these products. Complete real sandbox/device acceptance and review before public availability. See [Apple's purchase types](https://developer.apple.com/help/app-store-connect/reference/in-app-purchases-and-subscriptions/in-app-purchase-types/), [subscription guidance](https://developer.apple.com/app-store/subscriptions/), [privacy metadata](https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy), and [platform version information](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information).
 
 The [site motion direction](docs/site-motion-direction.md) records the film sequence, asset provenance, Apple device-artwork boundaries, and Figma review. See [film/README.md](film/README.md) for the active Blender render and the retained earlier Remotion study.
 
 ## Visual system
 
-The October 22 integrated-motion pass uses self-hosted Newsreader/Manrope
+The current identity pass uses self-hosted Source Serif 4 and system sans
 typography across full-screen, book-driven studio scenes. The closing download
 section and subpages retain the app's neutral paper/dark surfaces and vermilion
 accents. Responsive controls, shared subpage layouts,
 and the decorative privacy material asset are documented in
 [site motion direction](docs/site-motion-direction.md). The original approved
-3D films and real app captures are retained byte-for-byte. Frame-exact projected
+3D film video streams and real app captures are retained byte-for-byte; the
+October 22 sound pass replaces only the films' audio. Frame-exact projected
 geometry in `assets/motion/` supplies camera poses and colorless device meshes for
 the lazy-loaded Three.js lettering in `scene-type.js`. `scene-depth.js` synchronizes
 it to decoded video frames. HTML lettering remains available if WebGL cannot load.

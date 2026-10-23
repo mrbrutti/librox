@@ -9,7 +9,74 @@ import { bindSceneDepth } from './scene-depth.js';
   var screen = section.querySelector('.studio-screen');
   var poster = section.querySelector('.studio-poster');
   var toggle = section.querySelector('[data-film-toggle]');
-  var sound = section.querySelector('[data-film-sound]');
+  var soundButtons = Array.from(document.querySelectorAll('[data-film-sound]'));
+  var soundVideos = Array.from(document.querySelectorAll('[data-film-video], [data-family-video]'));
+  var ambientEnabled = false;
+  var soundFrame = 0;
+  var soundContext = null;
+  var soundGains = new Map();
+  function prepareSound() {
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!soundContext && AudioContext) {
+      soundContext = new AudioContext();
+      soundVideos.forEach(function (item) {
+        var gain = soundContext.createGain();
+        gain.gain.value = 0;
+        soundContext.createMediaElementSource(item).connect(gain).connect(soundContext.destination);
+        soundGains.set(item, {node:gain, target:0});
+        item.volume = 1;
+      });
+    }
+    return soundContext ? soundContext.resume() : Promise.resolve();
+  }
+  // The effects travel with each movie's media clock. Only the scene nearest
+  // the viewport centre is audible; the shared bed gently hands over on scroll.
+  function fadeSound() {
+    cancelAnimationFrame(soundFrame);
+    var winner = null;
+    var distance = Infinity;
+    if (ambientEnabled && !document.hidden) soundVideos.forEach(function (item) {
+      var box = item.closest('.cinematic-scene').getBoundingClientRect();
+      if (box.bottom <= 0 || box.top >= innerHeight) return;
+      var offset = Math.abs((box.top + box.bottom - innerHeight) / 2);
+      if (offset < distance) { distance = offset; winner = item; }
+    });
+    var moving = false;
+    soundVideos.forEach(function (item) {
+      var target = item === winner && !item.paused ? 1 : 0;
+      var gain = soundGains.get(item);
+      if (gain) {
+        // GainNode also works on iOS, where media volume follows the device.
+        // Its audio clock keeps the fade smooth even during a busy render.
+        if (gain.target !== target) {
+          gain.node.gain.setTargetAtTime(target, soundContext.currentTime, .12);
+          gain.target = target;
+        }
+        return;
+      }
+      var next = item.volume + (target - item.volume) * .10;
+      if (Math.abs(next - target) < .003) next = target;
+      else moving = true;
+      item.volume = next;
+    });
+    if (moving) soundFrame = requestAnimationFrame(fadeSound);
+  }
+  function soundButtonsState() {
+    soundButtons.forEach(function (button) {
+      button.innerHTML = '<span class="icon i-' + (ambientEnabled ? 'speaker-high' : 'speaker-slash') + '" aria-hidden="true"></span>';
+      button.setAttribute('aria-pressed', String(ambientEnabled));
+      button.setAttribute('aria-label', ambientEnabled ? 'Mute ambient sound' : 'Turn on ambient sound');
+      button.title = ambientEnabled ? 'Mute ambient sound' : 'Soft ambience and paper sounds';
+    });
+  }
+  soundVideos.forEach(function (item) {
+    item.volume = 0;
+    item.addEventListener('play', fadeSound);
+    item.addEventListener('pause', fadeSound);
+  });
+  window.addEventListener('scroll', fadeSound, {passive:true});
+  window.addEventListener('resize', fadeSound);
+  document.addEventListener('visibilitychange', fadeSound);
   var chapterButtons = Array.from(section.querySelectorAll('[data-film-chapter]'));
   var visible = false;
   var manual = null;
@@ -23,9 +90,7 @@ import { bindSceneDepth } from './scene-depth.js';
     toggle.querySelector('[data-play-label]').textContent = video.error ? 'Retry film' : video.paused ? 'Play film' : 'Pause film';
     toggle.querySelector('[data-play-icon]').innerHTML = playbackIcon(video.paused);
     toggle.setAttribute('aria-label', video.error ? 'Retry Librox film' : video.paused ? 'Play Librox film' : 'Pause Librox film');
-    sound.innerHTML = '<span class="icon i-' + (video.muted ? 'speaker-slash' : 'speaker-high') + '" aria-hidden="true"></span>';
-    sound.setAttribute('aria-pressed', String(!video.muted));
-    sound.setAttribute('aria-label', video.muted ? 'Turn on film sound' : 'Turn off film sound');
+    soundButtonsState();
   }
   function syncPlayback() {
     var play = visible && !document.hidden && (manual === true || (manual === null && !reduce.matches));
@@ -86,11 +151,32 @@ import { bindSceneDepth } from './scene-depth.js';
     event.preventDefault();
     video.currentTime = Math.max(0, Math.min(video.duration - .05, video.currentTime + (event.key === 'ArrowRight' ? 5 : -5)));
   });
-  sound.addEventListener('click', function () {
-    video.muted = !video.muted;
-    if (!video.muted) { manual = true; syncPlayback(); }
-    syncButton();
-  });
+  soundButtons.forEach(function (button) { button.addEventListener('click', function () {
+    ambientEnabled = !ambientEnabled;
+    if (ambientEnabled) {
+      try {
+        prepareSound().catch(function () {
+          ambientEnabled = false;
+          soundVideos.forEach(function (item) { item.muted = true; });
+          soundButtonsState(); fadeSound();
+        });
+      } catch (_) { ambientEnabled = false; }
+    }
+    soundVideos.forEach(function (item) { item.muted = !ambientEnabled; });
+    if (ambientEnabled) {
+      if (visible) manual = true;
+      if (nativeVisible) nativeManual = true;
+      // Unlock both media elements inside this explicit sound gesture. An
+      // offscreen film stays at zero volume and pauses as soon as it is ready.
+      if (family) { familyLoaded = true; familySource(); }
+      Promise.allSettled(soundVideos.map(function (item) { return item.play(); })).then(function () {
+        // Wait for both unlock attempts: pausing the other film earlier can
+        // abort its pending play promise and accidentally disable auto-play.
+        syncPlayback(); if (family) syncNative(); fadeSound();
+      });
+    }
+    soundButtonsState(); fadeSound();
+  }); });
   chapterButtons.forEach(function (button) {
     button.addEventListener('click', function () {
       var time = Number(button.dataset.seek);
