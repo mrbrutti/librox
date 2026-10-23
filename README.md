@@ -6,8 +6,9 @@ Metal book opening and iPad page turns, moves into the listening preview, then
 closes. Oversized 3D typography crosses behind and in front of the device in a full-screen scene. Wide
 and portrait camera compositions adapt to the media stage. Playback
 starts muted, has pause and sound controls, and respects reduced motion. Opt-in
-sound is an original, very quiet ambient bed with paper and movement effects
-timed to the films. See [sound design and reproduction](film/audio/README.md).
+sound uses occasional recorded birdsong on an independent 144-second seamless
+loop, with real page foley timed to the films. There is no constant noise bed.
+See [sound design, credits and reproduction](film/audio/README.md).
 
 A second full-screen scene automatically plays the 24-second 3D iPad/Mac film
 with native page turns, reading and live narration captures. Typography changes

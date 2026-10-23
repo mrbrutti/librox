@@ -1,72 +1,68 @@
-# Librox ambient sound
+# Librox natural background and paper sound
 
-Original procedural sound design for the active Blender films. The owner's
-direction is a subtle reading/meditation atmosphere with synchronized page
-sounds. The rejected narration is not shipped.
+The owner's correction is audio-only: small pleasant nature sounds, real paper
+turns, no continuous hum, and no detectable restart as the animations loop.
+No visual composition, typography, colors, frames or animation timing changes.
 
-## Sound and provenance
+## Sources and treatment
 
-- A quiet sustained open harmony, slowly varying filtered air and stereo width.
-- No speech, piano, beat, tune, downloaded sample or third-party music.
-- Soft paper gestures follow the visible native page turns. Small low movement
-  sounds accompany folding and the scene transitions.
-- This is designed website sound, not audio recorded from the app or hardware.
-- NumPy seed `20261022` makes the procedural variation reproducible. Each film
-  has its own continuous loop; sound is not regenerated on every page visit.
+All sound comes from CC0 field/foley recordings, listed in
+[sources/README.md](sources/README.md) and [public credits](../../assets/licenses/nature-and-paper.txt).
 
-The masters are 48 kHz, stereo, 24-bit PCM. `studio-soundscape.wav` is 22 seconds;
-`family-soundscape.wav` is 24 seconds. `soundscape-manifest.json` records exact
-gesture starts/durations, peak/RMS values and the sample difference at the loop.
-The ambient bed uses integer-cycle oscillators and periodic noise; transient
-gestures end before the boundary.
+- Seven complete blackbird phrases, at their original pitch and speed, sit at
+  irregular intervals across 144 seconds. There are quiet spaces between calls.
+- No oscillators, synthesized noise, rain bed, drone or musical score.
+- Wind/traffic frequencies below the bird's voice are filtered out; the upper
+  edge is softened, and each excerpt has a short cut-edge fade.
+- Two real page recordings retain their lift, friction, flex and settle. Gentle
+  filtering and transient control reduce close-mic ticks without replacing the
+  texture. Their strongest 10 ms meets the visible page-turn crest.
+- No invented hinge, fold or scene-transition whooshes. Paper is editorial
+  website foley, not a claim that the native app makes these sounds.
 
-Measured from the final AAC audio with FFmpeg's `loudnorm` analysis:
+## Loop and playback
 
-| Film | Integrated loudness | True peak |
-| --- | --- | --- |
-| Studio | -32.89 LUFS | -24.07 dBTP |
-| iPad/Mac | -32.75 LUFS | -23.39 dBTP |
+The background is assets/librox-nature.mp3, decoded once after the user opts in.
+A single Web Audio AudioBufferSourceNode loops the decoded PCM on its audio clock.
+It does not reload, reset or seek when either film repeats, changes chapter,
+changes responsive source or pauses. The nature background continues through
+the homepage; page foley follows only the visible film. Muting silences both.
 
-The intentionally low level follows the request for subtle background sound.
-These measurements do not establish the listener's device volume or approval of
-the sound. The four video streams are copied unchanged in this update.
+The beginning and end sit inside an ordinary quiet interval, comparable to the
+intervals inside the arrangement. No track-wide fade-out or fade-in marks the
+join. The delivered MP3 decodes to exactly 144 seconds at 32 kHz stereo, with
+zero-valued first/last seconds and a zero sample discontinuity at the join.
+88.68% of 100 ms windows are below -70 dBFS. This is intentionally sparse.
+
+This verification rules out a codec gap, click and short-film restart. Whether
+a listener notices the longer repeated sequence is a listening judgment, not
+something a numerical check can prove. The source has seven distinct phrases.
+
+Both controls start off. The audio context starts only in the sound-button
+gesture. Tab hiding fades the background out; returning restores it. Sound
+loading failure turns the setting off and permits a fresh attempt. The same
+decoded source is reused across repeated sound toggles.
 
 ## Reproduce
 
-Use Python 3 with `numpy`, `scipy` and `soundfile`, plus FFmpeg:
+Python 3 requires numpy, scipy and soundfile; FFmpeg must be installed.
 
 ```sh
 python3 film/audio/render-soundscape.py
-```
-
-When rendering the films again, `film/blender/encode.sh` and
-`film/blender/encode-family.sh` read these masters. To update sound without
-re-rendering video, run from the site root:
-
-```sh
-mkdir -p .local/audio
+mkdir -p .local/audio/natural
 for scene in studio family; do
   for layout in wide portrait; do
     ffmpeg -y -i "assets/librox-$scene-$layout.mp4" \
       -i "film/audio/$scene-soundscape.wav" \
       -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 128k \
-      -shortest -movflags +faststart ".local/audio/librox-$scene-$layout.mp4"
-    mv ".local/audio/librox-$scene-$layout.mp4" "assets/librox-$scene-$layout.mp4"
+      -shortest -movflags +faststart ".local/audio/natural/librox-$scene-$layout.mp4"
+    mv ".local/audio/natural/librox-$scene-$layout.mp4" "assets/librox-$scene-$layout.mp4"
   done
 done
 npm run build
 ```
 
-## Playback
-
-Both films start muted. Either sound button opts into the shared sound setting;
-both buttons report that setting. The nearest visible scene receives the ambient
-mix, with a short gain fade on handover. Web Audio gain nodes handle fades on
-mobile as well as desktop; media-volume ramps are a fallback without Web Audio.
-Audio is embedded in each film, so chapter seeks, loops, pause/resume and source
-changes use the same media clock. Hidden or offscreen films pause. Reduced-motion
-behavior and explicit playback controls remain available.
-
-The audio context and media unlock occur in the user's sound-button gesture,
-following [WebKit's media playback policy](https://webkit.org/blog/6784/new-video-policies-for-ios/).
-Browser permission or device restrictions can still require using the play control.
+The film encoders also use these paper-only masters. The nature master and
+review excerpts are written under ignored .local/audio/natural/. The source
+recordings, render script, delivery MP3, paper masters and timing manifest are
+versioned. All four H.264 visual streams remain unchanged.

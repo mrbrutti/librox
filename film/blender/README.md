@@ -69,9 +69,9 @@ onto the folding device as an app demonstration, not evidence from a physical Du
 - `assets/librox-mac-reader.mp4`: captured 2026-10-19 from the running native
   Catalyst development build, full Moby-Dick, Chapter 1. Window padding cropped;
   app content is unchanged. This is not the public App Store Mac release.
-- Sound is original procedural ambience with paper/fold gestures timed to these
-  films, not narration or sound captured from the native app. It starts muted,
-  is opt-in, and follows the visible scene. See [audio provenance and reproduction](../audio/README.md).
+- Sound uses recorded paper foley timed to these films and occasional natural
+  birdsong on an independent long loop. It is not sound captured from the app.
+  It starts muted and is opt-in. See [audio provenance and reproduction](../audio/README.md).
 - Listening still uses the already licensed, unmodified Apple iPhone 17 Pro
   bezel. Official Apple artwork is not used as the 3D geometry.
 

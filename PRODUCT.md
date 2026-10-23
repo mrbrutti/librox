@@ -33,9 +33,10 @@ book artwork. Keep the page compact; avoid long scroll-locked sequences.
   2026. They are original studies, not official Apple art or physical footage.
   Public pages omit internal preview labels at the user’s request.
 - Existing Privacy, Terms, Support and platform-aware App Store links remain.
-- Website audio is opt-in, very quiet ambience with synchronized paper and
-  movement sounds. No voice, piano, foreground melody or audible auto-play.
-  Sound follows the visible film and pauses with it.
+- Website audio is opt-in: occasional natural birdsong with quiet spaces,
+  plus real paper foley synchronized to the visible film. No continuous noise,
+  drone, voice, piano or fake movement whooshes. The 144-second nature loop runs
+  independently of film loops and seeks. No visual changes accompany this pass.
 - Free includes 10 imported books, one custom OPDS catalog, Basic/System listening,
   reader essentials and two app icons. Plus adds unlimited books and custom catalogs,
   paced reading, Enhanced on-device narration and the full icon collection. Existing

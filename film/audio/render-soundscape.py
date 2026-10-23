@@ -1,98 +1,101 @@
-"""Original, seeded ambient sound design. No speech, melody or sampled music.
+"""Natural background and recorded paper foley; see sources/README.md.
 
-Soft, slowly moving harmonic air with paper gestures timed to the native films.
-NumPy/SciPy/SoundFile only. Every oscillator/noise bed is periodic at the loop
-boundary. Paper transients use smooth envelopes and stay well below full scale.
+No oscillators, synthetic noise, pitch shifting, or fake hardware sounds.
+The 144-second nature arrangement runs independently of the films.
 """
 from pathlib import Path
 import json
+import subprocess
 import numpy as np
-from scipy.signal import butter, sosfilt
+from scipy.signal import butter, sosfiltfilt
 import soundfile as sf
 
 ROOT = Path(__file__).resolve().parent
+SITE = ROOT.parents[1]
 SR = 48000
-SEED = 20261022
+REVIEW = SITE / '.local/audio/natural'
+REVIEW.mkdir(parents=True, exist_ok=True)
 
-def filtered_noise(rng, count, low, high):
-    raw = rng.normal(size=count)
-    return sosfilt(butter(2, [low, high], fs=SR, btype='bandpass', output='sos'), raw)
 
-def ambient(duration):
-    rng = np.random.default_rng(SEED)
-    n = round(SR * duration)
-    t = np.arange(n) / SR
-    stereo = np.zeros((n, 2))
-    # A quiet open C/add9 color: sustained, with no attacks or tune to follow.
-    for midi, weight in [(48,.40),(55,.23),(60,.16),(62,.065),(67,.06)]:
-        hz = round((440 * 2**((midi-69)/12)) * duration) / duration
-        phase = rng.uniform(0, 2*np.pi)
-        breathing = .76 + .15*np.sin(2*np.pi*t/duration + rng.uniform(0,6))
-        breathing += .045*np.sin(4*np.pi*t/duration + rng.uniform(0,6))
-        for ch in range(2):
-            # Small phase separation gives width without detuned beating.
-            angle = 2*np.pi*hz*t + phase + ch*.12
-            wave = np.sin(angle) + .10*np.sin(2*angle+.4) + .018*np.sin(3*angle)
-            stereo[:,ch] += weight * wave * breathing
-    # Colored, periodic air. No hiss above 2.8 kHz, no rumble below 110 Hz.
-    freqs = np.fft.rfftfreq(n, 1/SR)
-    shape = 1/np.sqrt(np.maximum(freqs,110))
-    shape *= (1-np.exp(-(freqs/140)**4)) * np.exp(-(freqs/2300)**4)
-    for ch in range(2):
-        spectrum = (rng.normal(size=len(freqs)) + 1j*rng.normal(size=len(freqs))) * shape
-        air = np.fft.irfft(spectrum, n=n)
-        air /= np.std(air)
-        stereo[:,ch] += air * .055 * (.85+.15*np.sin(2*np.pi*t/duration+ch*.3))
-    stereo *= .034
-    return stereo
+def read(name, low, high):
+    raw = subprocess.check_output(['ffmpeg', '-v', 'error', '-i',
+        str(ROOT / 'sources' / (name + '.mp3')), '-f', 'f32le',
+        '-ar', str(SR), '-ac', '2', '-'])
+    x = np.frombuffer(raw, np.float32).reshape(-1, 2).astype(np.float64)
+    return sosfiltfilt(butter(2, [low, high], fs=SR,
+        btype='bandpass', output='sos'), x, axis=0)
 
-def gesture(rng, kind, duration):
-    n = round(duration*SR); t = np.arange(n)/SR; u = t/duration
-    if kind == 'page':
-        body = filtered_noise(rng,n,420,3200)
-        body += .25*filtered_noise(rng,n,140,650)
-        envelope = np.sin(np.pi*u)**1.9
-        envelope *= 1 + .14*np.sin(2*np.pi*19*t) * np.sin(np.pi*u)
-        peak = .020  # paper is a small foreground detail, not a cinematic whoosh
-    else:
-        body = filtered_noise(rng,n,130,950)
-        envelope = np.sin(np.pi*u)**2.4
-        peak = .007 if kind == 'fold' else .0045
-    mono = body*envelope
-    mono *= peak/max(np.max(np.abs(mono)),1e-9)
-    pan = np.linspace(.25,-.25,n)
-    return np.column_stack((mono*np.sqrt((1-pan)/2),mono*np.sqrt((1+pan)/2)))
 
-# Starts align the crest of each paper gesture with the visible turn.
-SCENES = {
-    'studio': dict(seconds=22,events=[
-        ('fold',.7,2.5),('page',4.65,1.05),('page',6.30,.85),
-        ('page',8.405,.85),('page',10.575,.85),
-        ('transition',11.85,.7),('fold',15.25,2.1)]),
-    'family': dict(seconds=24,events=[
-        ('page',.405,.85),('page',2.545,.85),('page',4.405,.85),
-        ('transition',5.55,.7),('fold',10.2,1.5),
-        ('page',14.745,.65),('transition',17.55,.7),('fold',22.15,1.5)])
+def edges(x, seconds):
+    """Soften cuts outside the naturally recorded gesture."""
+    n = min(round(seconds * SR), len(x) // 2)
+    fade = np.sin(np.linspace(0, np.pi / 2, n)) ** 2
+    x[:n] *= fade[:, None]
+    x[-n:] *= fade[::-1, None]
+    return x
+
+
+def report(name, x):
+    return dict(scene=name, seconds=len(x) / SR, sampleRate=SR,
+        peakDBFS=float(20 * np.log10(np.max(abs(x)) + 1e-12)),
+        rmsDBFS=float(20 * np.log10(np.sqrt(np.mean(x*x)) + 1e-12)),
+        loopEdgeDelta=float(np.max(abs(x[0] - x[-1]))))
+
+
+# Complete calls at original pitch/speed, spaced like a bird outside a room.
+# The quiet interval across the boundary has the same range as interior gaps.
+bird = read('blackbird', 950, 5800)
+bird *= 10**(-33/20) / np.max(abs(bird))
+phrases = [
+    (2.0, 4.25, 8.75, .85), (20.3, 13.65, 17.75, .66),
+    (39.7, 27.00, 29.50, .75), (60.6, 32.75, 36.25, .62),
+    (82.2, 40.25, 44.25, .80), (103.5, 44.75, 49.25, .63),
+    (125.8, 55.25, 57.75, .70),
+]
+nature = np.zeros((144 * SR, 2))
+for start, source_in, source_out, gain in phrases:
+    phrase = edges(bird[round(source_in*SR):round(source_out*SR)].copy(), .22)
+    begin = round(start * SR)
+    nature[begin:begin+len(phrase)] += phrase * gain
+assert np.max(abs(nature[0])) == np.max(abs(nature[-1])) == 0
+sf.write(REVIEW / 'nature-master.wav', nature, SR, subtype='PCM_24')
+subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', str(REVIEW / 'nature-master.wav'),
+    '-ar', '32000', '-c:a', 'libmp3lame', '-q:a', '4',
+    str(SITE / 'assets/librox-nature.mp3')], check=True)
+
+# Preserve each recording's lift, flex and settle. Align the loudest 10 ms
+# of paper friction with the visible turn's crest, instead of the clip start.
+papers = []
+for name, cut_out in [('page-1', .51), ('page-2', 1.28)]:
+    paper = edges(read(name, 160, 7500)[:round(cut_out*SR)].copy(), .018)
+    ceiling = np.quantile(np.abs(paper), .9995) * 1.8
+    paper = ceiling * np.tanh(paper / ceiling)
+    paper *= 10**(-32/20) / np.max(abs(paper))
+    window = 480
+    energy = np.mean(paper[:len(paper)//window*window].reshape(-1, window, 2)**2, axis=(1,2))
+    crest = (int(np.argmax(energy)) + .5) * window / SR
+    papers.append((paper, crest))
+
+scenes = {
+    'studio': (22, [(5.175, 1, .55), (6.725, 0, .45), (8.83, 1, .72), (11.0, 0, .64)]),
+    'family': (24, [(.83, 1, .72), (2.97, 0, .62), (4.83, 1, .64), (15.07, 0, .54)]),
 }
+reports = [dict(**report('nature', nature), phrases=phrases,
+    source='Blackbird (isolated), richwise, Freesound 811988, CC0')]
+for name, (duration, events) in scenes.items():
+    out = np.zeros((duration * SR, 2))
+    for crest_time, variant, gain in events:
+        paper, crest = papers[variant]
+        begin = round((crest_time - crest) * SR)
+        assert begin >= 0 and begin + len(paper) < len(out)
+        out[begin:begin+len(paper)] += paper * gain
+    sf.write(ROOT / f'{name}-soundscape.wav', out, SR, subtype='PCM_24')
+    reports.append(dict(**report(name, out), events=events,
+        source='Page Turn (1) and (2), OwlStorm / Ashe Kirk, CC0'))
 
-reports=[]
-for name,scene in SCENES.items():
-    duration=scene['seconds']; out=ambient(duration)
-    rng=np.random.default_rng(SEED+len(name))
-    for kind,start,length in scene['events']:
-        g=gesture(rng,kind,length); idx=round(start*SR)
-        out[idx:idx+len(g)] += g
-        # A tiny diffuse room tail: low-pass, below the paper's direct sound.
-        tail=sosfilt(butter(1,1800,fs=SR,output='sos'),g,axis=0)
-        for delay,gain in [(.047,.10),(.089,.055),(.151,.025)]:
-            begin=idx+round(delay*SR); end=min(len(out),begin+len(tail))
-            out[begin:end] += tail[:end-begin]*gain
-    out *= 2.0
-    assert np.isfinite(out).all() and np.max(abs(out))<.10
-    filename=ROOT/f'{name}-soundscape.wav'
-    sf.write(filename,out,SR,subtype='PCM_24')
-    reports.append(dict(scene=name,seed=SEED,sampleRate=SR,seconds=duration,
-        peakDBFS=20*np.log10(np.max(abs(out))),rmsDBFS=20*np.log10(np.sqrt(np.mean(out*out))),
-        loopEdgeDelta=float(np.max(abs(out[0]-out[-1]))),events=scene['events']))
-(ROOT/'soundscape-manifest.json').write_text(json.dumps(reports,indent=2)+'\n')
-print(json.dumps(reports,indent=2))
+# Review the actual nature join without adding an artificial preview fade.
+join = np.concatenate((nature[-20*SR:], nature[:20*SR]))
+sf.write(REVIEW / 'loop-join.wav', join, SR, subtype='PCM_16')
+sf.write(REVIEW / 'nature-preview.wav', nature[:30*SR], SR, subtype='PCM_16')
+(ROOT / 'soundscape-manifest.json').write_text(json.dumps(reports, indent=2)+'\n')
+print(json.dumps(reports, indent=2))
