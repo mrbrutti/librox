@@ -36,6 +36,10 @@ reviewed against the existing shared identity instead of adding unrelated styles
 
 ## Sound
 
+The sound implementation described below was superseded by the owner's
+audio-only correction. Current sources, sparse nature arrangement, paper foley
+and continuous-loop behavior are documented in `film/audio/README.md`.
+
 Replaced the previous soundtrack with original, seeded ambient synthesis and
 small paper/fold gestures. No narration is included. Sound follows the film's
 own clock and is enabled only through a sound-button gesture. Shared controls

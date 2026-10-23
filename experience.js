@@ -15,6 +15,9 @@ import { bindSceneDepth } from './scene-depth.js';
   var soundFrame = 0;
   var soundContext = null;
   var soundGains = new Map();
+  var natureGain = null;
+  var natureLoading = null;
+  var natureTarget = 0;
   function prepareSound() {
     var AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!soundContext && AudioContext) {
@@ -26,13 +29,40 @@ import { bindSceneDepth } from './scene-depth.js';
         soundGains.set(item, {node:gain, target:0});
         item.volume = 1;
       });
+      natureGain = soundContext.createGain();
+      natureGain.gain.value = 0;
+      natureGain.connect(soundContext.destination);
     }
-    return soundContext ? soundContext.resume() : Promise.resolve();
+    if (!soundContext) return Promise.resolve();
+    var resume = soundContext.resume();
+    if (!natureLoading) {
+      natureLoading = fetch(section.dataset.ambient).then(function (response) {
+        if (!response.ok) throw new Error('Background sound could not load');
+        return response.arrayBuffer();
+      }).then(function (bytes) { return soundContext.decodeAudioData(bytes); })
+      .then(function (buffer) {
+        // A single decoded buffer loops on the audio clock. It never reloads,
+        // seeks or restarts when a film loops, pauses or changes its source.
+        var source = soundContext.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        source.loopEnd = buffer.duration;
+        source.connect(natureGain);
+        source.start();
+        fadeSound();
+      }).catch(function (error) { natureLoading = null; throw error; });
+    }
+    return Promise.all([resume, natureLoading]);
   }
-  // The effects travel with each movie's media clock. Only the scene nearest
-  // the viewport centre is audible; the shared bed gently hands over on scroll.
+  // Recorded paper follows the visible movie's media clock. The nature layer
+  // has its own continuous timeline and remains steady through scene changes.
   function fadeSound() {
     cancelAnimationFrame(soundFrame);
+    var backgroundTarget = ambientEnabled && !document.hidden ? 1 : 0;
+    if (natureGain && natureTarget !== backgroundTarget) {
+      natureGain.gain.setTargetAtTime(backgroundTarget, soundContext.currentTime, backgroundTarget ? .6 : .05);
+      natureTarget = backgroundTarget;
+    }
     var winner = null;
     var distance = Infinity;
     if (ambientEnabled && !document.hidden) soundVideos.forEach(function (item) {
@@ -65,8 +95,8 @@ import { bindSceneDepth } from './scene-depth.js';
     soundButtons.forEach(function (button) {
       button.innerHTML = '<span class="icon i-' + (ambientEnabled ? 'speaker-high' : 'speaker-slash') + '" aria-hidden="true"></span>';
       button.setAttribute('aria-pressed', String(ambientEnabled));
-      button.setAttribute('aria-label', ambientEnabled ? 'Mute ambient sound' : 'Turn on ambient sound');
-      button.title = ambientEnabled ? 'Mute ambient sound' : 'Soft ambience and paper sounds';
+      button.setAttribute('aria-label', ambientEnabled ? 'Mute background sound' : 'Turn on background sound');
+      button.title = ambientEnabled ? 'Mute background sound' : 'Occasional birdsong and soft paper sounds';
     });
   }
   soundVideos.forEach(function (item) {
@@ -164,12 +194,16 @@ import { bindSceneDepth } from './scene-depth.js';
     }
     soundVideos.forEach(function (item) { item.muted = !ambientEnabled; });
     if (ambientEnabled) {
-      if (visible) manual = true;
-      if (nativeVisible) nativeManual = true;
       // Unlock both media elements inside this explicit sound gesture. An
       // offscreen film stays at zero volume and pauses as soon as it is ready.
       if (family) { familyLoaded = true; familySource(); }
-      Promise.allSettled(soundVideos.map(function (item) { return item.play(); })).then(function () {
+      Promise.allSettled(soundVideos.map(function (item) {
+        var intent = item === video ? manual : nativeManual;
+        // Enabling background sound must not undo an explicit film pause or
+        // reduced-motion preference. Its play control can unlock it later.
+        if (intent === false || (reduce.matches && intent !== true)) return Promise.resolve();
+        return item.play();
+      })).then(function () {
         // Wait for both unlock attempts: pausing the other film earlier can
         // abort its pending play promise and accidentally disable auto-play.
         syncPlayback(); if (family) syncNative(); fadeSound();
