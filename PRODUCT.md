@@ -26,15 +26,21 @@ book artwork. Keep the page compact; avoid long scroll-locked sequences.
 
 ## Constraints
 
-- Public Plus copy focuses on features and directs readers to the app for options and pricing at launch. No live purchase is implemented.
+- Public Plus copy presents the October 22 feature boundary and owner-approved USD launch prices: $0.99/month, $9.99/year, $49.99 Lifetime. Lifetime is a one-time purchase. Plus remains coming soon; the annual StoreKit implementation and draft product do not establish public purchasing availability. Monthly and Lifetime still need app/StoreKit implementation.
 - Use full real books with reference covers, never the excerpt fixture as hero.
 - No physical Duo is available. Captures come from development simulators.
 - The user authorized shipping the original 3D studio films on October 19,
   2026. They are original studies, not official Apple art or physical footage.
   Public pages omit internal preview labels at the user’s request.
 - Existing Privacy, Terms, Support and platform-aware App Store links remain.
-- Custom OPDS catalogs stay free. Plus proposes offline voices, queues and
-  per-book listening preferences, as the existing Plus page specifies.
+- Website audio is opt-in, very quiet ambience with synchronized paper and
+  movement sounds. No voice, piano, foreground melody or audible auto-play.
+  Sound follows the visible film and pauses with it.
+- Free includes 10 imported books, one custom OPDS catalog, Basic/System listening,
+  reader essentials and two app icons. Plus adds unlimited books and custom catalogs,
+  paced reading, Enhanced on-device narration and the full icon collection. Existing
+  books and reading data remain accessible after expiry. This supersedes the October 18
+  proposal; evidence is in the app's `docs/plus/implementation.md` and `PlusFeature.swift`.
 
 ## Evidence
 

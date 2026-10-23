@@ -9,10 +9,10 @@ for layout in wide portrait; do
     test -s "$frames/$frame.png" || { echo "Missing frame: $frames/$frame.png" >&2; exit 1; }
   done
   ffmpeg -y -framerate 30 -start_number 1 -i "$frames/%04d.png" \
-    -stream_loop -1 -i film/public/score.mp3 -t 22 \
+    -i film/audio/studio-soundscape.wav -t 22 \
     -map 0:v:0 -map 1:a:0 -c:v libx264 -preset slow -crf 20 -g 60 \
     -pix_fmt yuv420p -color_primaries bt709 -color_trc bt709 -colorspace bt709 \
-    -c:a aac -b:a 96k -af 'volume=0.5,afade=t=in:d=0.8,afade=t=out:st=21:d=1' \
+    -c:a aac -b:a 128k \
     -movflags +faststart ".local/render/librox-studio-$layout.mp4" -loglevel error
   mv ".local/render/librox-studio-$layout.mp4" "assets/librox-studio-$layout.mp4"
 done
