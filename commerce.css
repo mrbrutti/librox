@@ -8,7 +8,8 @@
 .membership-label { font-size:14px; font-weight:650; }
 .membership-free p { color:var(--muted); font-size:14px; line-height:1.8; margin-top:10px; }
 .membership-download { margin-top:26px; }
-.membership-plan { padding:36px; border-radius:20px; border:1px solid var(--line); background:var(--paper); box-shadow:0 3px 6px #24231f03,0 20px 40px -20px #24231f18; }
+.membership-plan { position:relative; padding:36px; border-radius:8px 14px 14px 8px; background:var(--paper); box-shadow:0 2px 3px #24231f0c,4px 14px 32px -16px #24231f28; }
+.membership-plan::before { content:""; position:absolute; pointer-events:none; left:8px; top:12px; bottom:12px; width:1px; background:var(--line); opacity:.65; }
 .membership-plan-top { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:30px; }
 .membership-plan-top > .icon { color:var(--red); width:26px; height:26px; }
 .membership-plan-status { font-size:12px; color:var(--muted); }
@@ -24,6 +25,8 @@
 .subpage-next a > span:not(.icon) { color:var(--muted); font-size:12px; }
 .subpage-next a strong { grid-column:1; font:450 28px/1.3 var(--serif); letter-spacing:-.02em; }
 .subpage-next a > .icon { grid-row:1/3; grid-column:2; align-self:center; }
+.subpage-next a > .icon { transition:transform 200ms var(--ease); }
+@media(hover:hover) and (pointer:fine) { .subpage-next a:hover > .icon { transform:translate(2px,-2px); } }
 .subpage-next a:hover strong { color:var(--red); }
 .privacy-promise { padding-top:48px; }
 .privacy-shell { display:grid; grid-template-columns:1fr 1fr; gap:6%; align-items:center; }

@@ -1,6 +1,13 @@
 import {build} from 'esbuild';
 import {readFile, writeFile, mkdir, copyFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {suggestedMarkup} from '../book-cover.mjs';
+
+await build({entryPoints:['books.js'], bundle:true, minify:true,
+  target:'es2022', outfile:'books.bundle.js'});
+const booksHTML = await readFile('books.html', 'utf8');
+await writeFile('books.html', booksHTML.replace(/<!-- suggested-books:start -->[\s\S]*?<!-- suggested-books:end -->/,
+  `<!-- suggested-books:start -->\n${suggestedMarkup()}\n            <!-- suggested-books:end -->`));
 
 // Keep WebGL out of the critical path. Its content hash travels with the
 // lightweight film controller, so a new deployment cannot reuse an old scene.
