@@ -1,2 +1,0 @@
-# Three.js contains shader source strings with intentional whitespace.
-book-scene.bundle.js -whitespace
